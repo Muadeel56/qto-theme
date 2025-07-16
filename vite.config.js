@@ -13,18 +13,30 @@ export default defineConfig({
       filename: 'remoteEntry.js',
       exposes: {
         './Button': './src/components/Button.jsx',
+        './Input': './src/components/Input.jsx',
         './Card': './src/components/Card.jsx',
+        './Badge': './src/components/Badge.jsx',
+        './Avatar': './src/components/Avatar.jsx',
+        './Modal': './src/components/Modal.jsx',
+        './Components': './src/components/index.js',
+        './Styles': './src/index.css',
       },
-      shared: ['react', 'react-dom']
+      shared: ['react', 'react-dom'],
+      dev: true,
+      emitFile: true, // ⬅️ this line is mandatory for `build` to output `remoteEntry.js`
     })
    ],
    build: {
     target: 'esnext',
     minify: false,
     cssCodeSplit: false,
-    outDir: 'dist', 
+    outDir: 'dist',
    },
    server: {
+    port: 5001,
+    cors: true,
+   },
+   preview: {
     port: 5001,
     cors: true,
    }

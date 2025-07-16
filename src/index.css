@@ -1,9 +1,13 @@
-@import "tailwindcss";
+/* Import design tokens first */
+@import "./styles/tokens.css";
 
-/* Optional Theme Tokens */
-:root {
-  --primary: #facc15; /* Yellow */
-  --secondary: #1f2937; /* Dark gray */
-  --background: #111827;
-  --text: #f9fafb;
-}
+/* Import base styles */
+@import "./styles/base.css";
+
+/* Import component styles */
+@import "./styles/button.css";
+@import "./styles/input.css";
+@import "./styles/card.css";
+@import "./styles/badge.css";
+@import "./styles/avatar.css";
+@import "./styles/modal.css";
