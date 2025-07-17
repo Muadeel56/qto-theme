@@ -11,3 +11,11 @@
 @import "./styles/badge.css";
 @import "./styles/avatar.css";
 @import "./styles/modal.css";
+@import "./styles/alert.css";
+@import "./styles/tooltip.css";
+@import "./styles/dropdown.css";
+
+/* Import theme component styles */
+@import "./styles/theme-toggle.css";
+@import "./styles/tooltip.css";
+@import "./styles/dropdown.css";

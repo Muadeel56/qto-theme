@@ -1,170 +1,127 @@
-
 import React, { useState } from 'react';
+import { 
+  ThemeProvider, 
+  ThemeToggle, 
+  Button, 
+  Card, 
+  Badge, 
+  Input,
+  Avatar,
+  Modal,
+  Alert,
+  Tooltip,
+  Dropdown
+} from './components';
 import './index.css';
-import { Button, Input, Card, Badge, Avatar, Modal } from './components';
 
 function App() {
+  const [inputValue, setInputValue] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: ''
-  });
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    alert('Form submitted! Check console for data.');
-    console.log('Form data:', formData);
-  };
+  const [alertVisible, setAlertVisible] = useState(true);
 
   return (
-    <div className="container" style={{ padding: '2rem 0' }}>
-      <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
-        <h1 style={{ color: 'var(--color-primary)', marginBottom: '1rem' }}>
-          QTO House Theme Components
-        </h1>
-        <p style={{ color: 'var(--color-text-secondary)', fontSize: '1.125rem' }}>
-          A comprehensive design system based on the QTO House brand colors
-        </p>
-      </div>
-
-      {/* Buttons Section */}
-      <Card style={{ marginBottom: '2rem' }}>
-        <Card.Header>
-          <h2 className="card-title">Buttons</h2>
-          <p className="card-subtitle">Various button styles and sizes</p>
-        </Card.Header>
-        <Card.Body>
-          <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', alignItems: 'center' }}>
-            <Button variant="primary">Primary</Button>
-            <Button variant="secondary">Secondary</Button>
-            <Button variant="outline">Outline</Button>
-            <Button variant="ghost">Ghost</Button>
-            <Button variant="danger">Danger</Button>
+    <ThemeProvider>
+      <div className="min-h-screen bg-gray-50 p-8">
+        <div className="max-w-6xl mx-auto">
+          <div className="flex justify-between items-center mb-8">
+            <h1 className="text-3xl font-bold text-gray-900">QTO Design System</h1>
+            <ThemeToggle />
           </div>
-          <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', alignItems: 'center', marginTop: '1rem' }}>
-            <Button size="sm">Small</Button>
-            <Button size="md">Medium</Button>
-            <Button size="lg">Large</Button>
-            <Button loading>Loading</Button>
-            <Button disabled>Disabled</Button>
-          </div>
-        </Card.Body>
-      </Card>
-
-      {/* Form Section */}
-      <Card style={{ marginBottom: '2rem' }}>
-        <Card.Header>
-          <h2 className="card-title">Form Components</h2>
-          <p className="card-subtitle">Input fields and form elements</p>
-        </Card.Header>
-        <Card.Body>
-          <form onSubmit={handleSubmit} style={{ display: 'grid', gap: '1rem' }}>
-            <Input
-              label="Full Name"
-              name="name"
-              placeholder="Enter your full name"
-              value={formData.name}
-              onChange={handleInputChange}
-              required
-            />
-            <Input
-              label="Email Address"
-              name="email"
-              type="email"
-              placeholder="Enter your email"
-              value={formData.email}
-              onChange={handleInputChange}
-              required
-            />
-            <Input
-              label="Message"
-              name="message"
-              placeholder="Enter your message"
-              value={formData.message}
-              onChange={handleInputChange}
-              helperText="Optional message or feedback"
-            />
-            <div style={{ display: 'flex', gap: '1rem' }}>
-              <Button type="submit" variant="primary">Submit Form</Button>
-              <Button type="button" variant="outline" onClick={() => setIsModalOpen(true)}>
-                Open Modal
-              </Button>
+          
+          {/* Alert Section */}
+          {alertVisible && (
+            <div className="mb-6">
+              <Alert 
+                variant="info" 
+                title="Welcome to QTO Design System"
+                dismissible
+                onClose={() => setAlertVisible(false)}
+              >
+                This is a showcase of all the components available in the QTO design system.
+              </Alert>
             </div>
-          </form>
-        </Card.Body>
-      </Card>
+          )}
+          
+          <div className="grid gap-6">
+            {/* Button Examples */}
+            <Card className="p-6">
+              <h2 className="text-xl font-semibold mb-4">Buttons</h2>
+              <div className="flex gap-4 flex-wrap">
+                <Button variant="primary">Primary</Button>
+                <Button variant="secondary">Secondary</Button>
+                <Button variant="outline">Outline</Button>
+                <Button variant="ghost">Ghost</Button>
+                <Button variant="danger">Danger</Button>
+                <Button variant="primary" onClick={() => setIsModalOpen(true)}>
+                  Open Modal
+                </Button>
+              </div>
+            </Card>
 
-      {/* Badges and Avatars Section */}
-      <Card style={{ marginBottom: '2rem' }}>
-        <Card.Header>
-          <h2 className="card-title">Badges & Avatars</h2>
-          <p className="card-subtitle">Status indicators and user representations</p>
-        </Card.Header>
-        <Card.Body>
-          <div style={{ marginBottom: '2rem' }}>
-            <h3 style={{ marginBottom: '1rem', fontSize: '1rem', fontWeight: '600' }}>Badges</h3>
-            <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
-              <Badge variant="primary">Primary</Badge>
-              <Badge variant="secondary">Secondary</Badge>
-              <Badge variant="success">Success</Badge>
-              <Badge variant="warning">Warning</Badge>
-              <Badge variant="error">Error</Badge>
-              <Badge variant="info">Info</Badge>
-            </div>
+            {/* Input Examples */}
+            <Card className="p-6">
+              <h2 className="text-xl font-semibold mb-4">Input</h2>
+              <div className="max-w-md">
+                <Input 
+                  label="Email"
+                  type="email"
+                  placeholder="Enter your email"
+                  value={inputValue}
+                  onChange={(e) => setInputValue(e.target.value)}
+                />
+              </div>
+            </Card>
+
+            {/* Badge Examples */}
+            <Card className="p-6">
+              <h2 className="text-xl font-semibold mb-4">Badges</h2>
+              <div className="flex gap-2 flex-wrap">
+                <Badge variant="primary">Primary</Badge>
+                <Badge variant="secondary">Secondary</Badge>
+                <Badge variant="success">Success</Badge>
+                <Badge variant="warning">Warning</Badge>
+                <Badge variant="error">Error</Badge>
+              </div>
+            </Card>
+
+            {/* Avatar Examples */}
+            <Card className="p-6">
+              <h2 className="text-xl font-semibold mb-4">Avatars</h2>
+              <div className="flex gap-4 items-center flex-wrap">
+                <Avatar size="sm" name="John Doe" />
+                <Avatar size="md" name="Jane Smith" />
+                <Avatar size="lg" name="Bob Johnson" />
+                <Avatar size="xl" name="Alice Brown" />
+              </div>
+            </Card>
+
+            {/* Interactive Components */}
+            <Card className="p-6">
+              <h2 className="text-xl font-semibold mb-4">Interactive Components</h2>
+              <div className="flex gap-4 flex-wrap">
+                <Tooltip content="This is a tooltip">
+                  <Button variant="outline">Hover for tooltip</Button>
+                </Tooltip>
+                
+                <Dropdown
+                  trigger={<Button variant="outline">Dropdown Menu</Button>}
+                >
+                  <div className="py-1">
+                    <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                      Option 1
+                    </a>
+                    <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                      Option 2
+                    </a>
+                    <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                      Option 3
+                    </a>
+                  </div>
+                </Dropdown>
+              </div>
+            </Card>
           </div>
-          <div>
-            <h3 style={{ marginBottom: '1rem', fontSize: '1rem', fontWeight: '600' }}>Avatars</h3>
-            <div style={{ display: 'flex', gap: '1rem', alignItems: 'center', flexWrap: 'wrap' }}>
-              <Avatar name="John Doe" size="sm" />
-              <Avatar name="Jane Smith" size="md" />
-              <Avatar name="Bob Johnson" size="lg" />
-              <Avatar name="Alice Brown" size="xl" variant="square" />
-              <Avatar name="Charlie Wilson" size="2xl" variant="rounded" />
-            </div>
-          </div>
-        </Card.Body>
-      </Card>
-
-      {/* Cards Section */}
-      <div style={{ display: 'grid', gap: '1rem', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', marginBottom: '2rem' }}>
-        <Card variant="outlined">
-          <Card.Header>
-            <h3 className="card-title">Outlined Card</h3>
-            <p className="card-subtitle">With border styling</p>
-          </Card.Header>
-          <Card.Body>
-            <p>This card has an outlined variant with a visible border.</p>
-          </Card.Body>
-        </Card>
-
-        <Card variant="filled">
-          <Card.Header>
-            <h3 className="card-title">Filled Card</h3>
-            <p className="card-subtitle">With background color</p>
-          </Card.Header>
-          <Card.Body>
-            <p>This card has a filled variant with a background color.</p>
-          </Card.Body>
-        </Card>
-
-        <Card variant="elevated" shadow="lg">
-          <Card.Header>
-            <h3 className="card-title">Elevated Card</h3>
-            <p className="card-subtitle">With shadow effect</p>
-          </Card.Header>
-          <Card.Body>
-            <p>This card has an elevated variant with a shadow effect.</p>
-          </Card.Body>
-        </Card>
+        </div>
       </div>
 
       {/* Modal */}
@@ -172,37 +129,22 @@ function App() {
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         title="Example Modal"
-        size="md"
       >
-        <div style={{ padding: '1rem 0' }}>
-          <p>This is an example modal dialog. It demonstrates the modal component with:</p>
-          <ul style={{ marginTop: '1rem', paddingLeft: '1.5rem' }}>
-            <li>Title bar with close button</li>
-            <li>Backdrop overlay</li>
-            <li>Escape key support</li>
-            <li>Responsive design</li>
-          </ul>
+        <div className="p-4">
+          <p className="text-gray-600 mb-4">
+            This is an example modal from the QTO design system.
+          </p>
+          <div className="flex gap-3 justify-end">
+            <Button variant="ghost" onClick={() => setIsModalOpen(false)}>
+              Cancel
+            </Button>
+            <Button variant="primary" onClick={() => setIsModalOpen(false)}>
+              Confirm
+            </Button>
+          </div>
         </div>
-        <Modal.Footer>
-          <Button variant="outline" onClick={() => setIsModalOpen(false)}>
-            Cancel
-          </Button>
-          <Button variant="primary" onClick={() => setIsModalOpen(false)}>
-            Confirm
-          </Button>
-        </Modal.Footer>
       </Modal>
-
-      {/* Footer */}
-      <div style={{ textAlign: 'center', marginTop: '3rem', padding: '2rem 0', borderTop: '1px solid var(--color-border)' }}>
-        <p style={{ color: 'var(--color-text-secondary)' }}>
-          QTO House Theme Components - Built with React
-        </p>
-        <div style={{ marginTop: '1rem' }}>
-          <Badge variant="primary" rounded="full">v1.0.0</Badge>
-        </div>
-      </div>
-    </div>
+    </ThemeProvider>
   );
 }
 

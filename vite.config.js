@@ -18,6 +18,11 @@ export default defineConfig({
         './Badge': './src/components/Badge.jsx',
         './Avatar': './src/components/Avatar.jsx',
         './Modal': './src/components/Modal.jsx',
+        './ThemeProvider': './src/components/ThemeProvider.jsx',
+        './ThemeToggle': './src/components/ThemeToggle.jsx',
+        './Tooltip': './src/components/Tooltip.jsx',
+        './Dropdown': './src/components/Dropdown.jsx',
+        './Alert': './src/components/Alert.jsx',
         './Components': './src/components/index.js',
         './Styles': './src/index.css',
       },
@@ -33,11 +38,11 @@ export default defineConfig({
     outDir: 'dist',
    },
    server: {
-    port: 5001,
+    port: 5002,
     cors: true,
    },
    preview: {
-    port: 5001,
+    port: 5002,
     cors: true,
    }
 })
