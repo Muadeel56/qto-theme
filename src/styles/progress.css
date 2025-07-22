@@ -1,0 +1,286 @@
+/* Progress Styles */
+
+/* Progress Container */
+.qto-progress-container {
+  width: 100%;
+}
+
+.qto-progress__label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-xs);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--color-text);
+}
+
+.qto-progress__percentage {
+  font-size: var(--text-xs);
+  color: var(--color-text-secondary);
+}
+
+/* Linear Progress Bar */
+.qto-progress {
+  position: relative;
+  width: 100%;
+  background: var(--color-bg-secondary);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.qto-progress__bar {
+  height: 100%;
+  background: var(--color-primary);
+  border-radius: inherit;
+  transition: width 0.6s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Progress Sizes */
+.qto-progress--sm {
+  height: 4px;
+}
+
+.qto-progress--md {
+  height: 8px;
+}
+
+.qto-progress--lg {
+  height: 12px;
+}
+
+/* Progress Variants */
+.qto-progress--primary .qto-progress__bar {
+  background: linear-gradient(90deg, var(--color-primary), var(--color-primary-hover));
+  box-shadow: 0 0 10px rgba(242, 182, 15, 0.3);
+}
+
+.qto-progress--secondary .qto-progress__bar {
+  background: linear-gradient(90deg, var(--color-secondary), var(--color-secondary-hover));
+  box-shadow: 0 0 10px rgba(128, 128, 128, 0.3);
+}
+
+.qto-progress--success .qto-progress__bar {
+  background: linear-gradient(90deg, var(--color-success), #16a34a);
+  box-shadow: 0 0 10px rgba(34, 197, 94, 0.3);
+}
+
+.qto-progress--warning .qto-progress__bar {
+  background: linear-gradient(90deg, var(--color-warning), #d97706);
+  box-shadow: 0 0 10px rgba(245, 158, 11, 0.3);
+}
+
+.qto-progress--error .qto-progress__bar {
+  background: linear-gradient(90deg, var(--color-error), #dc2626);
+  box-shadow: 0 0 10px rgba(239, 68, 68, 0.3);
+}
+
+.qto-progress--info .qto-progress__bar {
+  background: linear-gradient(90deg, var(--color-info), #2563eb);
+  box-shadow: 0 0 10px rgba(59, 130, 246, 0.3);
+}
+
+/* Rounded Variants */
+.qto-progress--rounded-none {
+  border-radius: 0;
+}
+
+.qto-progress--rounded-sm {
+  border-radius: var(--radius-sm);
+}
+
+.qto-progress--rounded-md {
+  border-radius: var(--radius-md);
+}
+
+.qto-progress--rounded-lg {
+  border-radius: var(--radius-lg);
+}
+
+.qto-progress--rounded-full {
+  border-radius: var(--radius-full);
+}
+
+/* Striped Progress */
+.qto-progress--striped .qto-progress__stripes {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: linear-gradient(
+    45deg,
+    rgba(255, 255, 255, 0.15) 25%,
+    transparent 25%,
+    transparent 50%,
+    rgba(255, 255, 255, 0.15) 50%,
+    rgba(255, 255, 255, 0.15) 75%,
+    transparent 75%,
+    transparent
+  );
+  background-size: 1rem 1rem;
+}
+
+/* Animated Progress */
+.qto-progress--animated .qto-progress__stripes {
+  animation: qto-progress-stripes 1s linear infinite;
+}
+
+@keyframes qto-progress-stripes {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 1rem 0;
+  }
+}
+
+/* Circular Progress */
+.qto-progress-circular {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.qto-progress-circular__svg {
+  transform: rotate(-90deg);
+}
+
+.qto-progress-circular__background {
+  fill: none;
+  stroke: var(--color-bg-secondary);
+}
+
+.qto-progress-circular__bar {
+  fill: none;
+  stroke: var(--color-primary);
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.6s ease;
+}
+
+/* Circular Progress Variants */
+.qto-progress-circular--primary .qto-progress-circular__bar {
+  stroke: var(--color-primary);
+  filter: drop-shadow(0 0 6px rgba(242, 182, 15, 0.3));
+}
+
+.qto-progress-circular--secondary .qto-progress-circular__bar {
+  stroke: var(--color-secondary);
+  filter: drop-shadow(0 0 6px rgba(128, 128, 128, 0.3));
+}
+
+.qto-progress-circular--success .qto-progress-circular__bar {
+  stroke: var(--color-success);
+  filter: drop-shadow(0 0 6px rgba(34, 197, 94, 0.3));
+}
+
+.qto-progress-circular--warning .qto-progress-circular__bar {
+  stroke: var(--color-warning);
+  filter: drop-shadow(0 0 6px rgba(245, 158, 11, 0.3));
+}
+
+.qto-progress-circular--error .qto-progress-circular__bar {
+  stroke: var(--color-error);
+  filter: drop-shadow(0 0 6px rgba(239, 68, 68, 0.3));
+}
+
+.qto-progress-circular--info .qto-progress-circular__bar {
+  stroke: var(--color-info);
+  filter: drop-shadow(0 0 6px rgba(59, 130, 246, 0.3));
+}
+
+.qto-progress-circular__label {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--color-text);
+  text-align: center;
+}
+
+/* Indeterminate Progress */
+.qto-progress--indeterminate .qto-progress__bar {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--color-primary),
+    transparent
+  );
+  animation: qto-progress-indeterminate 2s ease-in-out infinite;
+}
+
+@keyframes qto-progress-indeterminate {
+  0% {
+    transform: translateX(-100%);
+  }
+  50% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* Dark Theme Adjustments */
+[data-theme="dark"] .qto-progress {
+  background: var(--color-bg-tertiary);
+  box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="dark"] .qto-progress-circular__background {
+  stroke: var(--color-bg-tertiary);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .qto-progress__label {
+    font-size: var(--text-xs);
+  }
+  
+  .qto-progress-circular__label {
+    font-size: var(--text-xs);
+  }
+  
+  .qto-progress--lg {
+    height: 10px;
+  }
+  
+  .qto-progress--md {
+    height: 6px;
+  }
+  
+  .qto-progress--sm {
+    height: 4px;
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .qto-progress__bar,
+  .qto-progress-circular__bar {
+    transition: none;
+  }
+  
+  .qto-progress--animated .qto-progress__stripes,
+  .qto-progress--indeterminate .qto-progress__bar {
+    animation: none;
+  }
+}
+
+/* Focus styles for accessibility */
+.qto-progress:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+.qto-progress-circular:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+  border-radius: 50%;
+}

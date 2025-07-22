@@ -1,8 +1,9 @@
-/* Import design tokens first */
-@import "./styles/tokens.css";
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 
-/* Import base styles */
-@import "./styles/base.css";
+/* QTO House Theme Library */
+@import './styles/tokens.css';
+@import './styles/base.css';
 
 /* Import component styles */
 @import "./styles/button.css";

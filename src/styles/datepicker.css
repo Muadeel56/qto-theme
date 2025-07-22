@@ -1,0 +1,443 @@
+/* DateTimePicker Styles */
+
+/* DatePicker Container */
+.qto-datepicker {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.qto-datepicker--full-width {
+  width: 100%;
+}
+
+/* DatePicker Label */
+.qto-datepicker__label {
+  display: inline-block;
+  font-family: var(--font-base);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--color-text);
+  margin-bottom: var(--spacing-xs);
+}
+
+.qto-datepicker__required {
+  color: var(--color-error);
+  margin-left: 2px;
+}
+
+/* DatePicker Wrapper */
+.qto-datepicker__wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+/* DatePicker Field */
+.qto-datepicker__field {
+  width: 100%;
+  font-family: var(--font-base);
+  font-size: var(--text-sm);
+  line-height: 1.5;
+  color: var(--color-text);
+  background: var(--color-bg-primary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  transition: all var(--transition-fast);
+  outline: none;
+  padding: var(--spacing-sm) calc(var(--spacing-md) + 24px) var(--spacing-sm) var(--spacing-md);
+  min-height: 40px;
+}
+
+.qto-datepicker__field[readonly] {
+  cursor: pointer;
+}
+
+.qto-datepicker__field::-webkit-calendar-picker-indicator {
+  opacity: 0;
+  width: 0;
+  height: 0;
+  position: absolute;
+  right: 0;
+  cursor: pointer;
+}
+
+.qto-datepicker__field:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(242, 182, 15, 0.1);
+}
+
+.qto-datepicker__field:hover:not(:disabled):not(.qto-datepicker__field--error) {
+  border-color: var(--color-text-secondary);
+}
+
+/* DatePicker Sizes */
+.qto-datepicker__field--sm {
+  padding: var(--spacing-xs) calc(var(--spacing-sm) + 20px) var(--spacing-xs) var(--spacing-sm);
+  font-size: var(--text-xs);
+  min-height: 32px;
+}
+
+.qto-datepicker__field--lg {
+  padding: var(--spacing-md) calc(var(--spacing-lg) + 28px) var(--spacing-md) var(--spacing-lg);
+  font-size: var(--text-base);
+  min-height: 48px;
+}
+
+/* Rounded DatePicker */
+.qto-datepicker__field--rounded {
+  border-radius: var(--radius-full);
+}
+
+/* Full Width */
+.qto-datepicker__field--full-width {
+  width: 100%;
+}
+
+/* Error State */
+.qto-datepicker__field--error {
+  border-color: var(--color-error);
+  background: var(--color-error-light);
+}
+
+.qto-datepicker__field--error:focus {
+  border-color: var(--color-error);
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+}
+
+/* Disabled State */
+.qto-datepicker__field--disabled {
+  background: var(--color-bg-secondary);
+  color: var(--color-text-muted);
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* DatePicker Icon */
+.qto-datepicker__icon {
+  position: absolute;
+  right: var(--spacing-md);
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border: none;
+  background: none;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition: color var(--transition-fast);
+  pointer-events: auto;
+}
+
+.qto-datepicker__icon:hover {
+  color: var(--color-primary);
+}
+
+.qto-datepicker__icon:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Size adjustments for icon */
+.qto-datepicker__field--sm ~ .qto-datepicker__icon {
+  right: var(--spacing-sm);
+  width: 16px;
+  height: 16px;
+}
+
+.qto-datepicker__field--lg ~ .qto-datepicker__icon {
+  right: var(--spacing-lg);
+  width: 24px;
+  height: 24px;
+}
+
+/* DatePicker Calendar Dropdown */
+.qto-datepicker__calendar {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  margin-top: 4px;
+  animation: slideDown 0.2s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Error Message */
+.qto-datepicker__error {
+  font-size: var(--text-xs);
+  color: var(--color-error);
+  margin-top: var(--spacing-xs);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+}
+
+/* Helper Text */
+.qto-datepicker__helper {
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  margin-top: var(--spacing-xs);
+}
+
+/* Quick DatePicker */
+.qto-datepicker-quick {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  gap: var(--spacing-xs);
+}
+
+.qto-datepicker-quick__presets {
+  position: relative;
+}
+
+.qto-datepicker-quick__toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-primary);
+  color: var(--color-text-muted);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.qto-datepicker-quick__toggle:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.qto-datepicker-quick__dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: var(--spacing-xs);
+  background: var(--color-bg-primary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  z-index: var(--z-dropdown);
+  min-width: 120px;
+  overflow: hidden;
+}
+
+.qto-datepicker-quick__preset {
+  width: 100%;
+  padding: var(--spacing-sm) var(--spacing-md);
+  border: none;
+  background: transparent;
+  color: var(--color-text);
+  text-align: left;
+  cursor: pointer;
+  transition: background-color var(--transition-fast);
+  font-size: var(--text-sm);
+}
+
+.qto-datepicker-quick__preset:hover {
+  background: var(--color-primary-light);
+  color: var(--color-primary-dark);
+}
+
+/* Date Range Picker */
+.qto-datepicker-range {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.qto-datepicker-range__label {
+  font-family: var(--font-base);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--color-text);
+}
+
+.qto-datepicker-range__inputs {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--spacing-md);
+}
+
+.qto-datepicker-range__separator {
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  padding: 0 var(--spacing-xs);
+  margin-bottom: var(--spacing-lg);
+  white-space: nowrap;
+}
+
+/* Custom date input styling for better UX */
+.qto-datepicker__field::-webkit-datetime-edit {
+  padding: 0;
+}
+
+.qto-datepicker__field::-webkit-datetime-edit-fields-wrapper {
+  padding: 0;
+}
+
+.qto-datepicker__field::-webkit-datetime-edit-text {
+  color: var(--color-text-muted);
+  padding: 0 2px;
+}
+
+.qto-datepicker__field::-webkit-datetime-edit-month-field {
+  color: var(--color-text);
+}
+
+.qto-datepicker__field::-webkit-datetime-edit-day-field {
+  color: var(--color-text);
+}
+
+.qto-datepicker__field::-webkit-datetime-edit-year-field {
+  color: var(--color-text);
+}
+
+.qto-datepicker__field::-webkit-datetime-edit-hour-field {
+  color: var(--color-text);
+}
+
+.qto-datepicker__field::-webkit-datetime-edit-minute-field {
+  color: var(--color-text);
+}
+
+.qto-datepicker__field::-webkit-datetime-edit-second-field {
+  color: var(--color-text);
+}
+
+.qto-datepicker__field::-webkit-datetime-edit-ampm-field {
+  color: var(--color-text);
+}
+
+/* Firefox specific styling */
+.qto-datepicker__field::-moz-placeholder {
+  color: var(--color-text-muted);
+  opacity: 1;
+}
+
+/* Dark Theme Adjustments */
+[data-theme="dark"] .qto-datepicker__field {
+  background: var(--color-bg-primary);
+  border-color: var(--color-border);
+  color: var(--color-text);
+}
+
+[data-theme="dark"] .qto-datepicker__field--disabled {
+  background: var(--color-bg-tertiary);
+}
+
+[data-theme="dark"] .qto-datepicker-quick__toggle {
+  background: var(--color-bg-primary);
+  border-color: var(--color-border);
+}
+
+[data-theme="dark"] .qto-datepicker-quick__dropdown {
+  background: var(--color-bg-primary);
+  border-color: var(--color-border);
+}
+
+[data-theme="dark"] .qto-datepicker-quick__preset {
+  color: var(--color-text);
+}
+
+[data-theme="dark"] .qto-datepicker-quick__preset:hover {
+  background: var(--color-gray-700);
+  color: var(--color-text);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .qto-datepicker__field {
+    min-height: 44px; /* Increase touch target on mobile */
+    font-size: 16px; /* Prevent zoom on iOS */
+  }
+  
+  .qto-datepicker__field--sm {
+    min-height: 36px;
+  }
+  
+  .qto-datepicker__field--lg {
+    min-height: 52px;
+  }
+  
+  .qto-datepicker-range__inputs {
+    flex-direction: column;
+    gap: var(--spacing-sm);
+  }
+  
+  .qto-datepicker-range__separator {
+    display: none;
+  }
+  
+  .qto-datepicker-quick {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .qto-datepicker-quick__presets {
+    align-self: flex-end;
+  }
+  
+  .qto-datepicker-quick__dropdown {
+    right: 0;
+    left: auto;
+  }
+}
+
+/* Animation for dropdown */
+.qto-datepicker-quick__dropdown {
+  animation: qto-datepicker-slide-down var(--transition-fast) ease-out;
+}
+
+@keyframes qto-datepicker-slide-down {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+  .qto-datepicker__field,
+  .qto-datepicker-quick__toggle,
+  .qto-datepicker-quick__preset {
+    transition: none;
+  }
+  
+  .qto-datepicker-quick__dropdown {
+    animation: none;
+  }
+}
+
+/* Focus styles for keyboard navigation */
+.qto-datepicker-quick__toggle:focus {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+.qto-datepicker-quick__preset:focus {
+  background: var(--color-primary-light);
+  color: var(--color-primary-dark);
+  outline: none;
+}

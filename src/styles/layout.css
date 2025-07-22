@@ -1,0 +1,242 @@
+/* Responsive Layout Components */
+
+/* Container Base */
+.qto-container {
+  width: 100%;
+  margin: 0 auto;
+  position: relative;
+}
+
+.qto-container--padded {
+  padding-left: var(--container-padding);
+  padding-right: var(--container-padding);
+}
+
+.qto-container--fluid {
+  max-width: 100%;
+}
+
+.qto-container--sm {
+  max-width: min(100% - 2rem, 640px);
+}
+
+.qto-container--md {
+  max-width: min(100% - 2rem, 768px);
+}
+
+.qto-container--lg {
+  max-width: min(100% - 2rem, 1024px);
+}
+
+.qto-container--xl {
+  max-width: min(100% - 2rem, 1280px);
+}
+
+.qto-container--default {
+  max-width: var(--container-max-width);
+}
+
+/* Responsive adjustments */
+.qto-container--mobile {
+  padding-left: var(--spacing-md);
+  padding-right: var(--spacing-md);
+}
+
+.qto-container--tablet {
+  padding-left: var(--spacing-lg);
+  padding-right: var(--spacing-lg);
+}
+
+.qto-container--desktop {
+  padding-left: var(--spacing-xl);
+  padding-right: var(--spacing-xl);
+}
+
+/* Grid Component */
+.qto-grid {
+  display: grid;
+  width: 100%;
+}
+
+.qto-grid--cols-1 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
+.qto-grid--cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.qto-grid--cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.qto-grid--cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.qto-grid--cols-5 { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+.qto-grid--cols-6 { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+
+.qto-grid--gap-xs { gap: var(--spacing-xs); }
+.qto-grid--gap-sm { gap: var(--spacing-sm); }
+.qto-grid--gap-md { gap: var(--spacing-md); }
+.qto-grid--gap-lg { gap: var(--spacing-lg); }
+.qto-grid--gap-xl { gap: var(--spacing-xl); }
+
+/* Flex Component */
+.qto-flex {
+  display: flex;
+}
+
+.qto-flex--row { flex-direction: row; }
+.qto-flex--column { flex-direction: column; }
+.qto-flex--row-reverse { flex-direction: row-reverse; }
+.qto-flex--column-reverse { flex-direction: column-reverse; }
+
+.qto-flex--justify-start { justify-content: flex-start; }
+.qto-flex--justify-end { justify-content: flex-end; }
+.qto-flex--justify-center { justify-content: center; }
+.qto-flex--justify-between { justify-content: space-between; }
+.qto-flex--justify-around { justify-content: space-around; }
+.qto-flex--justify-evenly { justify-content: space-evenly; }
+
+.qto-flex--align-start { align-items: flex-start; }
+.qto-flex--align-end { align-items: flex-end; }
+.qto-flex--align-center { align-items: center; }
+.qto-flex--align-baseline { align-items: baseline; }
+.qto-flex--align-stretch { align-items: stretch; }
+
+.qto-flex--wrap-nowrap { flex-wrap: nowrap; }
+.qto-flex--wrap-wrap { flex-wrap: wrap; }
+.qto-flex--wrap-wrap-reverse { flex-wrap: wrap-reverse; }
+
+.qto-flex--gap-xs { gap: var(--spacing-xs); }
+.qto-flex--gap-sm { gap: var(--spacing-sm); }
+.qto-flex--gap-md { gap: var(--spacing-md); }
+.qto-flex--gap-lg { gap: var(--spacing-lg); }
+.qto-flex--gap-xl { gap: var(--spacing-xl); }
+
+/* Stack Component */
+.qto-stack {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Page Container */
+.qto-page-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.qto-page-header {
+  margin-bottom: var(--spacing-xl);
+}
+
+.qto-page-breadcrumbs {
+  margin-bottom: var(--spacing-md);
+}
+
+.qto-page-title-section {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--spacing-lg);
+  flex-wrap: wrap;
+}
+
+.qto-page-title-section--mobile {
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--spacing-md);
+}
+
+.qto-page-title-content {
+  flex: 1;
+  min-width: 0; /* Prevent flex item overflow */
+}
+
+.qto-page-title {
+  font-size: var(--text-3xl);
+  font-weight: 700;
+  color: var(--color-text);
+  margin: 0 0 var(--spacing-xs) 0;
+  line-height: var(--line-height-tight);
+}
+
+.qto-page-subtitle {
+  font-size: var(--text-base);
+  color: var(--color-text-secondary);
+  margin: 0;
+  line-height: var(--line-height-normal);
+}
+
+.qto-page-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  flex-shrink: 0;
+  flex-wrap: wrap;
+}
+
+.qto-page-content {
+  flex: 1;
+  width: 100%;
+}
+
+/* Card Grid */
+.qto-card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(var(--min-card-width, 280px), 1fr));
+  width: 100%;
+}
+
+.qto-card-grid--gap-xs { gap: var(--spacing-xs); }
+.qto-card-grid--gap-sm { gap: var(--spacing-sm); }
+.qto-card-grid--gap-md { gap: var(--spacing-md); }
+.qto-card-grid--gap-lg { gap: var(--spacing-lg); }
+.qto-card-grid--gap-xl { gap: var(--spacing-xl); }
+
+/* Responsive Breakpoints */
+@media (max-width: 640px) {
+  .qto-page-title {
+    font-size: var(--text-2xl);
+  }
+  
+  .qto-page-actions {
+    width: 100%;
+    justify-content: stretch;
+  }
+  
+  .qto-page-actions > * {
+    flex: 1;
+  }
+  
+  .qto-card-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (min-width: 640px) and (max-width: 768px) {
+  .qto-card-grid {
+    grid-template-columns: repeat(auto-fill, minmax(min(var(--min-card-width, 280px), 100%), 1fr));
+  }
+}
+
+@media (min-width: 1536px) {
+  .qto-page-title {
+    font-size: var(--text-4xl);
+  }
+  
+  .qto-container--default {
+    max-width: min(100% - 4rem, 1536px);
+  }
+}
+
+/* High DPI / Retina Displays */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .qto-page-title,
+  .qto-page-subtitle {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .qto-container,
+  .qto-grid,
+  .qto-flex,
+  .qto-stack {
+    transition: none;
+    animation: none;
+  }
+}

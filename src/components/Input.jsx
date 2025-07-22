@@ -1,5 +1,6 @@
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useState } from 'react';
 import PropTypes from 'prop-types';
+import { useResponsive } from '../hooks/useResponsive';
 import '../styles/input.css';
 
 const Input = forwardRef(({ 
@@ -12,20 +13,36 @@ const Input = forwardRef(({
   disabled = false,
   size = 'md',
   variant = 'default',
-  leftIcon,
-  rightIcon,
+  startIcon,
+  endIcon,
+  fullWidth = false,
+  fullWidthOnMobile = true,
+  rounded = false,
+  floating = false,
   className = '',
+  onFocus,
+  onBlur,
   ...props 
 }, ref) => {
-  const inputId = props.id || `input-${Math.random().toString(36).substr(2, 9)}`;
+  const { isMobile, breakpoint } = useResponsive();
+  const [isFocused, setIsFocused] = useState(false);
+  const [hasValue, setHasValue] = useState(Boolean(props.value || props.defaultValue));
+  
+  const inputId = props.id || `qto-input-${Math.random().toString(36).substr(2, 9)}`;
+
+  // Auto full-width on mobile if enabled
+  const isFullWidth = fullWidth || (fullWidthOnMobile && isMobile);
 
   const getInputClasses = () => {
-    const baseClasses = 'input-field';
-    const sizeClasses = `input-${size}`;
-    const variantClasses = `input-${variant}`;
-    const errorClasses = error ? 'input-error' : '';
-    const disabledClasses = disabled ? 'input-disabled' : '';
-    const iconClasses = leftIcon || rightIcon ? 'input-with-icon' : '';
+    const baseClasses = 'qto-input__field';
+    const sizeClasses = `qto-input__field--${size}`;
+    const variantClasses = `qto-input__field--${variant}`;
+    const errorClasses = error ? 'qto-input__field--error' : '';
+    const disabledClasses = disabled ? 'qto-input__field--disabled' : '';
+    const focusedClasses = isFocused ? 'qto-input__field--focused' : '';
+    const roundedClasses = rounded ? 'qto-input__field--rounded' : '';
+    const fullWidthClasses = isFullWidth ? 'qto-input__field--full-width' : '';
+    const responsiveClass = `qto-input__field--${breakpoint}`;
     
     return [
       baseClasses,
@@ -33,24 +50,54 @@ const Input = forwardRef(({
       variantClasses,
       errorClasses,
       disabledClasses,
-      iconClasses,
+      focusedClasses,
+      roundedClasses,
+      fullWidthClasses,
+      responsiveClass,
       className
     ].filter(Boolean).join(' ');
   };
 
+  const getContainerClasses = () => {
+    const baseClasses = 'qto-input';
+    const fullWidthClasses = isFullWidth ? 'qto-input--full-width' : '';
+    const floatingClasses = floating ? 'qto-input--floating' : '';
+    const focusedClasses = isFocused ? 'qto-input--focused' : '';
+    const hasValueClasses = hasValue ? 'qto-input--has-value' : '';
+    
+    return [
+      baseClasses,
+      fullWidthClasses,
+      floatingClasses,
+      focusedClasses,
+      hasValueClasses
+    ].filter(Boolean).join(' ');
+  };
+
+  const handleFocus = (e) => {
+    setIsFocused(true);
+    onFocus?.(e);
+  };
+
+  const handleBlur = (e) => {
+    setIsFocused(false);
+    setHasValue(Boolean(e.target.value));
+    onBlur?.(e);
+  };
+
   return (
-    <div className="input-container">
-      {label && (
-        <label htmlFor={inputId} className="input-label">
+    <div className={getContainerClasses()}>
+      {label && !floating && (
+        <label htmlFor={inputId} className="qto-input__label">
           {label}
-          {required && <span className="input-required-indicator">*</span>}
+          {required && <span className="qto-input__required">*</span>}
         </label>
       )}
       
-      <div className="input-wrapper">
-        {leftIcon && (
-          <span className="input-icon input-icon-left">
-            {leftIcon}
+      <div className="qto-input__wrapper">
+        {startIcon && (
+          <span className="qto-input__icon qto-input__icon--start">
+            {startIcon}
           </span>
         )}
         
@@ -58,28 +105,37 @@ const Input = forwardRef(({
           ref={ref}
           id={inputId}
           type={type}
-          placeholder={placeholder}
+          placeholder={floating ? '' : placeholder}
           disabled={disabled}
           required={required}
           className={getInputClasses()}
+          onFocus={handleFocus}
+          onBlur={handleBlur}
           {...props}
         />
         
-        {rightIcon && (
-          <span className="input-icon input-icon-right">
-            {rightIcon}
+        {floating && label && (
+          <label htmlFor={inputId} className="qto-input__label qto-input__label--floating">
+            {label}
+            {required && <span className="qto-input__required">*</span>}
+          </label>
+        )}
+        
+        {endIcon && (
+          <span className="qto-input__icon qto-input__icon--end">
+            {endIcon}
           </span>
         )}
       </div>
       
       {error && (
-        <span className="input-error-message" role="alert">
+        <span className="qto-input__error" role="alert">
           {error}
         </span>
       )}
       
       {helperText && !error && (
-        <span className="input-helper-text">
+        <span className="qto-input__helper">
           {helperText}
         </span>
       )}
@@ -97,10 +153,14 @@ Input.propTypes = {
   helperText: PropTypes.string,
   required: PropTypes.bool,
   disabled: PropTypes.bool,
+  fullWidth: PropTypes.bool,
+  fullWidthOnMobile: PropTypes.bool,
+  rounded: PropTypes.bool,
+  floating: PropTypes.bool,
   size: PropTypes.oneOf(['sm', 'md', 'lg']),
   variant: PropTypes.oneOf(['default', 'filled', 'minimal']),
-  leftIcon: PropTypes.node,
-  rightIcon: PropTypes.node,
+  startIcon: PropTypes.node,
+  endIcon: PropTypes.node,
   className: PropTypes.string,
   id: PropTypes.string,
 };
