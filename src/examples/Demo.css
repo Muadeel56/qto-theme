@@ -1,0 +1,30 @@
+.qto-theme-demo {
+  min-height: 100vh;
+  background: var(--color-bg-primary);
+  color: var(--color-text);
+}
+
+.demo-header {
+  text-align: center;
+  padding: var(--spacing-2xl) var(--spacing-md);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.demo-header h1 {
+  margin: 0 0 var(--spacing-sm) 0;
+  font-size: var(--text-3xl);
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.demo-header p {
+  margin: 0;
+  color: var(--color-text-secondary);
+  font-size: var(--text-lg);
+}
+
+.demo-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--spacing-xl) var(--spacing-md);
+}

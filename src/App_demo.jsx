@@ -3,9 +3,10 @@ import {
   Button,
   Input,
   Select,
+  DatePicker,
+  DateRangePicker,
   DateTimePicker,
   QuickDatePicker,
-  DateRangePicker,
   Badge,
   Card,
   DataGrid,
@@ -22,6 +23,7 @@ import {
   ThemeToggle,
   ThemeProvider
 } from './components';
+import DatePickerExample from './examples/DatePickerExample';
 import './index.css';
 
 const sampleTableData = [
@@ -46,6 +48,7 @@ const selectOptions = [
 ];
 
 function App() {
+  const [currentView, setCurrentView] = useState('main'); // 'main' or 'datepicker-demo'
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isFormModalOpen, setIsFormModalOpen] = useState(false);
   const [formData, setFormData] = useState({
@@ -65,6 +68,36 @@ function App() {
   const handleTableRowClick = (row) => {
     console.log('Row clicked:', row);
   };
+
+  // If viewing DatePicker demo, render that component
+  if (currentView === 'datepicker-demo') {
+    return (
+      <ThemeProvider>
+        <div style={{ minHeight: '100vh', background: 'var(--color-bg-primary)' }}>
+          <header style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            padding: '1rem 2rem',
+            borderBottom: '1px solid var(--color-border)',
+            background: 'var(--color-bg-primary)',
+            position: 'sticky',
+            top: 0,
+            zIndex: 100
+          }}>
+            <Button 
+              variant="outline" 
+              onClick={() => setCurrentView('main')}
+            >
+              ← Back to Main Demo
+            </Button>
+            <ThemeToggle />
+          </header>
+          <DatePickerExample />
+        </div>
+      </ThemeProvider>
+    );
+  }
 
   const handleFormSubmit = (data) => {
     console.log('Form submitted:', data);
@@ -150,6 +183,33 @@ function App() {
         background: 'var(--color-bg-primary)',
         minHeight: 'calc(100vh - 140px)'
       }}>
+
+        {/* Demo Navigation */}
+        <section style={{ marginBottom: '3rem' }}>
+          <div style={{ 
+            display: 'flex', 
+            flexWrap: 'wrap', 
+            gap: '1rem', 
+            justifyContent: 'center',
+            padding: '2rem',
+            background: 'var(--color-bg-secondary)',
+            borderRadius: 'var(--radius-xl)',
+            border: '1px solid var(--color-border)'
+          }}>
+            <Button 
+              variant="outline" 
+              onClick={() => setCurrentView('datepicker-demo')}
+            >
+              📅 View Full DatePicker Demo
+            </Button>
+            <Button variant="outline">
+              📋 View All Components
+            </Button>
+            <Button variant="outline">
+              🎨 Theme Customization
+            </Button>
+          </div>
+        </section>
         
         {/* Alert Examples */}
         <section style={{ marginBottom: '4rem' }}>
@@ -664,6 +724,146 @@ function App() {
               ]}
               placement="bottom-end"
             />
+          </div>
+        </section>
+
+        {/* DatePicker Examples */}
+        <section style={{ marginBottom: '4rem' }}>
+          <h2 style={{ 
+            marginBottom: '2rem', 
+            color: 'var(--color-text)',
+            fontFamily: 'var(--font-display)',
+            fontSize: 'var(--text-2xl)',
+            fontWeight: '700',
+            letterSpacing: '-0.025em'
+          }}>
+            Enhanced DatePicker Components
+          </h2>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '2rem', marginBottom: '2rem' }}>
+            <div style={{ flex: '1', minWidth: '280px' }}>
+              <DatePicker
+                label="Responsive DatePicker"
+                value={formData.date}
+                onChange={(date) => handleInputChange('date', date)}
+                placeholder="Select a date"
+                responsive={true}
+                fullWidthOnMobile={true}
+                clearable={true}
+                helperText="Fully responsive with mobile optimizations"
+              />
+            </div>
+            <div style={{ flex: '1', minWidth: '280px' }}>
+              <DatePicker
+                label="Quick Actions DatePicker"
+                quickActions={true}
+                clearable={true}
+                placeholder="Pick with quick options"
+                helperText="Includes preset date options"
+                size="lg"
+              />
+            </div>
+          </div>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '2rem' }}>
+            <div style={{ flex: '1', minWidth: '280px' }}>
+              <DatePicker
+                label="Time Picker"
+                type="time"
+                placeholder="Select time"
+                helperText="Time selection component"
+              />
+            </div>
+            <div style={{ flex: '1', minWidth: '280px' }}>
+              <DatePicker
+                label="DateTime Picker"
+                type="datetime-local"
+                placeholder="Select date and time"
+                helperText="Combined date and time picker"
+              />
+            </div>
+          </div>
+          <div style={{ 
+            marginTop: '2rem', 
+            padding: '1rem', 
+            background: 'var(--color-bg-secondary)', 
+            borderRadius: 'var(--radius-lg)',
+            border: '1px solid var(--color-border)'
+          }}>
+            <p style={{ margin: 0, fontSize: '0.875rem', color: 'var(--color-text-muted)' }}>
+              🎯 <strong>Pro Tip:</strong> Try resizing your browser window or testing on different devices to see the responsive behavior in action!
+            </p>
+          </div>
+        </section>
+
+        {/* DateRangePicker Examples */}
+        <section style={{ marginBottom: '4rem' }}>
+          <h2 style={{ 
+            marginBottom: '2rem', 
+            color: 'var(--color-text)',
+            fontFamily: 'var(--font-display)',
+            fontSize: 'var(--text-2xl)',
+            fontWeight: '700',
+            letterSpacing: '-0.025em'
+          }}>
+            Enhanced DateRangePicker Components
+          </h2>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '2rem', marginBottom: '2rem' }}>
+            <div style={{ flex: '1', minWidth: '320px' }}>
+              <DateRangePicker
+                label="Responsive Date Range"
+                startDate={formData.startDate}
+                endDate={formData.endDate}
+                onChange={(start, end) => {
+                  handleInputChange('startDate', start);
+                  handleInputChange('endDate', end);
+                }}
+                responsive={true}
+                fullWidthOnMobile={true}
+                stackOnMobile={true}
+                showClearButton={true}
+                helperText="Responsive date range with mobile stacking"
+              />
+            </div>
+            <div style={{ flex: '1', minWidth: '320px' }}>
+              <DateRangePicker
+                label="Quick Preset Range"
+                showPresets={true}
+                showClearButton={true}
+                helperText="Includes preset range options"
+                size="lg"
+              />
+            </div>
+          </div>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '2rem' }}>
+            <div style={{ flex: '1', minWidth: '320px' }}>
+              <DateRangePicker
+                label="Custom Labels Range"
+                startLabel="Check-in Date"
+                endLabel="Check-out Date"
+                separatorText="until"
+                allowSameDate={false}
+                helperText="Custom labels and validation"
+              />
+            </div>
+            <div style={{ flex: '1', minWidth: '320px' }}>
+              <DateRangePicker
+                label="Outline Variant"
+                variant="outline"
+                highlightRange={true}
+                autoSelectEndDate={true}
+                helperText="Auto-focus end date after start selection"
+              />
+            </div>
+          </div>
+          <div style={{ 
+            marginTop: '2rem', 
+            padding: '1rem', 
+            background: 'var(--color-info-light)', 
+            borderRadius: 'var(--radius-lg)',
+            border: '1px solid var(--color-info)'
+          }}>
+            <p style={{ margin: 0, fontSize: '0.875rem', color: 'var(--color-info-dark)' }}>
+              💡 <strong>Mobile Features:</strong> On mobile devices, inputs stack vertically for better usability, and range info is displayed clearly below the inputs.
+            </p>
           </div>
         </section>
 

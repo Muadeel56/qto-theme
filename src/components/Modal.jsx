@@ -1,21 +1,24 @@
 import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
+import { X } from 'lucide-react';
 import { useResponsive } from '../hooks/useResponsive';
 import '../styles/modal.css';
 
 const Modal = ({ 
-  isOpen, 
+  open = false,
   onClose, 
   title, 
   children, 
   size = 'md',
+  variant = 'soft',
+  padding = 'md',
   closeOnBackdrop = true,
   showCloseButton = true,
   className = '',
-  footer,
-  maxWidth,
+  actions,
   fullScreenOnMobile = true,
   preventClose = false,
+  animate = true,
   ...props 
 }) => {
   const { isMobile, isTablet, breakpoint } = useResponsive();
@@ -24,19 +27,19 @@ const Modal = ({
 
   const handleBackdropClick = (e) => {
     if (closeOnBackdrop && !preventClose && e.target === e.currentTarget) {
-      onClose();
+      onClose?.();
     }
   };
 
   const handleEscapeKey = (e) => {
-    if (e.key === 'Escape' && isOpen && !preventClose) {
-      onClose();
+    if (e.key === 'Escape' && open && !preventClose) {
+      onClose?.();
     }
   };
 
   // Focus management for accessibility
   useEffect(() => {
-    if (isOpen) {
+    if (open) {
       previousActiveElement.current = document.activeElement;
       
       // Focus the modal
@@ -53,10 +56,10 @@ const Modal = ({
       document.body.style.overflow = 'hidden';
       
       // Add modal-open class to body for additional styling
-      document.body.classList.add('modal-open');
+      document.body.classList.add('qto-modal-open');
     } else {
       document.body.style.overflow = '';
-      document.body.classList.remove('modal-open');
+      document.body.classList.remove('qto-modal-open');
       
       // Restore focus
       if (previousActiveElement.current) {
@@ -67,9 +70,9 @@ const Modal = ({
     return () => {
       document.removeEventListener('keydown', handleEscapeKey);
       document.body.style.overflow = '';
-      document.body.classList.remove('modal-open');
+      document.body.classList.remove('qto-modal-open');
     };
-  }, [isOpen, preventClose]);
+  }, [open, preventClose, onClose]);
 
   // Trap focus within modal
   const handleTabKey = (e) => {
@@ -97,29 +100,36 @@ const Modal = ({
     }
   };
 
-  if (!isOpen) return null;
+  if (!open) return null;
 
   const getModalClasses = () => {
-    const baseClasses = 'modal-content';
-    const sizeClasses = `modal-${size}`;
-    const responsiveClass = `modal--${breakpoint}`;
-    const fullScreenClass = fullScreenOnMobile && isMobile ? 'modal--fullscreen' : '';
+    const baseClasses = 'qto-modal__content';
+    const sizeClass = `qto-modal--${size}`;
+    const variantClass = `qto-modal--${variant}`;
+    const paddingClass = `qto-modal--padding-${padding}`;
+    const responsiveClass = `qto-modal--${breakpoint}`;
+    const fullScreenClass = fullScreenOnMobile && isMobile ? 'qto-modal--fullscreen' : '';
+    const animateClass = animate ? 'qto-modal--animate' : '';
     
     return [
       baseClasses,
-      sizeClasses,
+      sizeClass,
+      variantClass,
+      paddingClass,
       responsiveClass,
       fullScreenClass,
+      animateClass,
       className
     ].filter(Boolean).join(' ');
   };
 
   const getOverlayClasses = () => {
-    const baseClasses = 'modal-overlay';
-    const responsiveClass = isMobile ? 'modal-overlay--mobile' : 
-                           isTablet ? 'modal-overlay--tablet' : 'modal-overlay--desktop';
+    const baseClasses = 'qto-modal__overlay';
+    const responsiveClass = isMobile ? 'qto-modal__overlay--mobile' : 
+                           isTablet ? 'qto-modal__overlay--tablet' : 'qto-modal__overlay--desktop';
+    const animateClass = animate ? 'qto-modal__overlay--animate' : '';
     
-    return [baseClasses, responsiveClass].filter(Boolean).join(' ');
+    return [baseClasses, responsiveClass, animateClass].filter(Boolean).join(' ');
   };
 
   return (
@@ -128,45 +138,41 @@ const Modal = ({
       onClick={handleBackdropClick} 
       role="dialog"
       aria-modal="true"
-      aria-labelledby={title ? 'modal-title' : undefined}
+      aria-labelledby={title ? 'qto-modal-title' : undefined}
       {...props}
     >
       <div 
         ref={modalRef}
         className={getModalClasses()} 
-        style={maxWidth && !isMobile ? { maxWidth } : undefined}
         onKeyDown={handleTabKey}
       >
         {(title || showCloseButton) && (
-          <div className="modal-header">
+          <div className="qto-modal__header">
             {title && (
-              <h2 id="modal-title" className="modal-title">
+              <h2 id="qto-modal-title" className="qto-modal__title">
                 {title}
               </h2>
             )}
             {showCloseButton && !preventClose && (
               <button 
-                className="modal-close-button" 
+                className="qto-modal__close" 
                 onClick={onClose}
                 aria-label="Close modal"
                 type="button"
               >
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M18 6L6 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                  <path d="M6 6L18 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
+                <X />
               </button>
             )}
           </div>
         )}
         
-        <div className="modal-body">
+        <div className="qto-modal__body">
           {children}
         </div>
 
-        {footer && (
-          <div className="modal-footer">
-            {footer}
+        {actions && (
+          <div className="qto-modal__footer">
+            {actions}
           </div>
         )}
       </div>
@@ -177,14 +183,14 @@ const Modal = ({
 // Compound components for better reusability
 const ModalHeader = ({ children, className = '', ...props }) => {
   return (
-    <div className={`modal-header ${className}`} {...props}>
+    <div className={`qto-modal__header ${className}`} {...props}>
       {children}
     </div>
   );
 };
 
 const ModalBody = ({ children, className = '', scrollable = false, ...props }) => {
-  const bodyClasses = `modal-body ${scrollable ? 'modal-body--scrollable' : ''} ${className}`;
+  const bodyClasses = `qto-modal__body ${scrollable ? 'qto-modal__body--scrollable' : ''} ${className}`;
   
   return (
     <div className={bodyClasses} {...props}>
@@ -203,9 +209,9 @@ const ModalFooter = ({
   const { isMobile } = useResponsive();
   
   const footerClasses = [
-    'modal-footer',
-    `modal-footer--justify-${justify}`,
-    stackOnMobile && isMobile ? 'modal-footer--stacked' : '',
+    'qto-modal__footer',
+    `qto-modal__footer--justify-${justify}`,
+    stackOnMobile && isMobile ? 'qto-modal__footer--stacked' : '',
     className
   ].filter(Boolean).join(' ');
   
@@ -222,18 +228,34 @@ Modal.Body = ModalBody;
 Modal.Footer = ModalFooter;
 
 Modal.propTypes = {
-  isOpen: PropTypes.bool.isRequired,
+  /** Whether the modal is open */
+  open: PropTypes.bool,
+  /** Callback fired when the modal should close */
   onClose: PropTypes.func.isRequired,
+  /** Modal title */
   title: PropTypes.node,
+  /** Modal content */
   children: PropTypes.node.isRequired,
+  /** Size of the modal */
   size: PropTypes.oneOf(['xs', 'sm', 'md', 'lg', 'xl', 'full']),
+  /** Visual variant of the modal */
+  variant: PropTypes.oneOf(['soft', 'glass', 'outlined']),
+  /** Padding size */
+  padding: PropTypes.oneOf(['sm', 'md', 'lg']),
+  /** Whether clicking backdrop closes modal */
   closeOnBackdrop: PropTypes.bool,
+  /** Whether to show close button */
   showCloseButton: PropTypes.bool,
+  /** Additional CSS class names */
   className: PropTypes.string,
-  footer: PropTypes.node,
-  maxWidth: PropTypes.string,
+  /** Action buttons in footer */
+  actions: PropTypes.node,
+  /** Whether to go fullscreen on mobile */
   fullScreenOnMobile: PropTypes.bool,
+  /** Whether to prevent closing */
   preventClose: PropTypes.bool,
+  /** Whether to animate */
+  animate: PropTypes.bool,
 };
 
 ModalHeader.propTypes = {

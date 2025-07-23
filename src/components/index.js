@@ -13,10 +13,12 @@ export { default as Menu, MenuItem, MenuDivider } from './Menu.jsx';
 
 /* Enhanced Form Components */
 export { default as Select } from './Select.jsx';
+export { default as DatePicker } from './DatePicker.jsx';
+export { default as DateRangePicker } from './DateRangePicker.jsx';
 export { 
   default as DateTimePicker, 
   QuickDatePicker, 
-  DateRangePicker 
+  DateRangePicker as DateRangePickerOld
 } from './DateTimePicker.jsx';
 
 /* Data Display Components */

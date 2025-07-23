@@ -1,4 +1,4 @@
-/* DateTimePicker Styles */
+/* Enhanced DatePicker Styles - Fully Responsive */
 
 /* DatePicker Container */
 .qto-datepicker {
@@ -6,10 +6,38 @@
   display: flex;
   flex-direction: column;
   gap: var(--spacing-xs);
+  width: 100%;
+  max-width: 100%;
 }
 
 .qto-datepicker--full-width {
   width: 100%;
+}
+
+/* Responsive variants */
+.qto-datepicker--responsive {
+  transition: all var(--transition-fast);
+}
+
+.qto-datepicker--mobile {
+  font-size: 16px; /* Prevent zoom on iOS */
+}
+
+.qto-datepicker--tablet {
+  max-width: 400px;
+}
+
+/* Variant styles */
+.qto-datepicker--default {
+  /* Default styling */
+}
+
+.qto-datepicker--outline {
+  /* Outline variant */
+}
+
+.qto-datepicker--filled {
+  /* Filled variant */
 }
 
 /* DatePicker Label */
@@ -27,11 +55,71 @@
   margin-left: 2px;
 }
 
-/* DatePicker Wrapper */
+/* DatePicker Wrapper - contains field and actions */
 .qto-datepicker__wrapper {
   position: relative;
   display: flex;
   align-items: center;
+  width: 100%;
+}
+
+/* DatePicker Actions Container */
+.qto-datepicker__actions {
+  position: absolute;
+  right: var(--spacing-sm);
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  z-index: 2;
+}
+
+/* Clear button */
+.qto-datepicker__clear {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border: none;
+  background: none;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+  transition: all var(--transition-fast);
+  padding: 0;
+}
+
+.qto-datepicker__clear:hover {
+  color: var(--color-error);
+  background: var(--color-error-light);
+}
+
+.qto-datepicker__clear:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Quick actions toggle */
+.qto-datepicker__quick-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border: none;
+  background: none;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+  transition: all var(--transition-fast);
+  padding: 0;
+}
+
+.qto-datepicker__quick-toggle:hover {
+  color: var(--color-primary);
+  background: var(--color-primary-light);
 }
 
 /* DatePicker Field */
@@ -46,8 +134,51 @@
   border-radius: var(--radius-md);
   transition: all var(--transition-fast);
   outline: none;
-  padding: var(--spacing-sm) calc(var(--spacing-md) + 24px) var(--spacing-sm) var(--spacing-md);
+  padding: var(--spacing-sm) calc(var(--spacing-md) + 80px) var(--spacing-sm) var(--spacing-md);
   min-height: 40px;
+  box-sizing: border-box;
+}
+
+/* Responsive field adjustments */
+.qto-datepicker__field--responsive {
+  font-size: 16px; /* Prevent zoom on iOS */
+}
+
+/* Native input specific styles */
+.qto-datepicker__field--native {
+  padding-right: var(--spacing-md);
+}
+
+/* DatePicker Icon */
+.qto-datepicker__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border: none;
+  background: none;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition: color var(--transition-fast);
+  pointer-events: auto;
+  border-radius: var(--radius-sm);
+  padding: 0;
+}
+
+.qto-datepicker__icon:hover {
+  color: var(--color-primary);
+  background: var(--color-primary-light);
+}
+
+.qto-datepicker__icon:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.qto-datepicker__icon:focus {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
 }
 
 .qto-datepicker__field[readonly] {
@@ -70,6 +201,12 @@
 
 .qto-datepicker__field:hover:not(:disabled):not(.qto-datepicker__field--error) {
   border-color: var(--color-text-secondary);
+}
+
+/* Enhanced focus states for accessibility */
+.qto-datepicker__field:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
 }
 
 /* DatePicker Sizes */
@@ -114,56 +251,178 @@
   opacity: 0.6;
 }
 
-/* DatePicker Icon */
-.qto-datepicker__icon {
-  position: absolute;
-  right: var(--spacing-md);
-  top: 50%;
-  transform: translateY(-50%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 20px;
-  height: 20px;
-  border: none;
-  background: none;
-  color: var(--color-text-secondary);
-  cursor: pointer;
-  transition: color var(--transition-fast);
-  pointer-events: auto;
-}
-
-.qto-datepicker__icon:hover {
-  color: var(--color-primary);
-}
-
-.qto-datepicker__icon:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-/* Size adjustments for icon */
-.qto-datepicker__field--sm ~ .qto-datepicker__icon {
-  right: var(--spacing-sm);
-  width: 16px;
-  height: 16px;
-}
-
-.qto-datepicker__field--lg ~ .qto-datepicker__icon {
-  right: var(--spacing-lg);
-  width: 24px;
-  height: 24px;
-}
-
-/* DatePicker Calendar Dropdown */
+/* Enhanced DatePicker Calendar Dropdown */
 .qto-datepicker__calendar {
   position: absolute;
   top: 100%;
   left: 0;
+  z-index: 1000;
+  margin-top: 4px;
+  background: var(--color-bg-primary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  animation: slideDown 0.2s ease-out;
+  overflow: hidden;
+  max-height: 400px;
+  overflow-y: auto;
+  min-width: 280px;
+  max-width: 320px;
+  width: max-content;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Mobile fullscreen calendar */
+@media (max-width: 640px) {
+  .qto-datepicker__calendar {
+    position: fixed !important;
+    top: 50% !important;
+    left: 50% !important;
+    right: auto !important;
+    bottom: auto !important;
+    transform: translate(-50%, -50%) !important;
+    width: 90vw !important;
+    max-width: 320px !important;
+    max-height: 80vh !important;
+    margin: 0 !important;
+    border-radius: var(--radius-xl);
+    animation: mobileSlideUp 0.3s ease-out;
+    z-index: 9999;
+  }
+}
+
+@keyframes mobileSlideUp {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+/* Calendar header for mobile */
+.qto-datepicker__calendar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-md);
+  border-bottom: 1px solid var(--color-border);
+  background: var(--color-bg-secondary);
+}
+
+.qto-datepicker__calendar-header h3 {
+  margin: 0;
+  font-size: var(--text-base);
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.qto-datepicker__calendar-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: none;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  border-radius: var(--radius-full);
+  transition: all var(--transition-fast);
+}
+
+.qto-datepicker__calendar-close:hover {
+  color: var(--color-text);
+  background: var(--color-bg-tertiary);
+}
+
+/* Calendar footer for mobile */
+.qto-datepicker__calendar-footer {
+  display: flex;
+  justify-content: space-between;
+  padding: var(--spacing-md);
+  border-top: 1px solid var(--color-border);
+  background: var(--color-bg-secondary);
+}
+
+.qto-datepicker__calendar-today,
+.qto-datepicker__calendar-cancel {
+  padding: var(--spacing-sm) var(--spacing-md);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-primary);
+  color: var(--color-text);
+  cursor: pointer;
+  font-size: var(--text-sm);
+  transition: all var(--transition-fast);
+  min-width: 80px;
+}
+
+.qto-datepicker__calendar-today {
+  background: var(--color-primary);
+  color: var(--color-primary-contrast);
+  border-color: var(--color-primary);
+}
+
+.qto-datepicker__calendar-today:hover {
+  background: var(--color-primary-dark);
+}
+
+.qto-datepicker__calendar-cancel:hover {
+  border-color: var(--color-text-secondary);
+}
+
+/* Quick Actions Dropdown */
+.qto-datepicker__quick-actions {
+  position: absolute;
+  top: 100%;
   right: 0;
   z-index: 1000;
   margin-top: 4px;
+  background: var(--color-bg-primary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  min-width: 140px;
+  overflow: hidden;
   animation: slideDown 0.2s ease-out;
+}
+
+.qto-datepicker__quick-action {
+  display: block;
+  width: 100%;
+  padding: var(--spacing-sm) var(--spacing-md);
+  border: none;
+  background: transparent;
+  color: var(--color-text);
+  text-align: left;
+  cursor: pointer;
+  transition: background-color var(--transition-fast);
+  font-size: var(--text-sm);
+  white-space: nowrap;
+}
+
+.qto-datepicker__quick-action:hover {
+  background: var(--color-primary-light);
+  color: var(--color-primary-dark);
+}
+
+.qto-datepicker__quick-action:focus {
+  background: var(--color-primary-light);
+  color: var(--color-primary-dark);
+  outline: none;
 }
 
 @keyframes slideDown {
@@ -254,6 +513,367 @@
 .qto-datepicker-quick__preset:hover {
   background: var(--color-primary-light);
   color: var(--color-primary-dark);
+}
+
+/* Enhanced Date Range Picker Styles */
+.qto-daterange {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+  width: 100%;
+}
+
+.qto-daterange--full-width {
+  width: 100%;
+}
+
+.qto-daterange--responsive {
+  transition: all var(--transition-fast);
+}
+
+.qto-daterange--mobile {
+  font-size: 16px; /* Prevent zoom on iOS */
+}
+
+.qto-daterange--tablet {
+  max-width: 600px;
+}
+
+.qto-daterange--error {
+  border-color: var(--color-error);
+}
+
+/* Date Range Label */
+.qto-daterange__label {
+  display: inline-block;
+  font-family: var(--font-base);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--color-text);
+  margin-bottom: var(--spacing-xs);
+}
+
+.qto-daterange__required {
+  color: var(--color-error);
+  margin-left: 2px;
+}
+
+/* Date Range Wrapper */
+.qto-daterange__wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+/* Date Range Inputs Container */
+.qto-daterange__inputs {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--spacing-md);
+  width: 100%;
+}
+
+.qto-daterange--stacked .qto-daterange__inputs {
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--spacing-sm);
+}
+
+.qto-daterange__input-group {
+  flex: 1;
+  min-width: 0; /* Allow flex items to shrink */
+}
+
+/* Date Range Separator */
+.qto-daterange__separator {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0 var(--spacing-xs);
+  margin-bottom: var(--spacing-sm);
+  position: relative;
+}
+
+.qto-daterange--stacked .qto-daterange__separator {
+  display: none;
+}
+
+.qto-daterange__separator-text {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  white-space: nowrap;
+  font-weight: 500;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  background: var(--color-bg-primary);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border);
+}
+
+.qto-daterange__range-indicator {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 2px;
+  height: 20px;
+  background: linear-gradient(to bottom, var(--color-primary), var(--color-primary-light));
+  border-radius: var(--radius-full);
+  opacity: 0.6;
+  z-index: -1;
+}
+
+/* Date Range Actions */
+.qto-daterange__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  position: absolute;
+  right: var(--spacing-sm);
+  top: 0;
+  height: 100%;
+  z-index: 10;
+}
+
+.qto-daterange--stacked .qto-daterange__actions {
+  position: relative;
+  right: auto;
+  top: auto;
+  height: auto;
+  justify-content: flex-end;
+  margin-top: var(--spacing-sm);
+}
+
+.qto-daterange__clear,
+.qto-daterange__preset-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-primary);
+  color: var(--color-text-muted);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  padding: 0;
+}
+
+.qto-daterange__clear:hover {
+  color: var(--color-error);
+  border-color: var(--color-error);
+  background: var(--color-error-light);
+}
+
+.qto-daterange__preset-toggle:hover {
+  color: var(--color-primary);
+  border-color: var(--color-primary);
+  background: var(--color-primary-light);
+}
+
+.qto-daterange__clear:disabled,
+.qto-daterange__preset-toggle:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Preset Dropdown */
+.qto-daterange__presets {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  z-index: 1000;
+  margin-top: var(--spacing-xs);
+  background: var(--color-bg-primary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  min-width: 180px;
+  max-height: 300px;
+  overflow-y: auto;
+  animation: slideDown 0.2s ease-out;
+}
+
+.qto-daterange__preset {
+  display: block;
+  width: 100%;
+  padding: var(--spacing-sm) var(--spacing-md);
+  border: none;
+  background: transparent;
+  color: var(--color-text);
+  text-align: left;
+  cursor: pointer;
+  transition: background-color var(--transition-fast);
+  font-size: var(--text-sm);
+  white-space: nowrap;
+}
+
+.qto-daterange__preset:hover,
+.qto-daterange__preset:focus {
+  background: var(--color-primary-light);
+  color: var(--color-primary-dark);
+  outline: none;
+}
+
+.qto-daterange__preset:first-child {
+  border-top-left-radius: var(--radius-md);
+  border-top-right-radius: var(--radius-md);
+}
+
+.qto-daterange__preset:last-child {
+  border-bottom-left-radius: var(--radius-md);
+  border-bottom-right-radius: var(--radius-md);
+}
+
+/* Selection Info for Mobile */
+.qto-daterange__selection-info {
+  display: flex;
+  justify-content: center;
+  padding: var(--spacing-sm);
+  background: var(--color-bg-secondary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  margin-top: var(--spacing-sm);
+}
+
+.qto-daterange__selection-text {
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  font-weight: 500;
+}
+
+/* Error and Helper Text */
+.qto-daterange__error {
+  font-size: var(--text-xs);
+  color: var(--color-error);
+  margin-top: var(--spacing-xs);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+}
+
+.qto-daterange__helper {
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  margin-top: var(--spacing-xs);
+}
+
+/* Responsive Design for Date Range Picker */
+
+/* Mobile Portrait */
+@media (max-width: 640px) {
+  .qto-daterange__inputs {
+    flex-direction: column;
+    gap: var(--spacing-sm);
+  }
+  
+  .qto-daterange__separator {
+    display: none;
+  }
+  
+  .qto-daterange__actions {
+    position: relative;
+    right: auto;
+    top: auto;
+    height: auto;
+    justify-content: flex-end;
+    margin-top: var(--spacing-sm);
+  }
+
+  .qto-daterange__clear,
+  .qto-daterange__preset-toggle {
+    width: 40px;
+    height: 40px;
+  }
+
+  .qto-daterange__presets {
+    right: 0;
+    left: auto;
+    min-width: 200px;
+  }
+}
+
+/* Tablet */
+@media (min-width: 641px) and (max-width: 768px) {
+  .qto-daterange__inputs {
+    gap: var(--spacing-sm);
+  }
+  
+  .qto-daterange__separator-text {
+    padding: var(--spacing-xs);
+    font-size: var(--text-xs);
+  }
+}
+
+/* Desktop hover enhancements */
+@media (min-width: 1025px) {
+  .qto-daterange__separator-text:hover {
+    border-color: var(--color-primary-light);
+    background: var(--color-primary-light);
+    color: var(--color-primary-dark);
+  }
+}
+
+/* Dark Theme Support for Date Range Picker */
+[data-theme="dark"] .qto-daterange__separator-text {
+  background: var(--color-bg-secondary);
+  border-color: var(--color-border);
+  color: var(--color-text-muted);
+}
+
+[data-theme="dark"] .qto-daterange__clear,
+[data-theme="dark"] .qto-daterange__preset-toggle {
+  background: var(--color-bg-secondary);
+  border-color: var(--color-border);
+  color: var(--color-text-muted);
+}
+
+[data-theme="dark"] .qto-daterange__presets {
+  background: var(--color-bg-primary);
+  border-color: var(--color-border);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.4);
+}
+
+[data-theme="dark"] .qto-daterange__preset:hover,
+[data-theme="dark"] .qto-daterange__preset:focus {
+  background: var(--color-gray-700);
+  color: var(--color-text);
+}
+
+[data-theme="dark"] .qto-daterange__selection-info {
+  background: var(--color-bg-tertiary);
+  border-color: var(--color-border);
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+  .qto-daterange__clear,
+  .qto-daterange__preset-toggle,
+  .qto-daterange__preset {
+    transition: none;
+  }
+  
+  .qto-daterange__presets {
+    animation: none;
+  }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+  .qto-daterange__separator-text,
+  .qto-daterange__clear,
+  .qto-daterange__preset-toggle {
+    border-width: 2px;
+  }
+  
+  .qto-daterange__clear:focus,
+  .qto-daterange__preset-toggle:focus {
+    outline: 3px solid;
+    outline-offset: 2px;
+  }
 }
 
 /* Date Range Picker */
@@ -362,21 +982,76 @@
   color: var(--color-text);
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
+/* Comprehensive Responsive Design */
+
+/* Mobile First Approach */
+@media (max-width: 480px) {
   .qto-datepicker__field {
-    min-height: 44px; /* Increase touch target on mobile */
+    min-height: 48px; /* Larger touch targets on small mobile */
     font-size: 16px; /* Prevent zoom on iOS */
+    padding: var(--spacing-md) calc(var(--spacing-lg) + 90px) var(--spacing-md) var(--spacing-md);
   }
   
   .qto-datepicker__field--sm {
-    min-height: 36px;
+    min-height: 44px;
+    padding: var(--spacing-sm) calc(var(--spacing-md) + 80px) var(--spacing-sm) var(--spacing-md);
   }
   
   .qto-datepicker__field--lg {
     min-height: 52px;
+    padding: var(--spacing-lg) calc(var(--spacing-xl) + 100px) var(--spacing-lg) var(--spacing-lg);
+  }
+
+  .qto-datepicker__actions {
+    right: var(--spacing-md);
+    gap: var(--spacing-sm);
+  }
+
+  .qto-datepicker__icon,
+  .qto-datepicker__clear,
+  .qto-datepicker__quick-toggle {
+    width: 24px;
+    height: 24px;
+  }
+
+  .qto-datepicker__label {
+    font-size: var(--text-base);
+    margin-bottom: var(--spacing-sm);
+  }
+}
+
+/* Mobile Portrait */
+@media (max-width: 640px) {
+  .qto-datepicker {
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .qto-datepicker__field {
+    min-height: 44px; /* Apple recommended minimum */
+    font-size: 16px; /* Prevent zoom */
+    border-radius: var(--radius-lg); /* Larger radius for better mobile UX */
   }
   
+  .qto-datepicker__field--sm {
+    min-height: 40px;
+  }
+  
+  .qto-datepicker__field--lg {
+    min-height: 48px;
+  }
+
+  /* Enhanced touch targets */
+  .qto-datepicker__icon,
+  .qto-datepicker__clear,
+  .qto-datepicker__quick-toggle {
+    min-width: 44px;
+    min-height: 44px;
+    width: 22px;
+    height: 22px;
+    padding: var(--spacing-xs);
+  }
+
+  /* Simplified layout on mobile */
   .qto-datepicker-range__inputs {
     flex-direction: column;
     gap: var(--spacing-sm);
@@ -393,51 +1068,277 @@
   
   .qto-datepicker-quick__presets {
     align-self: flex-end;
+    margin-top: var(--spacing-sm);
   }
   
   .qto-datepicker-quick__dropdown {
     right: 0;
     left: auto;
+    min-width: 160px;
   }
 }
 
-/* Animation for dropdown */
-.qto-datepicker-quick__dropdown {
-  animation: qto-datepicker-slide-down var(--transition-fast) ease-out;
+/* Tablet Portrait */
+@media (min-width: 641px) and (max-width: 768px) {
+  .qto-datepicker__field {
+    min-height: 42px;
+    font-size: var(--text-sm);
+  }
+  
+  .qto-datepicker__field--sm {
+    min-height: 38px;
+  }
+  
+  .qto-datepicker__field--lg {
+    min-height: 46px;
+  }
+
+  .qto-datepicker__calendar {
+    max-width: 320px;
+  }
 }
 
-@keyframes qto-datepicker-slide-down {
-  from {
-    opacity: 0;
-    transform: translateY(-8px);
+/* Tablet Landscape and Small Desktop */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .qto-datepicker__field {
+    min-height: 40px;
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+  
+  .qto-datepicker__calendar {
+    max-width: 350px;
+  }
+
+  .qto-datepicker-range__inputs {
+    gap: var(--spacing-md);
   }
 }
 
-/* Accessibility improvements */
+/* Desktop */
+@media (min-width: 1025px) {
+  .qto-datepicker__field {
+    min-height: 40px;
+  }
+
+  .qto-datepicker__calendar {
+    max-width: 380px;
+  }
+
+  /* Enhanced hover states for desktop */
+  .qto-datepicker__field:hover:not(:disabled):not(.qto-datepicker__field--error) {
+    border-color: var(--color-primary-light);
+    box-shadow: 0 0 0 1px rgba(242, 182, 15, 0.1);
+  }
+}
+
+/* Large Desktop */
+@media (min-width: 1440px) {
+  .qto-datepicker__field--lg {
+    min-height: 48px;
+    font-size: var(--text-base);
+  }
+}
+
+/* High DPI Displays */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .qto-datepicker__icon svg,
+  .qto-datepicker__clear svg,
+  .qto-datepicker__quick-toggle svg {
+    stroke-width: 1.5;
+  }
+}
+
+/* Landscape Orientation */
+@media (orientation: landscape) and (max-height: 500px) {
+  .qto-datepicker__calendar {
+    max-height: 300px;
+    overflow-y: auto;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .qto-datepicker__icon,
+  .qto-datepicker__clear,
+  .qto-datepicker__quick-toggle,
+  .qto-datepicker__calendar,
+  .qto-datepicker__quick-actions {
+    display: none !important;
+  }
+  
+  .qto-datepicker__field {
+    border: 1px solid #000;
+    background: transparent;
+    box-shadow: none;
+  }
+}
+
+/* Enhanced Accessibility and User Experience */
+
+/* Focus management and keyboard navigation */
+.qto-datepicker__field:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+  border-color: var(--color-primary);
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .qto-datepicker__field {
+    border-width: 2px;
+  }
+  
+  .qto-datepicker__field:focus {
+    outline: 3px solid;
+    outline-offset: 2px;
+  }
+  
+  .qto-datepicker__icon,
+  .qto-datepicker__clear,
+  .qto-datepicker__quick-toggle {
+    border: 1px solid currentColor;
+  }
+}
+
+/* Reduced motion preferences */
 @media (prefers-reduced-motion: reduce) {
   .qto-datepicker__field,
-  .qto-datepicker-quick__toggle,
-  .qto-datepicker-quick__preset {
+  .qto-datepicker__icon,
+  .qto-datepicker__clear,
+  .qto-datepicker__quick-toggle,
+  .qto-datepicker-quick__preset,
+  .qto-datepicker__quick-action,
+  .qto-datepicker__calendar-today,
+  .qto-datepicker__calendar-cancel,
+  .qto-datepicker__calendar-close {
     transition: none;
   }
   
-  .qto-datepicker-quick__dropdown {
+  .qto-datepicker__calendar,
+  .qto-datepicker__quick-actions {
     animation: none;
   }
 }
 
-/* Focus styles for keyboard navigation */
-.qto-datepicker-quick__toggle:focus {
-  outline: 2px solid var(--color-primary);
-  outline-offset: 2px;
+/* Screen reader improvements */
+.qto-datepicker__field[aria-expanded="true"] {
+  /* Visual indication that dropdown is open */
+  border-color: var(--color-primary);
 }
 
-.qto-datepicker-quick__preset:focus {
-  background: var(--color-primary-light);
-  color: var(--color-primary-dark);
-  outline: none;
+/* Enhanced Dark Theme Support */
+[data-theme="dark"] .qto-datepicker__field {
+  background: var(--color-bg-primary);
+  border-color: var(--color-border);
+  color: var(--color-text);
+}
+
+[data-theme="dark"] .qto-datepicker__field:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(242, 182, 15, 0.2);
+}
+
+[data-theme="dark"] .qto-datepicker__field--disabled {
+  background: var(--color-bg-tertiary);
+  color: var(--color-text-muted);
+}
+
+[data-theme="dark"] .qto-datepicker__calendar {
+  background: var(--color-bg-primary);
+  border-color: var(--color-border);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.4), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
+}
+
+[data-theme="dark"] .qto-datepicker__calendar-header,
+[data-theme="dark"] .qto-datepicker__calendar-footer {
+  background: var(--color-bg-secondary);
+  border-color: var(--color-border);
+}
+
+[data-theme="dark"] .qto-datepicker__quick-actions {
+  background: var(--color-bg-primary);
+  border-color: var(--color-border);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.4);
+}
+
+[data-theme="dark"] .qto-datepicker__quick-action:hover,
+[data-theme="dark"] .qto-datepicker__quick-action:focus {
+  background: var(--color-gray-700);
+  color: var(--color-text);
+}
+
+[data-theme="dark"] .qto-datepicker__calendar-today {
+  background: var(--color-primary);
+  color: var(--color-primary-contrast);
+  border-color: var(--color-primary);
+}
+
+[data-theme="dark"] .qto-datepicker__calendar-cancel {
+  background: var(--color-bg-primary);
+  color: var(--color-text);
+  border-color: var(--color-border);
+}
+
+/* Variant Styles */
+.qto-datepicker--outline .qto-datepicker__field {
+  background: transparent;
+  border: 2px solid var(--color-border);
+}
+
+.qto-datepicker--outline .qto-datepicker__field:focus {
+  border-color: var(--color-primary);
+  background: var(--color-bg-primary);
+}
+
+.qto-datepicker--filled .qto-datepicker__field {
+  background: var(--color-bg-secondary);
+  border: 1px solid transparent;
+}
+
+.qto-datepicker--filled .qto-datepicker__field:focus {
+  background: var(--color-bg-primary);
+  border-color: var(--color-primary);
+}
+
+.qto-datepicker--filled .qto-datepicker__field:hover:not(:disabled) {
+  background: var(--color-bg-primary);
+  border-color: var(--color-border);
+}
+
+/* Loading and Disabled States */
+.qto-datepicker__field--disabled {
+  background: var(--color-bg-secondary);
+  color: var(--color-text-muted);
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.qto-datepicker__field--disabled::placeholder {
+  color: var(--color-text-muted);
+}
+
+/* Touch device optimizations */
+@media (hover: none) and (pointer: coarse) {
+  .qto-datepicker__field {
+    font-size: 16px; /* Prevent zoom */
+    min-height: 44px; /* Apple touch guidelines */
+  }
+  
+  .qto-datepicker__icon,
+  .qto-datepicker__clear,
+  .qto-datepicker__quick-toggle {
+    min-width: 44px;
+    min-height: 44px;
+  }
+  
+  /* Remove hover states on touch devices */
+  .qto-datepicker__field:hover {
+    border-color: var(--color-border);
+  }
+  
+  .qto-datepicker__icon:hover,
+  .qto-datepicker__clear:hover,
+  .qto-datepicker__quick-toggle:hover {
+    background: none;
+    color: var(--color-text-secondary);
+  }
 }

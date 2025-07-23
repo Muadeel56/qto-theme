@@ -130,6 +130,13 @@ const Calendar = ({
     onChange?.(formatDate(dayInfo.date));
   };
 
+  const handleKeyDown = (event, dayInfo) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      handleDateClick(dayInfo);
+    }
+  };
+
   const handlePrevMonth = () => {
     setCurrentMonth(new Date(currentMonth.getFullYear(), currentMonth.getMonth() - 1));
   };
@@ -155,13 +162,19 @@ const Calendar = ({
   }
 
   return (
-    <div className={`qto-calendar ${className}`} {...props}>
+    <div 
+      className={`qto-calendar ${className}`}
+      role="grid"
+      aria-label="Calendar"
+      {...props}
+    >
       <div className="qto-calendar__header">
         <button
           type="button"
           className="qto-calendar__nav-button"
           onClick={handlePrevMonth}
           aria-label="Previous month"
+          title="Previous month"
         >
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
             <polyline points="15,18 9,12 15,6" />
@@ -173,6 +186,7 @@ const Calendar = ({
             value={currentMonth.getMonth()}
             onChange={handleMonthChange}
             className="qto-calendar__month-select"
+            aria-label="Select month"
           >
             {months.map((month, index) => (
               <option key={index} value={index}>
@@ -185,6 +199,7 @@ const Calendar = ({
             value={currentMonth.getFullYear()}
             onChange={handleYearChange}
             className="qto-calendar__year-select"
+            aria-label="Select year"
           >
             {Array.from({ length: 21 }, (_, i) => {
               const year = new Date().getFullYear() - 10 + i;
@@ -202,6 +217,7 @@ const Calendar = ({
           className="qto-calendar__nav-button"
           onClick={handleNextMonth}
           aria-label="Next month"
+          title="Next month"
         >
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
             <polyline points="9,18 15,12 9,6" />
@@ -210,10 +226,14 @@ const Calendar = ({
       </div>
 
       <div className="qto-calendar__grid">
-        <div className="qto-calendar__weekdays">
-          {showWeekNumbers && <div className="qto-calendar__weekday qto-calendar__week-number-header">Wk</div>}
+        <div className="qto-calendar__weekdays" role="row">
+          {showWeekNumbers && (
+            <div className="qto-calendar__weekday qto-calendar__week-number-header" role="columnheader">
+              Wk
+            </div>
+          )}
           {reorderedWeekdays.map((weekday) => (
-            <div key={weekday} className="qto-calendar__weekday">
+            <div key={weekday} className="qto-calendar__weekday" role="columnheader">
               {weekday}
             </div>
           ))}
@@ -221,9 +241,9 @@ const Calendar = ({
 
         <div className="qto-calendar__weeks">
           {weeks.map((week, weekIndex) => (
-            <div key={weekIndex} className="qto-calendar__week">
+            <div key={weekIndex} className="qto-calendar__week" role="row">
               {showWeekNumbers && (
-                <div className="qto-calendar__week-number">
+                <div className="qto-calendar__week-number" role="gridcell">
                   {getWeekNumber(week[0].date)}
                 </div>
               )}
@@ -243,8 +263,14 @@ const Calendar = ({
                     dayInfo.isHighlighted ? 'qto-calendar__day--highlighted' : ''
                   }`}
                   onClick={() => handleDateClick(dayInfo)}
+                  onKeyDown={(e) => handleKeyDown(e, dayInfo)}
                   disabled={dayInfo.isDisabled}
-                  aria-label={`${dayInfo.date.toDateString()}${dayInfo.isSelected ? ' (selected)' : ''}`}
+                  role="gridcell"
+                  aria-label={`${dayInfo.date.toDateString()}${dayInfo.isSelected ? ' (selected)' : ''}${dayInfo.isToday ? ' (today)' : ''}`}
+                  aria-selected={dayInfo.isSelected}
+                  aria-current={dayInfo.isToday ? 'date' : undefined}
+                  tabIndex={dayInfo.isSelected || (dayIndex === 0 && weekIndex === 0 && !selectedDate) ? 0 : -1}
+                  title={dayInfo.date.toDateString()}
                 >
                   {dayInfo.day}
                 </button>

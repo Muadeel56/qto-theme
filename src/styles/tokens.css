@@ -109,6 +109,71 @@
   --color-border-focus: #f2b60f;
   --color-border-error: #ef4444;
 
+  /* Alert Tokens */
+  --alert-success-bg: var(--color-success-light);
+  --alert-success-border: var(--color-success);
+  --alert-success-text: #166534;
+  --alert-success-icon: var(--color-success);
+  
+  --alert-error-bg: var(--color-error-light);
+  --alert-error-border: var(--color-error);
+  --alert-error-text: #991b1b;
+  --alert-error-icon: var(--color-error);
+  
+  --alert-warning-bg: var(--color-warning-light);
+  --alert-warning-border: var(--color-warning);
+  --alert-warning-text: #92400e;
+  --alert-warning-icon: var(--color-warning);
+  
+  --alert-info-bg: var(--color-info-light);
+  --alert-info-border: var(--color-info);
+  --alert-info-text: #1e40af;
+  --alert-info-icon: var(--color-info);
+
+  /* Modal Tokens */
+  --modal-bg: var(--color-bg-primary);
+  --modal-border: var(--color-border);
+  --modal-overlay: rgba(0, 0, 0, 0.6);
+  --modal-shadow: var(--shadow-2xl);
+  --modal-radius: var(--radius-xl);
+
+  /* Chart Tokens */
+  --chart-line: var(--color-primary);
+  --chart-grid: var(--color-border-light);
+  --chart-bg: var(--color-bg-primary);
+  --chart-text: var(--color-text);
+  --chart-legend: var(--color-text-secondary);
+  
+  /* Chart color palette */
+  --chart-color-1: var(--color-primary);
+  --chart-color-2: var(--color-success);
+  --chart-color-3: var(--color-info);
+  --chart-color-4: var(--color-warning);
+  --chart-color-5: var(--color-error);
+  --chart-color-6: #8b5cf6;
+  --chart-color-7: #06b6d4;
+  --chart-color-8: #84cc16;
+
+  /* Calendar Tokens */
+  --calendar-bg: var(--color-bg-primary);
+  --calendar-border: var(--color-border);
+  --calendar-text: var(--color-text);
+  --calendar-day-bg: var(--color-bg-secondary);
+  --calendar-day-hover: var(--color-bg-tertiary);
+  --calendar-today: var(--color-primary);
+  --calendar-today-text: var(--color-white);
+  --calendar-event: var(--color-info);
+  --calendar-weekend: var(--color-text-muted);
+
+  /* Table Tokens */
+  --table-bg: var(--color-bg-primary);
+  --table-border: var(--color-border);
+  --table-header-bg: var(--color-bg-secondary);
+  --table-header-text: var(--color-text);
+  --table-row-hover: var(--color-bg-tertiary);
+  --table-row-selected: rgba(var(--color-primary-rgb), 0.1);
+  --table-row-stripe: var(--color-bg-secondary);
+
   /* Typography - Outfit Font Stack */
   --font-base: 'Outfit', 'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   --font-mono: 'JetBrains Mono', 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
@@ -164,6 +229,7 @@
   --color-bg-primary: #171717;
   --color-bg-secondary: #262626;
   --color-bg-tertiary: #404040;
+  --color-bg-overlay: rgba(0, 0, 0, 0.8);
 
   --color-border: #404040;
   --color-border-light: #525252;
@@ -177,6 +243,46 @@
   --color-sidebar-text-muted-light: rgba(255, 255, 255, 0.7);
   --color-sidebar-text-dark: #ffffff;
   --color-sidebar-text-muted-dark: rgba(255, 255, 255, 0.7);
+
+  /* Alert dark theme tokens */
+  --alert-success-bg: rgba(34, 197, 94, 0.15);
+  --alert-success-text: #86efac;
+  --alert-success-border: rgba(34, 197, 94, 0.3);
+  
+  --alert-error-bg: rgba(239, 68, 68, 0.15);
+  --alert-error-text: #fca5a5;
+  --alert-error-border: rgba(239, 68, 68, 0.3);
+  
+  --alert-warning-bg: rgba(245, 158, 11, 0.15);
+  --alert-warning-text: #fbbf24;
+  --alert-warning-border: rgba(245, 158, 11, 0.3);
+  
+  --alert-info-bg: rgba(59, 130, 246, 0.15);
+  --alert-info-text: #93c5fd;
+  --alert-info-border: rgba(59, 130, 246, 0.3);
+
+  /* Modal dark theme tokens */
+  --modal-bg: var(--color-bg-secondary);
+  --modal-border: var(--color-border);
+  --modal-overlay: rgba(0, 0, 0, 0.9);
+
+  /* Chart dark theme tokens */
+  --chart-bg: var(--color-bg-primary);
+  --chart-text: var(--color-text);
+  --chart-grid: rgba(255, 255, 255, 0.1);
+  --chart-legend: var(--color-text-secondary);
+
+  /* Calendar dark theme tokens */
+  --calendar-bg: var(--color-bg-primary);
+  --calendar-day-bg: var(--color-bg-secondary);
+  --calendar-day-hover: var(--color-bg-tertiary);
+  --calendar-weekend: var(--color-text-muted);
+
+  /* Table dark theme tokens */
+  --table-bg: var(--color-bg-primary);
+  --table-header-bg: var(--color-bg-secondary);
+  --table-row-hover: var(--color-bg-tertiary);
+  --table-row-stripe: var(--color-bg-secondary);
 }
 
 /* System preference fallback */

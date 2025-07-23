@@ -42,10 +42,14 @@
     "@originjs/vite-plugin-federation": "^1.4.1",
     "@tailwindcss/vite": "^4.1.11",
     "date-fns": "^4.1.0",
+    "echarts": "^5.6.0",
+    "echarts-for-react": "^3.0.2",
+    "lucide-react": "^0.525.0",
     "prop-types": "^15.8.1",
     "react": "^18 || ^19",
     "react-datepicker": "^8.4.0",
     "react-dom": "^18 || ^19",
+    "recharts": "^3.1.0",
     "tailwindcss": "^4.1.11"
   },
   "devDependencies": {
