@@ -52,10 +52,7 @@ const Calendar = ({
   }, [value]);
 
   const formatDate = (date) => {
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, '0');
-    const day = String(date.getDate()).padStart(2, '0');
-    return `${year}-${month}-${day}`;
+    return date.toISOString().split('T')[0];
   };
 
   const isSameDay = (date1, date2) => {
@@ -228,24 +225,21 @@ const Calendar = ({
       return (
         <div className="qto-calendar__day-content qto-calendar__day-content--large">
           <span className="qto-calendar__day-number">{day}</span>
-          <div className="qto-calendar__events-container">
-            {attendanceInfo && (
-              <div className={`qto-calendar__event-block qto-calendar__event-block--${attendanceInfo.status}`}>
-                <span className="qto-calendar__event-title">
-                  {attendanceInfo.status === 'present' ? `Present: ${attendanceInfo.workingHours}h` :
-                   attendanceInfo.status === 'absent' ? 'Absent' :
-                   attendanceInfo.status === 'holiday' ? 'Holiday' :
-                   attendanceInfo.status === 'leave' ? 'Leave' :
-                   `Partial: ${attendanceInfo.workingHours}h`}
-                </span>
-              </div>
-            )}
-            {eventInfo && (
-              <div className={`qto-calendar__event-block qto-calendar__event-block--${eventInfo.type}`}>
-                <span className="qto-calendar__event-title">{eventInfo.title}</span>
-              </div>
-            )}
-          </div>
+          {showEventText && eventInfo && (
+            <div className="qto-calendar__event-text" title={eventInfo.title}>
+              {eventInfo.title?.slice(0, 8)}...
+            </div>
+          )}
+          {attendanceInfo?.workingHours && (
+            <div className="qto-calendar__hours-text" title={`${attendanceInfo.workingHours}h worked`}>
+              {attendanceInfo.workingHours}h
+            </div>
+          )}
+          {showEventDots && status && (
+            <div className="qto-calendar__day-indicators">
+              <div className={`qto-calendar__status-indicator qto-calendar__status--${status}`} />
+            </div>
+          )}
         </div>
       );
     }

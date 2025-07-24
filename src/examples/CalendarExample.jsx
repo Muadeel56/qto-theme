@@ -4,6 +4,7 @@ import Calendar from '../components/Calendar';
 const CalendarExample = () => {
   const [selectedDate, setSelectedDate] = useState('2025-07-24');
   const [viewMode, setViewMode] = useState('attendance'); // 'basic', 'attendance', 'events'
+  const [calendarVariant, setCalendarVariant] = useState('default'); // 'default', 'compact', 'large', 'mobile'
 
   // Sample attendance data for demo
   const attendanceData = {
@@ -31,10 +32,20 @@ const CalendarExample = () => {
 
   // Sample events data
   const events = {
+    '2025-07-01': { type: 'meeting', title: 'Sprint Planning' },
+    '2025-07-03': { type: 'work', title: 'Code Review' },
     '2025-07-05': { type: 'meeting', title: 'Team Meeting' },
+    '2025-07-08': { type: 'personal', title: 'Training Session' },
+    '2025-07-10': { type: 'meeting', title: 'Weekly Standup' },
     '2025-07-12': { type: 'deadline', title: 'Project Deadline' },
-    '2025-07-18': { type: 'event', title: 'Company Event' },
+    '2025-07-15': { type: 'work', title: 'Feature Development' },
+    '2025-07-17': { type: 'meeting', title: 'Client Presentation' },
+    '2025-07-18': { type: 'work', title: 'Company Event' },
+    '2025-07-22': { type: 'meeting', title: 'Retrospective' },
     '2025-07-24': { type: 'meeting', title: 'Client Call' },
+    '2025-07-25': { type: 'personal', title: 'Performance Review' },
+    '2025-07-29': { type: 'deadline', title: 'Release Deployment' },
+    '2025-07-31': { type: 'work', title: 'Documentation Update' },
   };
 
   const handleDateChange = (date, dayInfo) => {
@@ -64,30 +75,65 @@ const CalendarExample = () => {
   const selectedDayEvent = events[selectedDate];
 
   return (
-    <div className="calendar-example">
+    <div className={`calendar-example ${calendarVariant === 'large' ? 'large-calendar-demo' : ''}`}>
       <div className="calendar-demo-header">
-        <h2>Responsive Calendar Component</h2>
-        <p>Interactive calendar with attendance tracking, events, and full responsive design</p>
+        <h2>📅 Responsive Calendar Component</h2>
+        <p>Multi-variant calendar with attendance tracking, events, and full responsive design</p>
         
-        <div className="view-mode-selector">
-          <button 
-            className={`mode-btn ${viewMode === 'basic' ? 'active' : ''}`}
-            onClick={() => setViewMode('basic')}
-          >
-            Basic Calendar
-          </button>
-          <button 
-            className={`mode-btn ${viewMode === 'attendance' ? 'active' : ''}`}
-            onClick={() => setViewMode('attendance')}
-          >
-            Attendance View
-          </button>
-          <button 
-            className={`mode-btn ${viewMode === 'events' ? 'active' : ''}`}
-            onClick={() => setViewMode('events')}
-          >
-            Events View
-          </button>
+        <div className="calendar-controls">
+          <div className="control-group">
+            <label>View Mode:</label>
+            <div className="view-mode-selector">
+              <button 
+                className={`mode-btn ${viewMode === 'basic' ? 'active' : ''}`}
+                onClick={() => setViewMode('basic')}
+              >
+                Basic
+              </button>
+              <button 
+                className={`mode-btn ${viewMode === 'attendance' ? 'active' : ''}`}
+                onClick={() => setViewMode('attendance')}
+              >
+                Attendance
+              </button>
+              <button 
+                className={`mode-btn ${viewMode === 'events' ? 'active' : ''}`}
+                onClick={() => setViewMode('events')}
+              >
+                Events
+              </button>
+            </div>
+          </div>
+
+          <div className="control-group">
+            <label>Calendar Size:</label>
+            <div className="variant-selector">
+              <button 
+                className={`variant-btn ${calendarVariant === 'compact' ? 'active' : ''}`}
+                onClick={() => setCalendarVariant('compact')}
+              >
+                📱 Compact
+              </button>
+              <button 
+                className={`variant-btn ${calendarVariant === 'default' ? 'active' : ''}`}
+                onClick={() => setCalendarVariant('default')}
+              >
+                💻 Default
+              </button>
+              <button 
+                className={`variant-btn ${calendarVariant === 'large' ? 'active' : ''}`}
+                onClick={() => setCalendarVariant('large')}
+              >
+                🖥️ Large
+              </button>
+              <button 
+                className={`variant-btn ${calendarVariant === 'mobile' ? 'active' : ''}`}
+                onClick={() => setCalendarVariant('mobile')}
+              >
+                📲 Mobile
+              </button>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -118,16 +164,21 @@ const CalendarExample = () => {
           </div>
         )}
 
-        <div className="calendar-demo-grid">
+        <div className={`calendar-demo-grid ${calendarVariant === 'large' ? 'large-calendar-layout' : ''}`}>
           {/* Calendar Component */}
           <div className="calendar-container">
+            <div className="calendar-variant-label">
+              <span className="variant-badge">{calendarVariant.charAt(0).toUpperCase() + calendarVariant.slice(1)} Calendar</span>
+            </div>
             <Calendar
               value={selectedDate}
               onChange={handleDateChange}
               attendanceData={viewMode === 'attendance' ? attendanceData : {}}
               events={viewMode === 'events' ? events : {}}
               showEventDots={viewMode !== 'basic'}
-              className="demo-calendar"
+              showEventText={calendarVariant === 'large'}
+              variant={calendarVariant}
+              className={`demo-calendar ${calendarVariant === 'large' ? 'large-calendar' : ''}`}
               showWeekNumbers={false}
             />
           </div>
@@ -163,6 +214,40 @@ const CalendarExample = () => {
             {!selectedDayData && !selectedDayEvent && (
               <p>No data available for this date.</p>
             )}
+
+            <div className="variant-info">
+              <h5>Current Variant Features:</h5>
+              <ul>
+                {calendarVariant === 'compact' && (
+                  <>
+                    <li>✅ Minimal space usage</li>
+                    <li>✅ Single letter weekdays</li>
+                    <li>✅ Smaller touch targets</li>
+                  </>
+                )}
+                {calendarVariant === 'default' && (
+                  <>
+                    <li>✅ Balanced size and features</li>
+                    <li>✅ Good for most use cases</li>
+                    <li>✅ Standard touch targets</li>
+                  </>
+                )}
+                {calendarVariant === 'large' && (
+                  <>
+                    <li>✅ Larger touch targets</li>
+                    <li>✅ Event text display</li>
+                    <li>✅ Enhanced accessibility</li>
+                  </>
+                )}
+                {calendarVariant === 'mobile' && (
+                  <>
+                    <li>✅ Auto-responsive sizing</li>
+                    <li>✅ Optimized for touch</li>
+                    <li>✅ Container-based scaling</li>
+                  </>
+                )}
+              </ul>
+            </div>
           </div>
         </div>
 
@@ -197,13 +282,13 @@ const CalendarExample = () => {
         <div className="demo-responsive-test">
           <h3>📱 Responsive Features</h3>
           <ul>
-            <li><strong>Mobile First:</strong> Optimized for touch devices with larger tap targets</li>
-            <li><strong>Flexible Grid:</strong> Automatically adjusts to container width</li>
-            <li><strong>Compact Mode:</strong> Smaller size for limited spaces</li>
-            <li><strong>Touch Friendly:</strong> Enhanced touch targets on mobile devices</li>
-            <li><strong>Landscape Support:</strong> Optimized for landscape orientation</li>
-            <li><strong>High DPI:</strong> Sharp indicators on retina displays</li>
-            <li><strong>Container Queries:</strong> Adapts to parent container size</li>
+            <li><strong>Multi-Variant Support:</strong> Choose between compact, default, large, and mobile variants</li>
+            <li><strong>Auto-Responsive:</strong> Mobile variant automatically adjusts to container width</li>
+            <li><strong>Touch Optimized:</strong> Enhanced touch targets on mobile devices</li>
+            <li><strong>Flexible Grid:</strong> CSS Grid with aspect-ratio for perfect squares</li>
+            <li><strong>Event Display:</strong> Large variant shows event text, others show indicators</li>
+            <li><strong>Accessibility:</strong> Full keyboard navigation and screen reader support</li>
+            <li><strong>Theme Aware:</strong> Adapts to light/dark themes automatically</li>
           </ul>
         </div>
       </div>
