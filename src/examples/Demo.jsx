@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import AlertExample from './AlertExample';
 import ModalExample from './ModalExample';
 import ChartExample from './ChartExample';
+import CalendarExample from './CalendarExample';
 import './Demo.css';
 
 const QTOThemeDemo = () => {
-  const [activeSection, setActiveSection] = useState('alerts');
+  const [activeSection, setActiveSection] = useState('calendar');
 
   const navStyle = {
     display: 'flex',
@@ -36,6 +37,12 @@ const QTOThemeDemo = () => {
       
       <nav style={navStyle}>
         <button
+          style={navButtonStyle(activeSection === 'calendar')}
+          onClick={() => setActiveSection('calendar')}
+        >
+          Calendar
+        </button>
+        <button
           style={navButtonStyle(activeSection === 'alerts')}
           onClick={() => setActiveSection('alerts')}
         >
@@ -56,6 +63,12 @@ const QTOThemeDemo = () => {
       </nav>
       
       <main className="demo-content">
+        {activeSection === 'calendar' && (
+          <section>
+            <CalendarExample />
+          </section>
+        )}
+        
         {activeSection === 'alerts' && (
           <section>
             <AlertExample />

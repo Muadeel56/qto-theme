@@ -30,10 +30,17 @@
   box-shadow: var(--calendar-shadow);
   font-family: var(--font-base);
   max-width: 320px;
+  min-width: 280px;
   user-select: none;
   width: 100%;
   overflow: hidden;
   animation: calendarFadeIn 0.2s ease-out;
+  position: relative;
+}
+
+.qto-calendar--compact {
+  max-width: 280px;
+  min-width: 240px;
 }
 
 /* Calendar when used inside DatePicker dropdown */
@@ -160,7 +167,7 @@
 }
 
 .qto-calendar__weekdays.qto-calendar__weekdays--with-week-numbers {
-  grid-template-columns: 32px repeat(7, 1fr);
+  grid-template-columns: minmax(32px, auto) repeat(7, 1fr);
 }
 
 .qto-calendar__weekday {
@@ -195,7 +202,7 @@
 }
 
 .qto-calendar__week--with-week-numbers {
-  grid-template-columns: 32px repeat(7, 1fr);
+  grid-template-columns: minmax(32px, auto) repeat(7, 1fr);
 }
 
 .qto-calendar__week-number {
@@ -212,6 +219,7 @@
 
 .qto-calendar__day {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   width: 36px;
@@ -227,6 +235,69 @@
   touch-action: manipulation;
   -webkit-tap-highlight-color: transparent;
   position: relative;
+  padding: 2px;
+}
+
+.qto-calendar__day-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  gap: 1px;
+}
+
+.qto-calendar__day-number {
+  font-size: inherit;
+  line-height: 1;
+  font-weight: inherit;
+}
+
+.qto-calendar__day-indicators {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  min-height: 8px;
+}
+
+.qto-calendar__status-indicator {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.qto-calendar__status--present {
+  background: var(--color-success);
+}
+
+.qto-calendar__status--absent {
+  background: var(--color-error);
+}
+
+.qto-calendar__status--holiday {
+  background: var(--color-warning);
+}
+
+.qto-calendar__status--leave {
+  background: var(--color-info);
+}
+
+.qto-calendar__status--partial {
+  background: var(--color-warning-light);
+}
+
+.qto-calendar__status--event {
+  background: var(--color-primary);
+}
+
+.qto-calendar__hours-indicator {
+  font-size: 8px;
+  line-height: 1;
+  color: var(--color-text-muted);
+  opacity: 0.8;
 }
 
 .qto-calendar__day:hover:not(:disabled),
@@ -291,6 +362,36 @@
   background: var(--color-info-light);
 }
 
+.qto-calendar__day--present {
+  background: rgba(34, 197, 94, 0.1);
+  border: 1px solid rgba(34, 197, 94, 0.3);
+}
+
+.qto-calendar__day--absent {
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.qto-calendar__day--holiday {
+  background: rgba(245, 158, 11, 0.1);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+.qto-calendar__day--leave {
+  background: rgba(59, 130, 246, 0.1);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+}
+
+.qto-calendar__day--partial {
+  background: rgba(245, 158, 11, 0.05);
+  border: 1px solid rgba(245, 158, 11, 0.2);
+}
+
+.qto-calendar__day--event {
+  background: rgba(242, 182, 15, 0.1);
+  border: 1px solid rgba(242, 182, 15, 0.3);
+}
+
 .qto-calendar__day--other {
   opacity: 0.4;
 }
@@ -335,7 +436,13 @@
 @media (max-width: 768px) {
   .qto-calendar {
     max-width: 100%;
+    min-width: auto;
     border-radius: var(--radius-lg);
+  }
+  
+  .qto-calendar--compact {
+    max-width: 100%;
+    min-width: auto;
   }
   
   .qto-calendar__header {
@@ -366,8 +473,11 @@
   }
   
   .qto-calendar__day {
-    width: 32px;
-    height: 32px;
+    width: auto;
+    height: auto;
+    aspect-ratio: 1;
+    min-width: 32px;
+    min-height: 32px;
     font-size: var(--text-xs);
   }
   
@@ -375,13 +485,25 @@
     padding: var(--spacing-xs);
     font-size: 10px;
   }
+  
+  .qto-calendar__hours-indicator {
+    font-size: 7px;
+  }
+  
+  .qto-calendar__status-indicator {
+    width: 3px;
+    height: 3px;
+  }
 }
 
 /* Ultra small screens */
 @media (max-width: 480px) {
   .qto-calendar__day {
-    width: 28px;
-    height: 28px;
+    width: auto;
+    height: auto;
+    aspect-ratio: 1;
+    min-width: 28px;
+    min-height: 28px;
     font-size: 11px;
   }
   
@@ -400,17 +522,76 @@
     min-width: 50px;
     font-size: 11px;
   }
+  
+  .qto-calendar__hours-indicator {
+    display: none; /* Hide hours text on very small screens */
+  }
+  
+  .qto-calendar__status-indicator {
+    width: 2px;
+    height: 2px;
+  }
+  
+  .qto-calendar__grid {
+    padding: var(--spacing-xs);
+  }
+  
+  .qto-calendar__header {
+    padding: var(--spacing-xs) var(--spacing-sm);
+  }
+}
+
+/* Extra small screens (smartwatches, very narrow phones) */
+@media (max-width: 320px) {
+  .qto-calendar__day {
+    width: auto;
+    height: auto;
+    aspect-ratio: 1;
+    min-width: 24px;
+    min-height: 24px;
+    font-size: 10px;
+  }
+  
+  .qto-calendar__day-indicators {
+    gap: 1px;
+    min-height: 6px;
+  }
+  
+  .qto-calendar__weekday {
+    font-size: 8px;
+    padding: 1px;
+  }
 }
 
 /* Tablet optimizations */
 @media (min-width: 769px) and (max-width: 1024px) {
   .qto-calendar {
+    max-width: 350px;
+  }
+  
+  .qto-calendar--compact {
     max-width: 300px;
   }
   
   .qto-calendar__day {
-    width: 38px;
-    height: 38px;
+    width: 40px;
+    height: 40px;
+  }
+}
+
+/* Large screens */
+@media (min-width: 1025px) {
+  .qto-calendar {
+    max-width: 380px;
+  }
+  
+  .qto-calendar--compact {
+    max-width: 320px;
+  }
+  
+  .qto-calendar__day {
+    width: 42px;
+    height: 42px;
   }
 }
 
@@ -422,7 +603,32 @@
   }
   
   .qto-calendar__nav-button {
-    min-width: 40px;
-    min-height: 40px;
+    min-width: 44px;
+    min-height: 44px;
+  }
+}
+
+/* High DPI displays */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 2dppx) {
+  .qto-calendar__status-indicator {
+    width: 5px;
+    height: 5px;
+  }
+}
+
+/* Landscape orientation on mobile */
+@media (max-height: 500px) and (orientation: landscape) {
+  .qto-calendar__day {
+    width: 32px;
+    height: 32px;
+    font-size: var(--text-xs);
+  }
+  
+  .qto-calendar__grid {
+    padding: var(--spacing-xs);
+  }
+  
+  .qto-calendar__header {
+    padding: var(--spacing-xs) var(--spacing-sm);
   }
 }
