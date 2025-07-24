@@ -1,0 +1,375 @@
+/* MUI DataGrid Integration Styles */
+
+.qto-datagrid {
+  width: 100%;
+  font-family: var(--font-family);
+}
+
+/* Toolbar Styles */
+.qto-datagrid__toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--spacing-md);
+  padding: var(--spacing-lg);
+  background: var(--color-bg-secondary);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.qto-datagrid__toolbar-left {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-lg);
+  flex: 1;
+}
+
+.qto-datagrid__toolbar-right {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  flex-wrap: wrap;
+}
+
+.qto-datagrid__toolbar-controls {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+}
+
+.qto-datagrid__title-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.qto-datagrid__title {
+  color: var(--color-text);
+  font-weight: 600;
+  margin: 0;
+}
+
+.qto-datagrid__subtitle {
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+.qto-datagrid__action-btn {
+  white-space: nowrap;
+  font-size: var(--text-sm);
+}
+
+/* Action Cell Styles */
+.qto-datagrid__action-cell {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  justify-content: center;
+}
+
+.qto-datagrid__action-icon {
+  transition: var(--transition-fast);
+}
+
+.qto-datagrid__action-icon:hover {
+  transform: scale(1.1);
+}
+
+/* Status Cell Styles */
+.qto-datagrid__status-cell {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+}
+
+.qto-datagrid__status-indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.qto-datagrid__status-cell--success .qto-datagrid__status-indicator {
+  background-color: var(--color-success);
+}
+
+.qto-datagrid__status-cell--warning .qto-datagrid__status-indicator {
+  background-color: var(--color-warning);
+}
+
+.qto-datagrid__status-cell--error .qto-datagrid__status-indicator {
+  background-color: var(--color-danger);
+}
+
+.qto-datagrid__status-cell--info .qto-datagrid__status-indicator {
+  background-color: var(--color-info);
+}
+
+.qto-datagrid__status-cell--default .qto-datagrid__status-indicator {
+  background-color: var(--color-text-secondary);
+}
+
+/* Error State */
+.qto-datagrid__error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-4xl);
+  text-align: center;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-bg-primary);
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .qto-datagrid__toolbar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--spacing-sm);
+  }
+
+  .qto-datagrid__toolbar-left {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--spacing-sm);
+  }
+
+  .qto-datagrid__toolbar-right {
+    justify-content: center;
+  }
+
+  .qto-datagrid__toolbar-controls {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .qto-datagrid__title-section {
+    text-align: center;
+  }
+
+  .qto-datagrid__action-cell {
+    flex-direction: column;
+    gap: var(--spacing-xs);
+  }
+
+  .qto-datagrid__action-btn {
+    font-size: var(--text-xs);
+    padding: var(--spacing-xs) var(--spacing-sm);
+  }
+}
+
+/* Tablet */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .qto-datagrid__toolbar {
+    gap: var(--spacing-sm);
+  }
+
+  .qto-datagrid__toolbar-left {
+    gap: var(--spacing-md);
+  }
+}
+
+/* Desktop and larger */
+@media (min-width: 1025px) {
+  .qto-datagrid__toolbar {
+    padding: var(--spacing-xl);
+  }
+}
+
+/* Dark Theme Adjustments */
+[data-theme="dark"] .qto-datagrid__toolbar {
+  background: var(--color-bg-tertiary);
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+  .qto-datagrid {
+    border: 2px solid var(--color-border);
+  }
+
+  .qto-datagrid__status-indicator {
+    border: 2px solid var(--color-bg-primary);
+  }
+
+  .qto-datagrid__action-icon {
+    border: 1px solid transparent;
+  }
+
+  .qto-datagrid__action-icon:focus {
+    border-color: var(--color-primary);
+  }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .qto-datagrid__action-icon {
+    transition: none;
+  }
+
+  .qto-datagrid__action-icon:hover {
+    transform: none;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .qto-datagrid__toolbar {
+    display: none;
+  }
+
+  .qto-datagrid__action-cell {
+    display: none;
+  }
+}
+
+/* Custom MUI DataGrid Overrides */
+.MuiDataGrid-root {
+  border-radius: var(--radius-lg) !important;
+  font-family: var(--font-family) !important;
+}
+
+.MuiDataGrid-columnHeaders {
+  background-color: var(--color-bg-secondary) !important;
+  border-bottom: 2px solid var(--color-border) !important;
+}
+
+.MuiDataGrid-columnHeaderTitle {
+  font-size: var(--text-xs) !important;
+  font-weight: 600 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+  color: var(--color-text-secondary) !important;
+}
+
+.MuiDataGrid-cell {
+  border-bottom: 1px solid var(--color-border) !important;
+  font-size: var(--text-sm) !important;
+}
+
+.MuiDataGrid-row:hover {
+  background-color: var(--color-bg-secondary) !important;
+}
+
+.MuiDataGrid-row.Mui-selected {
+  background-color: rgba(var(--color-primary-rgb), 0.1) !important;
+}
+
+.MuiDataGrid-row.Mui-selected:hover {
+  background-color: rgba(var(--color-primary-rgb), 0.15) !important;
+}
+
+.MuiDataGrid-footerContainer {
+  border-top: 1px solid var(--color-border) !important;
+  background-color: var(--color-bg-secondary) !important;
+}
+
+.MuiDataGrid-sortIcon {
+  color: var(--color-primary) !important;
+}
+
+.MuiDataGrid-menuIcon {
+  color: var(--color-text-secondary) !important;
+}
+
+/* Toolbar QuickFilter Styles */
+.MuiDataGrid-toolbarQuickFilter .MuiInputBase-root {
+  background-color: var(--color-bg-primary) !important;
+  border-radius: var(--radius-md) !important;
+}
+
+.MuiDataGrid-toolbarQuickFilter .MuiInputBase-input {
+  font-size: var(--text-sm) !important;
+  color: var(--color-text) !important;
+}
+
+.MuiDataGrid-toolbarQuickFilter .MuiInputBase-input::placeholder {
+  color: var(--color-text-secondary) !important;
+}
+
+/* Checkbox Styles */
+.MuiCheckbox-root {
+  color: var(--color-text-secondary) !important;
+}
+
+.MuiCheckbox-root.Mui-checked {
+  color: var(--color-primary) !important;
+}
+
+/* Button Styles in Toolbar */
+.MuiButton-root {
+  text-transform: none !important;
+  border-radius: var(--radius-md) !important;
+  font-size: var(--text-sm) !important;
+  font-weight: 500 !important;
+}
+
+.MuiButton-outlined {
+  border-color: var(--color-border) !important;
+  color: var(--color-text) !important;
+}
+
+.MuiButton-outlined:hover {
+  border-color: var(--color-primary) !important;
+  background-color: rgba(var(--color-primary-rgb), 0.1) !important;
+}
+
+.MuiButton-contained {
+  background-color: var(--color-primary) !important;
+  color: var(--color-white) !important;
+}
+
+.MuiButton-contained:hover {
+  background-color: var(--color-primary-dark) !important;
+}
+
+/* Icon Button Styles */
+.MuiIconButton-root {
+  color: var(--color-text-secondary) !important;
+  transition: var(--transition-fast) !important;
+}
+
+.MuiIconButton-root:hover {
+  color: var(--color-primary) !important;
+  background-color: rgba(var(--color-primary-rgb), 0.1) !important;
+}
+
+/* Tooltip Styles */
+.MuiTooltip-tooltip {
+  background-color: var(--color-bg-tertiary) !important;
+  color: var(--color-text) !important;
+  font-size: var(--text-xs) !important;
+  border: 1px solid var(--color-border) !important;
+  border-radius: var(--radius-sm) !important;
+}
+
+/* Pagination Styles */
+.MuiTablePagination-root {
+  color: var(--color-text) !important;
+  font-size: var(--text-sm) !important;
+}
+
+.MuiTablePagination-select {
+  color: var(--color-text) !important;
+}
+
+.MuiTablePagination-selectIcon {
+  color: var(--color-text-secondary) !important;
+}
+
+/* Focus Styles */
+.MuiDataGrid-cell:focus,
+.MuiDataGrid-columnHeader:focus {
+  outline: 2px solid var(--color-primary) !important;
+  outline-offset: -2px !important;
+}
+
+/* Loading Overlay */
+.MuiDataGrid-overlay {
+  background-color: rgba(var(--color-bg-primary-rgb), 0.8) !important;
+}
+
+.MuiCircularProgress-root {
+  color: var(--color-primary) !important;
+}

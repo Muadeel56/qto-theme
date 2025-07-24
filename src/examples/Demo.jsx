@@ -5,6 +5,7 @@ import AlertExample from './AlertExample';
 import ModalExample from './ModalExample';
 import ChartExample from './ChartExample';
 import CalendarExample from './CalendarExample';
+import MuiDataGridExample from './MuiDataGridExample';
 import './Demo.css';
 
 const QTOThemeDemo = () => {
@@ -56,6 +57,12 @@ const QTOThemeDemo = () => {
               📅 Calendar
             </button>
             <button
+              style={navButtonStyle(activeSection === 'tables')}
+              onClick={() => setActiveSection('tables')}
+            >
+              📋 Tables
+            </button>
+            <button
               style={navButtonStyle(activeSection === 'alerts')}
               onClick={() => setActiveSection('alerts')}
             >
@@ -90,6 +97,12 @@ const QTOThemeDemo = () => {
           {activeSection === 'calendar' && (
             <section>
               <CalendarExample />
+            </section>
+          )}
+          
+          {activeSection === 'tables' && (
+            <section>
+              <MuiDataGridExample />
             </section>
           )}
           

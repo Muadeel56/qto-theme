@@ -48,7 +48,7 @@ export { default as ThemeToggle } from './components/ThemeToggle';
 
 // Hooks
 export { useResponsive, useMediaQuery, useBreakpoint } from './hooks/useResponsive';
-export { useTheme, ThemeProvider } from './hooks/useTheme';
+export { useTheme, ThemeProvider } from './components/ThemeProvider';
 
 // Import all styles so they're bundled
 import './styles/tokens.css';

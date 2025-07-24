@@ -23,15 +23,17 @@ export {
 
 /* Data Display Components */
 export { default as Table } from './Table.jsx';
+export { default as TableWithActions } from './TableWithActions.jsx';
+export { default as SearchableTable } from './SearchableTable.jsx';
+export { default as SortableTable } from './SortableTable.jsx';
+export { default as ExpandableTable } from './ExpandableTable.jsx';
+export { default as QTODataGrid } from './QTODataGrid.jsx';
+export { default as DataGridWithActions } from './DataGridWithActions.jsx';
+export { default as ServerSideDataGrid } from './ServerSideDataGrid.jsx';
+export { default as MuiThemeProvider } from './MuiThemeProvider.jsx';
 export { default as DataGrid } from './DataGrid.jsx';
 export { default as Progress, CircularProgress } from './Progress.jsx';
 export { default as Alert } from './Alert.jsx';
-
-
-
-
-
-
 
 /* Theme Components */
 export { ThemeProvider, useTheme } from './ThemeProvider.jsx';

@@ -1,0 +1,342 @@
+/* Expandable Table Component Styles */
+
+.qto-expandable-table {
+  width: 100%;
+}
+
+/* Header Controls */
+.qto-expandable-table__header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.qto-expandable-table__controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-md);
+  background: var(--color-bg-secondary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  gap: var(--spacing-md);
+}
+
+.qto-expandable-table__status {
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  font-weight: 500;
+}
+
+.qto-expandable-table__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+}
+
+/* Toggle Buttons */
+.qto-expandable-table__toggle-all,
+.qto-expandable-table__toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 24px;
+  height: 24px;
+  padding: 0;
+  border-radius: var(--radius-sm);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  transition: var(--transition-fast);
+}
+
+.qto-expandable-table__toggle {
+  color: var(--color-text-secondary);
+}
+
+.qto-expandable-table__toggle:hover {
+  color: var(--color-primary);
+  background: rgba(var(--color-primary-rgb), 0.1);
+}
+
+.qto-expandable-table__toggle--expanded {
+  color: var(--color-primary);
+  background: rgba(var(--color-primary-rgb), 0.1);
+}
+
+.qto-expandable-table__spacer {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+}
+
+/* Expanded Content Rows */
+.qto-expandable-table__expanded-row {
+  background: var(--color-bg-secondary);
+}
+
+.qto-expandable-table__expanded-content {
+  padding: var(--spacing-lg);
+  border-bottom: 1px solid var(--color-border);
+}
+
+/* Nested Rows */
+.qto-expandable-table__nested-row {
+  background: rgba(var(--color-primary-rgb), 0.02);
+}
+
+.qto-expandable-table__nested-row--level-1 {
+  background: rgba(var(--color-primary-rgb), 0.03);
+}
+
+.qto-expandable-table__nested-row--level-2 {
+  background: rgba(var(--color-primary-rgb), 0.05);
+}
+
+.qto-expandable-table__nested-row--level-3 {
+  background: rgba(var(--color-primary-rgb), 0.07);
+}
+
+.qto-expandable-table__nesting-indicator {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.qto-expandable-table__nesting-indicator::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: calc(100% - 24px);
+  height: 1px;
+  background: var(--color-border);
+  opacity: 0.5;
+}
+
+/* Clickable Rows */
+.qto-expandable-table__clickable-row {
+  cursor: pointer;
+  transition: background-color var(--transition-fast);
+}
+
+.qto-expandable-table__clickable-row:hover {
+  background: rgba(var(--color-primary-rgb), 0.05);
+}
+
+/* Expand/Collapse Column */
+.qto-expandable-table .qto-table__cell:first-child {
+  width: 48px;
+  text-align: center;
+  padding-left: var(--spacing-sm);
+  padding-right: var(--spacing-sm);
+}
+
+/* Animation for expand/collapse */
+.qto-expandable-table__toggle {
+  transform-origin: center;
+  transition: transform var(--transition-fast), color var(--transition-fast);
+}
+
+.qto-expandable-table__toggle--expanded {
+  transform: rotate(90deg);
+}
+
+/* Row transitions */
+.qto-expandable-table__expanded-row,
+.qto-expandable-table__nested-row {
+  animation: expandRow 0.3s ease-out;
+}
+
+@keyframes expandRow {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Mobile Responsive */
+@media (max-width: 640px) {
+  .qto-expandable-table__controls {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--spacing-sm);
+  }
+
+  .qto-expandable-table__status {
+    text-align: center;
+  }
+
+  .qto-expandable-table__actions {
+    justify-content: center;
+  }
+
+  .qto-expandable-table__expanded-content {
+    padding: var(--spacing-md);
+  }
+
+  .qto-expandable-table__nesting-indicator {
+    padding-left: 0 !important;
+  }
+
+  .qto-expandable-table__nesting-indicator::before {
+    display: none;
+  }
+
+  /* Mobile card layout adjustments */
+  .qto-expandable-table .qto-table--mobile .qto-table__card {
+    position: relative;
+  }
+
+  .qto-expandable-table .qto-table--mobile .qto-table__card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: var(--color-primary);
+    opacity: 0.3;
+    transition: opacity var(--transition-fast);
+  }
+
+  .qto-expandable-table .qto-table--mobile .qto-table__card--expandable::before {
+    opacity: 0.6;
+  }
+
+  .qto-expandable-table .qto-table--mobile .qto-table__card--expanded::before {
+    opacity: 1;
+  }
+}
+
+/* Tablet */
+@media (min-width: 641px) and (max-width: 1024px) {
+  .qto-expandable-table__controls {
+    flex-wrap: wrap;
+  }
+
+  .qto-expandable-table__expanded-content {
+    padding: var(--spacing-lg);
+  }
+}
+
+/* Desktop and larger */
+@media (min-width: 1025px) {
+  .qto-expandable-table__controls {
+    padding: var(--spacing-lg);
+  }
+
+  .qto-expandable-table__expanded-content {
+    padding: var(--spacing-xl);
+  }
+}
+
+/* Dark Theme */
+[data-theme="dark"] .qto-expandable-table__controls {
+  background: var(--color-bg-tertiary);
+  border-color: var(--color-border);
+}
+
+[data-theme="dark"] .qto-expandable-table__expanded-row {
+  background: var(--color-bg-tertiary);
+}
+
+[data-theme="dark"] .qto-expandable-table__nested-row {
+  background: rgba(var(--color-primary-rgb), 0.1);
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+  .qto-expandable-table__controls {
+    border-width: 2px;
+  }
+
+  .qto-expandable-table__toggle,
+  .qto-expandable-table__toggle-all {
+    border: 2px solid transparent;
+  }
+
+  .qto-expandable-table__toggle:focus,
+  .qto-expandable-table__toggle-all:focus {
+    border-color: var(--color-primary);
+  }
+
+  .qto-expandable-table__nested-row {
+    border-left: 4px solid var(--color-primary);
+  }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .qto-expandable-table__toggle,
+  .qto-expandable-table__expanded-row,
+  .qto-expandable-table__nested-row,
+  .qto-expandable-table__clickable-row {
+    animation: none;
+    transition: none;
+  }
+
+  .qto-expandable-table__toggle--expanded {
+    transform: none;
+  }
+}
+
+/* Focus States */
+.qto-expandable-table__toggle:focus,
+.qto-expandable-table__toggle-all:focus {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* Loading States */
+.qto-expandable-table--loading .qto-expandable-table__toggle,
+.qto-expandable-table--loading .qto-expandable-table__toggle-all {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+/* Print Styles */
+@media print {
+  .qto-expandable-table__controls {
+    display: none;
+  }
+
+  .qto-expandable-table__expanded-row,
+  .qto-expandable-table__nested-row {
+    background: transparent !important;
+    animation: none;
+  }
+
+  .qto-expandable-table__toggle,
+  .qto-expandable-table__toggle-all {
+    display: none;
+  }
+}
+
+/* Accessibility improvements */
+.qto-expandable-table__toggle[aria-expanded="true"],
+.qto-expandable-table__toggle-all[aria-expanded="true"] {
+  background: rgba(var(--color-primary-rgb), 0.1);
+}
+
+/* Custom scrollbar for expanded content */
+.qto-expandable-table__expanded-content::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.qto-expandable-table__expanded-content::-webkit-scrollbar-track {
+  background: var(--color-bg-secondary);
+}
+
+.qto-expandable-table__expanded-content::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 3px;
+}
+
+.qto-expandable-table__expanded-content::-webkit-scrollbar-thumb:hover {
+  background: var(--color-text-secondary);
+}

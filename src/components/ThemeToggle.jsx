@@ -1,9 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useTheme } from './ThemeProvider';
+import { useTheme, ThemeProvider } from './ThemeProvider';
 import '../styles/theme-toggle.css';
 
-const ThemeToggle = ({ 
+// Direct import of ThemeContext for context checking
+import { createContext, useContext } from 'react';
+
+// Create a simple context checker hook
+const useThemeContext = () => {
+  try {
+    return useTheme();
+  } catch (error) {
+    return null;
+  }
+};
+
+// Internal component that requires ThemeProvider context
+const ThemeToggleInternal = ({ 
   variant = 'button',
   size = 'md', 
   className = '', 
@@ -93,6 +106,23 @@ const ThemeToggle = ({
       {showLabel && <span className="qto-theme-toggle__label">{getThemeLabel()}</span>}
     </button>
   );
+};
+
+// Safe wrapper component that provides ThemeProvider context if needed
+const ThemeToggle = (props) => {
+  const themeContext = useThemeContext();
+  
+  // If we're not in a ThemeProvider context, wrap with one
+  if (!themeContext) {
+    return (
+      <ThemeProvider defaultTheme="light">
+        <ThemeToggleInternal {...props} />
+      </ThemeProvider>
+    );
+  }
+
+  // We're already in a ThemeProvider context
+  return <ThemeToggleInternal {...props} />;
 };
 
 ThemeToggle.propTypes = {
