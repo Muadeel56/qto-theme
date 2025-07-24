@@ -123,10 +123,10 @@
 }
 
 /* Error Badge */
-.qto-badge--error {
-  background: var(--color-error);
+.qto-badge--danger {
+  background: var(--color-danger);
   color: var(--color-white);
-  border-color: var(--color-error);
+  border-color: var(--color-danger);
 }
 
 /* Info Badge */
@@ -173,17 +173,17 @@
   transform: translateY(-1px);
 }
 
-/* Error Badge */
-.qto-badge--error {
-  background: var(--color-error);
+/* Danger Badge */
+.qto-badge--danger {
+  background: var(--color-danger);
   color: var(--color-white);
-  border-color: var(--color-error);
+  border-color: var(--color-danger);
   box-shadow: 0 2px 4px rgba(239, 68, 68, 0.2);
 }
 
-.qto-badge--error:hover {
-  background: #dc2626;
-  border-color: #dc2626;
+.qto-badge--danger:hover {
+  background: var(--color-danger-hover);
+  border-color: var(--color-danger-hover);
   box-shadow: 0 4px 8px rgba(239, 68, 68, 0.3);
   transform: translateY(-1px);
 }
@@ -263,16 +263,16 @@
   color: #d97706;
 }
 
-.qto-badge--outline.qto-badge--error {
+.qto-badge--outline.qto-badge--danger {
   background: transparent;
-  color: var(--color-error);
-  border-color: var(--color-error);
+  color: var(--color-danger);
+  border-color: var(--color-danger);
   box-shadow: none;
 }
 
-.qto-badge--outline.qto-badge--error:hover {
-  background: var(--color-error-light);
-  color: #dc2626;
+.qto-badge--outline.qto-badge--danger:hover {
+  background: var(--color-danger-light);
+  color: var(--color-danger-hover);
 }
 
 .qto-badge--outline.qto-badge--info {

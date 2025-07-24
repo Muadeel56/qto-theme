@@ -73,12 +73,24 @@
   /* Semantic Colors */
   --color-success: #22c55e;
   --color-success-light: #f0fdf4;
+  --color-success-hover: #16a34a;
+  --color-success-active: #15803d;
   --color-warning: #f59e0b;
   --color-warning-light: #fffbeb;
+  --color-warning-hover: #d97706;
+  --color-warning-active: #b45309;
   --color-error: #ef4444;
   --color-error-light: #fef2f2;
+  --color-error-hover: #dc2626;
+  --color-error-active: #b91c1c;
+  --color-danger: #ef4444;
+  --color-danger-light: #fef2f2;
+  --color-danger-hover: #dc2626;
+  --color-danger-active: #b91c1c;
   --color-info: #3b82f6;
   --color-info-light: #eff6ff;
+  --color-info-hover: #2563eb;
+  --color-info-active: #1d4ed8;
 
   /* Text Colors */
   --color-text: #171717;

@@ -152,7 +152,19 @@ const CardImage = ({
 };
 
 Card.propTypes = {
-  variant: PropTypes.oneOf(['default', 'outlined', 'elevated', 'filled', 'gradient']),
+  variant: PropTypes.oneOf([
+    'default', 
+    'outlined', 
+    'elevated', 
+    'filled', 
+    'gradient',
+    'primary',
+    'secondary',
+    'success',
+    'danger',
+    'warning',
+    'info'
+  ]),
   shadow: PropTypes.oneOf(['none', 'sm', 'md', 'lg', 'xl', '2xl']),
   padding: PropTypes.oneOf(['none', 'xs', 'sm', 'md', 'lg', 'xl']),
   rounded: PropTypes.oneOf(['none', 'sm', 'md', 'lg', 'xl', '2xl', 'full']),

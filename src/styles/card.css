@@ -111,6 +111,70 @@
   border: 1px solid var(--color-border-light);
 }
 
+/* ===== SEMANTIC COLOR VARIANTS ===== */
+
+/* Success Card */
+.qto-card--success {
+  border-left: 4px solid var(--color-success);
+  background: var(--color-bg-primary);
+  border-color: var(--color-success);
+}
+
+.qto-card--success::before {
+  background: linear-gradient(90deg, var(--color-success), var(--color-success-hover));
+}
+
+/* Danger Card */
+.qto-card--danger {
+  border-left: 4px solid var(--color-danger);
+  background: var(--color-bg-primary);
+  border-color: var(--color-danger);
+}
+
+.qto-card--danger::before {
+  background: linear-gradient(90deg, var(--color-danger), var(--color-danger-hover));
+}
+
+/* Warning Card */
+.qto-card--warning {
+  border-left: 4px solid var(--color-warning);
+  background: var(--color-bg-primary);
+  border-color: var(--color-warning);
+}
+
+.qto-card--warning::before {
+  background: linear-gradient(90deg, var(--color-warning), var(--color-warning-hover));
+}
+
+/* Info Card */
+.qto-card--info {
+  border-left: 4px solid var(--color-info);
+  background: var(--color-bg-primary);
+  border-color: var(--color-info);
+}
+
+.qto-card--info::before {
+  background: linear-gradient(90deg, var(--color-info), var(--color-info-hover));
+}
+
+/* Primary Card */
+.qto-card--primary {
+  border-left: 4px solid var(--color-primary);
+  background: var(--color-bg-primary);
+  border-color: var(--color-primary);
+}
+
+.qto-card--primary::before {
+  background: linear-gradient(90deg, var(--color-primary), var(--color-primary-hover));
+}
+
+/* Secondary Card */
+.qto-card--secondary {
+  border-left: 4px solid var(--color-secondary);
+  background: var(--color-bg-primary);
+  border-color: var(--color-secondary);
+}
+
 /* Shadow Variants */
 .qto-card--shadow-none {
   box-shadow: none;

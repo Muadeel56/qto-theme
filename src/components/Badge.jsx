@@ -74,7 +74,7 @@ const Badge = ({
 };
 
 Badge.propTypes = {
-  variant: PropTypes.oneOf(['primary', 'secondary', 'success', 'warning', 'error', 'info', 'neutral']),
+  variant: PropTypes.oneOf(['primary', 'secondary', 'success', 'warning', 'danger', 'info', 'neutral']),
   size: PropTypes.oneOf(['xs', 'sm', 'md', 'lg']),
   rounded: PropTypes.oneOf(['sm', 'md', 'lg', 'full']),
   outline: PropTypes.bool,

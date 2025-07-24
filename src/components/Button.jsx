@@ -102,18 +102,34 @@ const Button = ({
 };
 
 Button.propTypes = {
-  variant: PropTypes.oneOf(['primary', 'secondary', 'outline', 'ghost', 'danger', 'success', 'warning', 'info']),
-  size: PropTypes.oneOf(['xs', 'sm', 'md', 'lg', 'xl']),
+  children: PropTypes.node,
+  variant: PropTypes.oneOf([
+    'primary', 
+    'secondary', 
+    'success', 
+    'danger', 
+    'warning', 
+    'info',
+    'outline-primary',
+    'outline-secondary', 
+    'outline-success', 
+    'outline-danger', 
+    'outline-warning', 
+    'outline-info',
+    'ghost', 
+    'link'
+  ]),
+  size: PropTypes.oneOf(['small', 'medium', 'large']),
   disabled: PropTypes.bool,
   loading: PropTypes.bool,
-  fullWidth: PropTypes.bool,
-  rounded: PropTypes.bool,
-  gradient: PropTypes.bool,
-  responsive: PropTypes.bool,
-  children: PropTypes.node.isRequired,
+  type: PropTypes.oneOf(['button', 'submit', 'reset']),
+  onClick: PropTypes.func,
   className: PropTypes.string,
-  startIcon: PropTypes.node,
-  endIcon: PropTypes.node,
+  gradient: PropTypes.bool,
+  icon: PropTypes.node,
+  iconPosition: PropTypes.oneOf(['left', 'right']),
+  fullWidth: PropTypes.bool,
+  rounded: PropTypes.bool
 };
 
 export default Button;
