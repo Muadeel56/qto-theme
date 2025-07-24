@@ -46,6 +46,12 @@ export { default as Tooltip } from './components/Tooltip';
 // Theme Components
 export { default as ThemeToggle } from './components/ThemeToggle';
 
+// File Handling Components
+export { default as FileUpload } from './components/FileUpload';
+export { default as FileDownload } from './components/FileDownload';
+export { default as FileDisplay } from './components/FileDisplay';
+export { default as FileManager } from './components/FileManager';
+
 // Hooks
 export { useResponsive, useMediaQuery, useBreakpoint } from './hooks/useResponsive';
 export { useTheme, ThemeProvider } from './components/ThemeProvider';
@@ -76,3 +82,7 @@ import './styles/avatar.css';
 import './styles/typography.css';
 import './styles/spinner.css';
 import './styles/tooltip.css';
+import './styles/file-upload.css';
+import './styles/file-download.css';
+import './styles/file-display.css';
+import './styles/file-manager.css';

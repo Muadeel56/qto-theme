@@ -33,6 +33,12 @@ export { default as ServerSideDataGrid } from './ServerSideDataGrid.jsx';
 export { default as MuiThemeProvider } from './MuiThemeProvider.jsx';
 export { default as DataGrid } from './DataGrid.jsx';
 export { default as Progress, CircularProgress } from './Progress.jsx';
+
+/* File Handling Components */
+export { default as FileUpload } from './FileUpload.jsx';
+export { default as FileDownload } from './FileDownload.jsx';
+export { default as FileDisplay } from './FileDisplay.jsx';
+export { default as FileManager } from './FileManager.jsx';
 export { default as Alert } from './Alert.jsx';
 
 /* Theme Components */

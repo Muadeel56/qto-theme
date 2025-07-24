@@ -6,6 +6,7 @@ import ModalExample from './ModalExample';
 import ChartExample from './ChartExample';
 import CalendarExample from './CalendarExample';
 import MuiDataGridExample from './MuiDataGridExample';
+import FileHandlingExample from './FileHandlingExample';
 import './Demo.css';
 
 const QTOThemeDemo = () => {
@@ -81,6 +82,12 @@ const QTOThemeDemo = () => {
               📊 Charts
             </button>
             <button
+              style={navButtonStyle(activeSection === 'files')}
+              onClick={() => setActiveSection('files')}
+            >
+              📁 File Handling
+            </button>
+            <button
               style={navButtonStyle(activeSection === 'themes')}
               onClick={() => setActiveSection('themes')}
             >
@@ -121,6 +128,12 @@ const QTOThemeDemo = () => {
           {activeSection === 'charts' && (
             <section>
               <ChartExample />
+            </section>
+          )}
+          
+          {activeSection === 'files' && (
+            <section>
+              <FileHandlingExample />
             </section>
           )}
 
