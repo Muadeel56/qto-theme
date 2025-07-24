@@ -16,6 +16,26 @@
   border: 1px solid var(--datagrid-border);
   overflow: hidden;
   font-family: var(--font-base);
+  transition: all var(--transition-fast); /* Smooth theme transitions */
+}
+
+/* Force CSS variable re-evaluation on theme change */
+.qto-datagrid[data-theme="dark"] {
+  --datagrid-bg: var(--color-bg-primary);
+  --datagrid-border: var(--color-border);
+  --datagrid-header-bg: var(--color-bg-secondary);
+  --datagrid-row-hover: var(--color-bg-tertiary);
+  --datagrid-text: var(--color-text);
+  --datagrid-text-muted: var(--color-text-secondary);
+}
+
+.qto-datagrid[data-theme="light"] {
+  --datagrid-bg: var(--color-bg-primary);
+  --datagrid-border: var(--color-border);
+  --datagrid-header-bg: var(--color-bg-secondary);
+  --datagrid-row-hover: var(--color-bg-tertiary);
+  --datagrid-text: var(--color-text);
+  --datagrid-text-muted: var(--color-text-secondary);
 }
 
 /* Toolbar */
@@ -132,7 +152,7 @@
 
 .qto-datagrid__header-cell {
   padding: var(--spacing-md) var(--spacing-lg);
-  text-align: left;
+  text-align: center; /* Center headers by default */
   font-weight: 600;
   color: var(--datagrid-text);
   border-bottom: 2px solid var(--datagrid-border);
@@ -140,6 +160,8 @@
   user-select: none;
   position: relative;
   background: var(--datagrid-header-bg);
+  min-height: 48px; /* Consistent with cell height */
+  box-sizing: border-box;
 }
 
 .qto-datagrid__header-cell--sortable {
@@ -149,6 +171,10 @@
 
 .qto-datagrid__header-cell--sortable:hover {
   background: var(--datagrid-row-hover);
+}
+
+.qto-datagrid__header-cell--left {
+  text-align: left;
 }
 
 .qto-datagrid__header-cell--center {
@@ -163,6 +189,7 @@
   width: 48px;
   padding-left: var(--spacing-lg);
   padding-right: var(--spacing-sm);
+  text-align: center;
 }
 
 .qto-datagrid__header-content {
@@ -225,14 +252,18 @@
 .qto-datagrid__row {
   transition: all var(--transition-fast);
   border-bottom: 1px solid var(--datagrid-border);
+  min-height: 48px; /* Ensure minimum row height for better visibility */
 }
 
 .qto-datagrid__row:hover {
   background: var(--datagrid-row-hover);
+  transform: translateY(-1px); /* Subtle lift effect on hover */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
 .qto-datagrid__row--selected {
   background: var(--datagrid-selected);
+  border-color: rgba(var(--color-primary-rgb, 242, 182, 15), 0.3);
 }
 
 .qto-datagrid__row--clickable {
@@ -248,6 +279,16 @@
   vertical-align: middle;
   color: var(--datagrid-text);
   line-height: var(--line-height-normal);
+  text-align: center; /* Center all content by default */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-height: 48px; /* Ensure consistent cell height */
+  box-sizing: border-box;
+}
+
+.qto-datagrid__cell--left {
+  text-align: left;
 }
 
 .qto-datagrid__cell--center {
@@ -262,6 +303,7 @@
   width: 48px;
   padding-left: var(--spacing-lg);
   padding-right: var(--spacing-sm);
+  text-align: center;
 }
 
 .qto-datagrid__cell--empty {

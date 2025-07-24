@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useMemo } from 'react';
+import React, { useState, useCallback, useMemo, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { DataGrid } from '@mui/x-data-grid';
 import {
@@ -21,6 +21,7 @@ import {
   Refresh as RefreshIcon,
 } from '@mui/icons-material';
 import QTOMuiThemeProvider from './MuiThemeProvider';
+import { useTheme } from './ThemeProvider';
 import '../styles/mui-datagrid.css';
 
 // Custom Toolbar Component
@@ -181,10 +182,17 @@ const QTODataGrid = ({
   
   ...other
 }) => {
+  const { actualTheme } = useTheme();
   const [paginationModel, setPaginationModel] = useState({
     page: 0,
     pageSize: pageSize,
   });
+  const [themeKey, setThemeKey] = useState(0);
+
+  // Force re-render when theme changes to ensure proper MUI theme updates
+  useEffect(() => {
+    setThemeKey(prev => prev + 1);
+  }, [actualTheme]);
 
   // Enhance columns with action column if rowActions provided
   const enhancedColumns = useMemo(() => {
@@ -340,6 +348,22 @@ const QTODataGrid = ({
           '& .MuiDataGrid-root': {
             fontFamily: 'var(--font-family)',
           },
+          '& .MuiDataGrid-cell': {
+            textAlign: 'center', // Center all cells by default
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          },
+          '& .MuiDataGrid-columnHeader': {
+            textAlign: 'center', // Center all headers by default
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          },
+          '& .MuiDataGrid-columnHeaderTitle': {
+            textAlign: 'center',
+            width: '100%',
+          },
         }}
         
         {...other}
@@ -349,11 +373,15 @@ const QTODataGrid = ({
 };
 
 // Wrapped component with MUI Theme Provider
-const WrappedQTODataGrid = (props) => (
-  <QTOMuiThemeProvider>
-    <QTODataGrid {...props} />
-  </QTOMuiThemeProvider>
-);
+const WrappedQTODataGrid = (props) => {
+  const { actualTheme } = useTheme();
+  
+  return (
+    <QTOMuiThemeProvider key={actualTheme}>
+      <QTODataGrid {...props} />
+    </QTOMuiThemeProvider>
+  );
+};
 
 QTODataGrid.propTypes = {
   data: PropTypes.array,

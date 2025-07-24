@@ -3,6 +3,48 @@
 .qto-datagrid {
   width: 100%;
   font-family: var(--font-family);
+  transition: all var(--transition-fast); /* Smooth theme transitions */
+}
+
+/* Force theme-aware styles */
+.qto-datagrid .MuiDataGrid-root {
+  background-color: var(--color-bg-primary) !important;
+  color: var(--color-text) !important;
+  border: 1px solid var(--color-border) !important;
+  transition: all var(--transition-fast);
+}
+
+.qto-datagrid .MuiDataGrid-main {
+  background-color: var(--color-bg-primary) !important;
+}
+
+.qto-datagrid .MuiDataGrid-columnHeaders {
+  background-color: var(--color-bg-secondary) !important;
+  border-bottom: 2px solid var(--color-border) !important;
+}
+
+.qto-datagrid .MuiDataGrid-columnHeader {
+  background-color: var(--color-bg-secondary) !important;
+  color: var(--color-text) !important;
+}
+
+.qto-datagrid .MuiDataGrid-cell {
+  background-color: var(--color-bg-primary) !important;
+  color: var(--color-text) !important;
+  border-bottom: 1px solid var(--color-border) !important;
+  text-align: center !important;
+}
+
+.qto-datagrid .MuiDataGrid-row {
+  background-color: var(--color-bg-primary) !important;
+}
+
+.qto-datagrid .MuiDataGrid-row:hover {
+  background-color: var(--color-bg-tertiary) !important;
+}
+
+.qto-datagrid .MuiDataGrid-row.Mui-selected {
+  background-color: rgba(var(--color-primary-rgb, 242, 182, 15), 0.08) !important;
 }
 
 /* Toolbar Styles */

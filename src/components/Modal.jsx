@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
+import { createPortal } from 'react-dom';
 import { X } from 'lucide-react';
 import { useResponsive } from '../hooks/useResponsive';
 import '../styles/modal.css';
@@ -102,82 +103,167 @@ const Modal = ({
 
   if (!open) return null;
 
-  const getModalClasses = () => {
-    const baseClasses = 'qto-modal__content';
-    const sizeClass = `qto-modal--${size}`;
-    const variantClass = `qto-modal--${variant}`;
-    const paddingClass = `qto-modal--padding-${padding}`;
-    const responsiveClass = `qto-modal--${breakpoint}`;
-    const fullScreenClass = fullScreenOnMobile && isMobile ? 'qto-modal--fullscreen' : '';
-    const animateClass = animate ? 'qto-modal--animate' : '';
-    
-    return [
-      baseClasses,
-      sizeClass,
-      variantClass,
-      paddingClass,
-      responsiveClass,
-      fullScreenClass,
-      animateClass,
-      className
-    ].filter(Boolean).join(' ');
+  // Size mapping for inline styles
+  const getSizeStyles = () => {
+    const sizeMap = {
+      xs: { maxWidth: '320px' },
+      sm: { maxWidth: '400px' },
+      md: { maxWidth: '500px' },
+      lg: { maxWidth: '600px' },
+      xl: { maxWidth: '800px' },
+      full: { maxWidth: '95vw', height: '95vh' }
+    };
+    return sizeMap[size] || sizeMap.md;
   };
 
-  const getOverlayClasses = () => {
-    const baseClasses = 'qto-modal__overlay';
-    const responsiveClass = isMobile ? 'qto-modal__overlay--mobile' : 
-                           isTablet ? 'qto-modal__overlay--tablet' : 'qto-modal__overlay--desktop';
-    const animateClass = animate ? 'qto-modal__overlay--animate' : '';
-    
-    return [baseClasses, responsiveClass, animateClass].filter(Boolean).join(' ');
+  // Variant styling for inline styles
+  const getVariantStyles = () => {
+    switch (variant) {
+      case 'glass':
+        return {
+          backgroundColor: 'rgba(255, 255, 255, 0.95)',
+          backdropFilter: 'blur(12px)',
+          border: '1px solid rgba(255, 255, 255, 0.2)'
+        };
+      case 'outlined':
+        return {
+          backgroundColor: '#ffffff',
+          border: '2px solid #f2b60f',
+          boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)'
+        };
+      default: // soft
+        return {
+          backgroundColor: '#ffffff',
+          border: '1px solid #e5e5e5'
+        };
+    }
   };
 
-  return (
+  const modalContent = (
     <div 
-      className={getOverlayClasses()} 
       onClick={handleBackdropClick} 
       role="dialog"
       aria-modal="true"
       aria-labelledby={title ? 'qto-modal-title' : undefined}
+      style={{
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        width: '100vw',
+        height: '100vh',
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        zIndex: 1050,
+        padding: fullScreenOnMobile && isMobile ? '0' : '1rem'
+      }}
       {...props}
     >
       <div 
         ref={modalRef}
-        className={getModalClasses()} 
         onKeyDown={handleTabKey}
+        tabIndex={-1}
+        style={{
+          ...getVariantStyles(),
+          ...getSizeStyles(),
+          borderRadius: fullScreenOnMobile && isMobile ? '0' : '12px',
+          boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
+          maxHeight: fullScreenOnMobile && isMobile ? '100vh' : '90vh',
+          width: fullScreenOnMobile && isMobile ? '100vw' : '100%',
+          display: 'flex',
+          flexDirection: 'column',
+          position: 'relative',
+          fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
+          overflow: 'hidden'
+        }}
       >
         {(title || showCloseButton) && (
-          <div className="qto-modal__header">
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            gap: '1rem',
+            padding: '1.5rem',
+            borderBottom: '1px solid #e5e5e5',
+            flexShrink: 0
+          }}>
             {title && (
-              <h2 id="qto-modal-title" className="qto-modal__title">
+              <h2 id="qto-modal-title" style={{
+                margin: 0,
+                fontSize: '1.125rem',
+                fontWeight: 600,
+                lineHeight: 1.25,
+                color: '#171717',
+                flex: 1,
+                minWidth: 0
+              }}>
                 {title}
               </h2>
             )}
             {showCloseButton && !preventClose && (
               <button 
-                className="qto-modal__close" 
                 onClick={onClose}
                 aria-label="Close modal"
                 type="button"
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  width: '40px',
+                  height: '40px',
+                  border: 'none',
+                  background: 'transparent',
+                  color: '#525252',
+                  cursor: 'pointer',
+                  borderRadius: '6px',
+                  transition: 'all 0.15s ease',
+                  flexShrink: 0
+                }}
+                onMouseEnter={(e) => {
+                  e.target.style.backgroundColor = '#f5f5f5';
+                  e.target.style.color = '#171717';
+                }}
+                onMouseLeave={(e) => {
+                  e.target.style.backgroundColor = 'transparent';
+                  e.target.style.color = '#525252';
+                }}
               >
-                <X />
+                <X size={20} />
               </button>
             )}
           </div>
         )}
         
-        <div className="qto-modal__body">
+        <div style={{
+          padding: '1.5rem',
+          flex: 1,
+          overflowY: 'auto',
+          color: '#171717',
+          lineHeight: 1.5
+        }}>
           {children}
         </div>
 
         {actions && (
-          <div className="qto-modal__footer">
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '1rem',
+            padding: '1.5rem',
+            borderTop: '1px solid #e5e5e5',
+            flexShrink: 0,
+            justifyContent: 'flex-end'
+          }}>
             {actions}
           </div>
         )}
       </div>
     </div>
   );
+
+  // Render modal in a portal for better isolation
+  return createPortal(modalContent, document.body);
 };
 
 // Compound components for better reusability

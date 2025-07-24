@@ -1,5 +1,6 @@
-import React, { useState, useMemo, useCallback } from 'react';
+import React, { useState, useMemo, useCallback, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { useTheme } from './ThemeProvider';
 import '../styles/datagrid.css';
 
 const DataGrid = ({ 
@@ -21,11 +22,18 @@ const DataGrid = ({
   className = '',
   ...props 
 }) => {
+  const { actualTheme } = useTheme();
   const [currentPage, setCurrentPage] = useState(1);
   const [sortConfig, setSortConfig] = useState({ key: null, direction: 'asc' });
   const [selectedRows, setSelectedRows] = useState(new Set());
   const [globalFilter, setGlobalFilter] = useState('');
   const [columnFilters, setColumnFilters] = useState({});
+  const [themeKey, setThemeKey] = useState(0); // Force re-render on theme change
+
+  // Force re-render when theme changes to ensure proper CSS variable updates
+  useEffect(() => {
+    setThemeKey(prev => prev + 1);
+  }, [actualTheme]);
 
   // Filter data based on global and column filters
   const filteredData = useMemo(() => {
@@ -215,7 +223,12 @@ const DataGrid = ({
   };
 
   return (
-    <div className={`qto-datagrid ${className}`} {...props}>
+    <div 
+      key={themeKey} 
+      className={`qto-datagrid ${className}`} 
+      data-theme={actualTheme}
+      {...props}
+    >
       {/* Toolbar */}
       <div className="qto-datagrid__toolbar">
         {filterable && (
@@ -266,7 +279,7 @@ const DataGrid = ({
                 {columns.map((column) => (
                   <th
                     key={column.key}
-                    className={`qto-datagrid__header-cell ${column.sortable !== false && sortable ? 'qto-datagrid__header-cell--sortable' : ''} ${column.align ? `qto-datagrid__header-cell--${column.align}` : ''}`}
+                    className={`qto-datagrid__header-cell ${column.sortable !== false && sortable ? 'qto-datagrid__header-cell--sortable' : ''} ${column.align ? `qto-datagrid__header-cell--${column.align}` : 'qto-datagrid__header-cell--center'}`}
                     style={{ width: column.width, minWidth: column.minWidth }}
                     onClick={() => column.sortable !== false && handleSort(column.key)}
                   >
@@ -332,7 +345,7 @@ const DataGrid = ({
                       {columns.map((column) => (
                         <td
                           key={`${rowId}-${column.key}`}
-                          className={`qto-datagrid__cell ${column.align ? `qto-datagrid__cell--${column.align}` : ''}`}
+                          className={`qto-datagrid__cell ${column.align ? `qto-datagrid__cell--${column.align}` : 'qto-datagrid__cell--center'}`}
                         >
                           {column.render ? column.render(row[column.key], row, rowIndex) : row[column.key]}
                         </td>
