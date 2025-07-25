@@ -1,0 +1,145 @@
+/* Typography Styles */
+.qto-typography {
+  margin: 0;
+  font-family: var(--font-base);
+  line-height: var(--line-height-normal);
+  color: var(--color-text);
+}
+
+/* Variants */
+.qto-typography--h1 {
+  font-size: var(--text-4xl);
+  font-weight: 700;
+  line-height: var(--line-height-tight);
+  letter-spacing: -0.025em;
+}
+
+.qto-typography--h2 {
+  font-size: var(--text-3xl);
+  font-weight: 600;
+  line-height: var(--line-height-tight);
+  letter-spacing: -0.025em;
+}
+
+.qto-typography--h3 {
+  font-size: var(--text-2xl);
+  font-weight: 600;
+  line-height: var(--line-height-snug);
+  letter-spacing: -0.025em;
+}
+
+.qto-typography--h4 {
+  font-size: var(--text-xl);
+  font-weight: 600;
+  line-height: var(--line-height-snug);
+}
+
+.qto-typography--h5 {
+  font-size: var(--text-lg);
+  font-weight: 600;
+  line-height: var(--line-height-snug);
+}
+
+.qto-typography--h6 {
+  font-size: var(--text-base);
+  font-weight: 600;
+  line-height: var(--line-height-snug);
+}
+
+.qto-typography--subtitle1 {
+  font-size: var(--text-lg);
+  font-weight: 500;
+  line-height: var(--line-height-normal);
+  letter-spacing: 0.009em;
+}
+
+.qto-typography--subtitle2 {
+  font-size: var(--text-base);
+  font-weight: 500;
+  line-height: var(--line-height-normal);
+  letter-spacing: 0.007em;
+}
+
+.qto-typography--body1 {
+  font-size: var(--text-base);
+  font-weight: 400;
+  line-height: var(--line-height-relaxed);
+}
+
+.qto-typography--body2 {
+  font-size: var(--text-sm);
+  font-weight: 400;
+  line-height: var(--line-height-relaxed);
+}
+
+.qto-typography--caption {
+  font-size: var(--text-xs);
+  font-weight: 400;
+  line-height: var(--line-height-normal);
+  letter-spacing: 0.033em;
+}
+
+.qto-typography--overline {
+  font-size: var(--text-xs);
+  font-weight: 600;
+  line-height: var(--line-height-normal);
+  letter-spacing: 0.083em;
+  text-transform: uppercase;
+}
+
+.qto-typography--display1 {
+  font-size: var(--text-5xl);
+  font-weight: 700;
+  line-height: var(--line-height-tight);
+  letter-spacing: -0.025em;
+}
+
+.qto-typography--display2 {
+  font-size: var(--text-6xl);
+  font-weight: 700;
+  line-height: var(--line-height-tight);
+  letter-spacing: -0.025em;
+}
+
+/* Font Weights */
+.qto-typography--weight-thin { font-weight: 100; }
+.qto-typography--weight-extralight { font-weight: 200; }
+.qto-typography--weight-light { font-weight: 300; }
+.qto-typography--weight-normal { font-weight: 400; }
+.qto-typography--weight-medium { font-weight: 500; }
+.qto-typography--weight-semibold { font-weight: 600; }
+.qto-typography--weight-bold { font-weight: 700; }
+.qto-typography--weight-extrabold { font-weight: 800; }
+.qto-typography--weight-black { font-weight: 900; }
+
+/* Text Alignment */
+.qto-typography--align-left { text-align: left; }
+.qto-typography--align-center { text-align: center; }
+.qto-typography--align-right { text-align: right; }
+.qto-typography--align-justify { text-align: justify; }
+
+/* Colors */
+.qto-typography--color-default { color: var(--color-text); }
+.qto-typography--color-primary { color: var(--color-primary); }
+.qto-typography--color-secondary { color: var(--color-text-secondary); }
+.qto-typography--color-muted { color: var(--color-text-muted); }
+.qto-typography--color-light { color: var(--color-text-light); }
+.qto-typography--color-inverse { color: var(--color-text-inverse); }
+.qto-typography--color-success { color: var(--color-success); }
+.qto-typography--color-warning { color: var(--color-warning); }
+.qto-typography--color-error { color: var(--color-error); }
+.qto-typography--color-info { color: var(--color-info); }
+
+/* Gutter Bottom */
+.qto-typography--gutter-bottom {
+  margin-bottom: var(--spacing-md);
+}
+
+/* Responsive Typography */
+@media (max-width: 768px) {
+  .qto-typography--h1 { font-size: var(--text-3xl); }
+  .qto-typography--h2 { font-size: var(--text-2xl); }
+  .qto-typography--h3 { font-size: var(--text-xl); }
+  .qto-typography--display1 { font-size: var(--text-4xl); }
+  .qto-typography--display2 { font-size: var(--text-5xl); }
+}
