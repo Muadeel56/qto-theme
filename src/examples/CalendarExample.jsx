@@ -1,9 +1,5 @@
 import React, { useState } from 'react';
-<<<<<<< HEAD
 import Calendar from '../components/CalendarEnhanced';
-=======
-import Calendar from '../components/Calendar';
->>>>>>> 1b13d5ca21952d5c9d705622186518232943c42b
 
 const CalendarExample = () => {
   const [selectedDate, setSelectedDate] = useState('2025-07-24');
