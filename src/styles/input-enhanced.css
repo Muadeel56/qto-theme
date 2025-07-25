@@ -1,0 +1,346 @@
+/* Input Styles */
+.qto-input {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.qto-input--full-width {
+  width: 100%;
+}
+
+/* Input Label */
+.qto-input__label {
+  display: inline-block;
+  font-family: var(--font-base);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--color-text);
+  margin-bottom: var(--spacing-xs);
+}
+
+.qto-input__required {
+  color: var(--color-error);
+  margin-left: 2px;
+}
+
+/* Floating Label */
+.qto-input--floating .qto-input__label--floating {
+  position: absolute;
+  top: 50%;
+  left: var(--spacing-sm);
+  transform: translateY(-50%);
+  background: var(--color-bg-primary);
+  padding: 0 var(--spacing-xs);
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  pointer-events: none;
+  transition: all var(--transition-fast);
+  z-index: 1;
+}
+
+.qto-input--floating.qto-input--focused .qto-input__label--floating,
+.qto-input--floating.qto-input--has-value .qto-input__label--floating {
+  top: 0;
+  transform: translateY(-50%);
+  font-size: var(--text-xs);
+  color: var(--color-primary);
+  font-weight: 500;
+}
+
+/* Input Wrapper */
+.qto-input__wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+/* Input Field */
+.qto-input__field {
+  width: 100%;
+  font-family: var(--font-base);
+  font-size: var(--text-sm);
+  line-height: 1.5;
+  color: var(--color-text);
+  background: var(--color-bg-primary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  transition: all var(--transition-fast);
+  outline: none;
+  padding: var(--spacing-sm) var(--spacing-md);
+  min-height: 40px;
+}
+
+.qto-input__field::placeholder {
+  color: var(--color-text-muted);
+  opacity: 1;
+}
+
+.qto-input__field:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(242, 182, 15, 0.1);
+}
+
+.qto-input__field:hover:not(:disabled):not(.qto-input__field--error) {
+  border-color: var(--color-text-secondary);
+}
+
+/* Input Sizes */
+.qto-input__field--sm {
+  padding: var(--spacing-xs) var(--spacing-sm);
+  font-size: var(--text-xs);
+  min-height: 32px;
+}
+
+.qto-input__field--lg {
+  padding: var(--spacing-md) var(--spacing-lg);
+  font-size: var(--text-base);
+  min-height: 48px;
+}
+
+/* Input Variants */
+.qto-input__field--outline {
+  background: transparent;
+  border: 2px solid var(--color-border);
+}
+
+.qto-input__field--outline:focus {
+  border-color: var(--color-primary);
+  background: var(--color-bg-primary);
+}
+
+.qto-input__field--filled {
+  background: var(--color-bg-secondary);
+  border: 1px solid transparent;
+  border-bottom: 2px solid var(--color-border);
+  border-radius: var(--radius-md) var(--radius-md) 0 0;
+}
+
+.qto-input__field--filled:focus {
+  background: var(--color-bg-primary);
+  border-bottom-color: var(--color-primary);
+  box-shadow: none;
+}
+
+/* Rounded Input */
+.qto-input__field--rounded {
+  border-radius: var(--radius-full);
+}
+
+/* Full Width */
+.qto-input__field--full-width {
+  width: 100%;
+}
+
+/* Error State */
+.qto-input__field--error {
+  border-color: var(--color-error);
+  background: var(--color-error-light);
+}
+
+.qto-input__field--error:focus {
+  border-color: var(--color-error);
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+}
+
+/* Disabled State */
+.qto-input__field--disabled {
+  background: var(--color-bg-secondary);
+  color: var(--color-text-muted);
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.qto-input__field--disabled::placeholder {
+  color: var(--color-text-light);
+}
+
+/* Icons */
+.qto-input__icon {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-muted);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.qto-input__icon--left {
+  left: var(--spacing-sm);
+}
+
+.qto-input__icon--right {
+  right: var(--spacing-sm);
+}
+
+/* Adjust padding when icons are present */
+.qto-input__wrapper:has(.qto-input__icon--left) .qto-input__field {
+  padding-left: calc(var(--spacing-md) + 24px);
+}
+
+.qto-input__wrapper:has(.qto-input__icon--right) .qto-input__field {
+  padding-right: calc(var(--spacing-md) + 24px);
+}
+
+/* Error Message */
+.qto-input__error {
+  font-size: var(--text-xs);
+  color: var(--color-error);
+  margin-top: var(--spacing-xs);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+}
+
+/* Helper Text */
+.qto-input__helper {
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  margin-top: var(--spacing-xs);
+}
+
+/* Focus Styles */
+.qto-input--focused .qto-input__icon {
+  color: var(--color-primary);
+}
+
+/* Dark Theme Adjustments */
+[data-theme="dark"] .qto-input__field {
+  background: var(--color-bg-primary);
+  border-color: var(--color-border);
+}
+
+[data-theme="dark"] .qto-input__field--filled {
+  background: var(--color-bg-secondary);
+}
+
+[data-theme="dark"] .qto-input__field--filled:focus {
+  background: var(--color-bg-primary);
+}
+
+[data-theme="dark"] .qto-input__field--disabled {
+  background: var(--color-bg-tertiary);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .qto-input__field {
+    min-height: 44px; /* Increase touch target on mobile */
+    font-size: 16px; /* Prevent zoom on iOS */
+  }
+  
+  .qto-input__field--sm {
+    min-height: 36px;
+  }
+  
+  .qto-input__field--lg {
+    min-height: 52px;
+  }
+}
+
+/* Legacy input styles for backward compatibility */
+.input-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.input-label {
+  display: inline-block;
+  font-family: var(--font-base);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--color-text);
+  margin-bottom: var(--spacing-xs);
+}
+
+.input-required-indicator {
+  color: var(--color-error);
+  margin-left: 2px;
+}
+
+.input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-field {
+  width: 100%;
+  font-family: var(--font-base);
+  font-size: var(--text-sm);
+  line-height: 1.5;
+  color: var(--color-text);
+  background: var(--color-bg-primary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  transition: all var(--transition-fast);
+  outline: none;
+  padding: var(--spacing-sm) var(--spacing-md);
+  min-height: 40px;
+}
+
+.input-field:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(242, 182, 15, 0.1);
+}
+
+.input-sm {
+  padding: var(--spacing-xs) var(--spacing-sm);
+  font-size: var(--text-xs);
+  min-height: 32px;
+}
+
+.input-lg {
+  padding: var(--spacing-md) var(--spacing-lg);
+  font-size: var(--text-base);
+  min-height: 48px;
+}
+
+.input-error {
+  border-color: var(--color-error);
+  background: var(--color-error-light);
+}
+
+.input-disabled {
+  background: var(--color-bg-secondary);
+  color: var(--color-text-muted);
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.input-icon {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-muted);
+  pointer-events: none;
+}
+
+.input-icon-left {
+  left: var(--spacing-sm);
+}
+
+.input-icon-right {
+  right: var(--spacing-sm);
+}
+
+.input-error-message {
+  font-size: var(--text-xs);
+  color: var(--color-error);
+  margin-top: var(--spacing-xs);
+}
+
+.input-helper-text {
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  margin-top: var(--spacing-xs);
+}

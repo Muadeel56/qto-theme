@@ -1,0 +1,277 @@
+/* Sortable Table Component Styles */
+
+.qto-sortable-table {
+  width: 100%;
+}
+
+/* Sort Controls */
+.qto-sortable-table__actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.qto-sortable-table__controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-md);
+  background: rgba(var(--color-info-rgb), 0.1);
+  border: 1px solid rgba(var(--color-info-rgb), 0.2);
+  border-radius: var(--radius-md);
+  gap: var(--spacing-md);
+}
+
+.qto-sortable-table__sort-info {
+  font-size: var(--text-sm);
+  color: var(--color-info);
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+}
+
+.qto-sortable-table__clear-sort {
+  color: var(--color-danger);
+  white-space: nowrap;
+}
+
+/* Enhanced Column Headers */
+.qto-sortable-table .qto-table__cell--sortable {
+  position: relative;
+}
+
+.qto-sortable-table .qto-table__head-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-xs);
+}
+
+/* Sort Indicators */
+.qto-sortable-table__sort-indicator {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  font-size: var(--text-xs);
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+.qto-sortable-table__sort-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  background: var(--color-primary);
+  color: var(--color-white);
+  border-radius: 50%;
+  font-size: var(--text-2xs);
+  font-weight: 700;
+}
+
+.qto-sortable-table__sort-direction {
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Sort Icons */
+.qto-sortable-table .qto-table__sort-icon {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  opacity: 0.3;
+  transition: opacity var(--transition-fast);
+}
+
+.qto-sortable-table .qto-table__cell--sortable:hover .qto-table__sort-icon {
+  opacity: 0.6;
+}
+
+.qto-sortable-table .qto-table__sort-icon.active {
+  opacity: 1;
+}
+
+.qto-sortable-table .qto-table__sort-icon svg {
+  width: 12px;
+  height: 12px;
+  stroke-width: 2.5;
+}
+
+.qto-sortable-table .qto-table__sort-icon svg.active {
+  color: var(--color-primary);
+}
+
+/* Multi-sort Visual Enhancements */
+.qto-sortable-table--multi-sort .qto-table__cell--sortable.qto-table__cell--sorted {
+  background: rgba(var(--color-primary-rgb), 0.05);
+}
+
+.qto-sortable-table--multi-sort .qto-table__cell--sortable.qto-table__cell--sorted::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--color-primary);
+  opacity: 0.3;
+}
+
+/* Column Sort Priority */
+.qto-sortable-table__column-priority-1::after {
+  opacity: 1;
+}
+
+.qto-sortable-table__column-priority-2::after {
+  opacity: 0.7;
+}
+
+.qto-sortable-table__column-priority-3::after {
+  opacity: 0.5;
+}
+
+/* Hover Effects */
+.qto-sortable-table .qto-table__cell--sortable:hover {
+  background: rgba(var(--color-primary-rgb), 0.05);
+  cursor: pointer;
+}
+
+.qto-sortable-table .qto-table__cell--sortable:active {
+  background: rgba(var(--color-primary-rgb), 0.1);
+}
+
+/* Mobile Responsive */
+@media (max-width: 640px) {
+  .qto-sortable-table__controls {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--spacing-sm);
+  }
+
+  .qto-sortable-table__sort-info {
+    text-align: center;
+    justify-content: center;
+  }
+
+  .qto-sortable-table__clear-sort {
+    align-self: center;
+  }
+
+  .qto-sortable-table .qto-table__head-content {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--spacing-xs);
+  }
+
+  .qto-sortable-table__sort-indicator {
+    font-size: var(--text-2xs);
+  }
+
+  .qto-sortable-table__sort-number {
+    width: 14px;
+    height: 14px;
+    font-size: 8px;
+  }
+}
+
+/* Tablet */
+@media (min-width: 641px) and (max-width: 1024px) {
+  .qto-sortable-table__controls {
+    flex-wrap: wrap;
+  }
+
+  .qto-sortable-table .qto-table__head-content {
+    gap: var(--spacing-xs);
+  }
+}
+
+/* Desktop and larger */
+@media (min-width: 1025px) {
+  .qto-sortable-table__controls {
+    padding: var(--spacing-lg);
+  }
+
+  .qto-sortable-table .qto-table__sort-icon svg {
+    width: 14px;
+    height: 14px;
+  }
+}
+
+/* Dark Theme */
+[data-theme="dark"] .qto-sortable-table__controls {
+  background: rgba(var(--color-info-rgb), 0.1);
+  border-color: rgba(var(--color-info-rgb), 0.3);
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+  .qto-sortable-table__controls {
+    border-width: 2px;
+  }
+
+  .qto-sortable-table .qto-table__sort-icon svg {
+    stroke-width: 3;
+  }
+
+  .qto-sortable-table__sort-number {
+    border: 2px solid var(--color-white);
+  }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .qto-sortable-table .qto-table__sort-icon,
+  .qto-sortable-table .qto-table__cell--sortable {
+    transition: none;
+  }
+}
+
+/* Focus States */
+.qto-sortable-table .qto-table__cell--sortable:focus {
+  outline: 2px solid var(--color-primary);
+  outline-offset: -2px;
+}
+
+.qto-sortable-table__clear-sort:focus {
+  outline: 2px solid var(--color-danger);
+  outline-offset: 2px;
+}
+
+/* Loading States */
+.qto-sortable-table--loading .qto-table__cell--sortable {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+/* Animation for sort changes */
+.qto-sortable-table__sort-indicator {
+  animation: sortIndicatorFadeIn 0.3s ease-in-out;
+}
+
+@keyframes sortIndicatorFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Keyboard Navigation */
+.qto-sortable-table .qto-table__cell--sortable[tabindex]:focus {
+  z-index: 1;
+}
+
+/* RTL Support */
+[dir="rtl"] .qto-sortable-table .qto-table__head-content {
+  flex-direction: row-reverse;
+}
+
+[dir="rtl"] .qto-sortable-table__sort-indicator {
+  flex-direction: row-reverse;
+}

@@ -1,0 +1,297 @@
+/* Searchable Table Component Styles */
+
+.qto-searchable-table {
+  width: 100%;
+}
+
+/* Main Controls */
+.qto-searchable-table__controls {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+/* Search Bar */
+.qto-searchable-table__search-bar {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  flex-wrap: wrap;
+}
+
+.qto-searchable-table__search-input {
+  flex: 1;
+  min-width: 200px;
+}
+
+.qto-searchable-table__clear-btn {
+  white-space: nowrap;
+  color: var(--color-danger);
+}
+
+/* Quick Filters */
+.qto-searchable-table__quick-filters {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--spacing-md);
+  padding: var(--spacing-md);
+  background: var(--color-bg-secondary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+
+.qto-searchable-table__filter-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.qto-searchable-table__filter-label {
+  font-size: var(--text-xs);
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Advanced Search */
+.qto-searchable-table__advanced-search {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  transition: var(--transition-fast);
+}
+
+.qto-searchable-table__advanced-header {
+  background: var(--color-bg-secondary);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.qto-searchable-table__advanced-toggle {
+  width: 100%;
+  justify-content: space-between;
+  padding: var(--spacing-md);
+  text-align: left;
+  border-radius: 0;
+  font-weight: 600;
+}
+
+.qto-searchable-table__chevron {
+  transition: transform var(--transition-fast);
+  font-size: var(--text-xs);
+}
+
+.qto-searchable-table__chevron--up {
+  transform: rotate(180deg);
+}
+
+.qto-searchable-table__advanced-panel {
+  padding: var(--spacing-lg);
+  background: var(--color-bg-primary);
+}
+
+.qto-searchable-table__advanced-fields {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--spacing-lg);
+}
+
+.qto-searchable-table__advanced-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.qto-searchable-table__field-label {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+/* Range Inputs */
+.qto-searchable-table__range-inputs {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.qto-searchable-table__range-separator {
+  color: var(--color-text-secondary);
+  font-weight: 600;
+}
+
+.qto-searchable-table__range-inputs .qto-input {
+  flex: 1;
+}
+
+/* Results Info */
+.qto-searchable-table__results-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--spacing-sm);
+}
+
+.qto-searchable-table__results-count {
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  font-weight: 500;
+}
+
+/* Mobile Responsive */
+@media (max-width: 640px) {
+  .qto-searchable-table__controls {
+    gap: var(--spacing-sm);
+  }
+
+  .qto-searchable-table__search-bar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--spacing-sm);
+  }
+
+  .qto-searchable-table__search-input {
+    min-width: auto;
+  }
+
+  .qto-searchable-table__clear-btn {
+    align-self: center;
+  }
+
+  .qto-searchable-table__quick-filters {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-sm);
+  }
+
+  .qto-searchable-table__advanced-fields {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-md);
+  }
+
+  .qto-searchable-table__advanced-panel {
+    padding: var(--spacing-md);
+  }
+
+  .qto-searchable-table__range-inputs {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .qto-searchable-table__range-separator {
+    align-self: center;
+    transform: rotate(90deg);
+  }
+
+  .qto-searchable-table__results-info {
+    justify-content: center;
+  }
+}
+
+/* Tablet */
+@media (min-width: 641px) and (max-width: 1024px) {
+  .qto-searchable-table__quick-filters {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  }
+
+  .qto-searchable-table__advanced-fields {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+}
+
+/* Desktop and larger */
+@media (min-width: 1025px) {
+  .qto-searchable-table__search-bar {
+    flex-wrap: nowrap;
+  }
+
+  .qto-searchable-table__quick-filters {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  }
+
+  .qto-searchable-table__advanced-fields {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  }
+}
+
+/* Search Input Icon */
+.qto-searchable-table__search-input .qto-input__icon {
+  color: var(--color-text-secondary);
+}
+
+.qto-searchable-table__search-input .qto-input__field:focus + .qto-input__icon {
+  color: var(--color-primary);
+}
+
+/* Dark Theme */
+[data-theme="dark"] .qto-searchable-table__quick-filters,
+[data-theme="dark"] .qto-searchable-table__advanced-search {
+  border-color: var(--color-border);
+}
+
+[data-theme="dark"] .qto-searchable-table__advanced-header {
+  background: var(--color-bg-tertiary);
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+  .qto-searchable-table__quick-filters,
+  .qto-searchable-table__advanced-search {
+    border-width: 2px;
+  }
+
+  .qto-searchable-table__filter-label,
+  .qto-searchable-table__field-label {
+    font-weight: 700;
+  }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .qto-searchable-table__advanced-search,
+  .qto-searchable-table__chevron {
+    transition: none;
+  }
+}
+
+/* Focus States */
+.qto-searchable-table__advanced-toggle:focus {
+  outline: 2px solid var(--color-primary);
+  outline-offset: -2px;
+}
+
+/* Loading States */
+.qto-searchable-table__controls:has(.qto-input--loading) {
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+/* Empty States */
+.qto-searchable-table__no-results {
+  text-align: center;
+  padding: var(--spacing-2xl);
+  color: var(--color-text-secondary);
+}
+
+.qto-searchable-table__no-results-icon {
+  font-size: 3rem;
+  opacity: 0.3;
+  margin-bottom: var(--spacing-md);
+}
+
+/* Animation for results count */
+.qto-searchable-table__results-count {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

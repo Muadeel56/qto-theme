@@ -1,0 +1,366 @@
+/* QTO Modal System - Modern & Responsive */
+
+/* Modal tokens */
+:root {
+  /* Modal-specific tokens */
+  --modal-bg: var(--color-bg-primary);
+  --modal-border: var(--color-border);
+  --modal-overlay: var(--color-bg-overlay);
+  --modal-shadow: var(--shadow-2xl);
+  --modal-radius: var(--radius-xl);
+  
+  /* Modal sizes */
+  --modal-xs-width: clamp(280px, 90vw, 320px);
+  --modal-sm-width: clamp(320px, 90vw, 400px);
+  --modal-md-width: clamp(400px, 90vw, 500px);
+  --modal-lg-width: clamp(500px, 90vw, 600px);
+  --modal-xl-width: clamp(600px, 90vw, 800px);
+  --modal-full-width: 100vw;
+  
+  /* Modal spacing */
+  --modal-padding-sm: var(--spacing-md);
+  --modal-padding-md: var(--spacing-lg);
+  --modal-padding-lg: var(--spacing-xl);
+}
+
+/* Body lock when modal is open */
+.qto-modal-open {
+  overflow: hidden;
+}
+
+/* Modal Overlay */
+.qto-modal__overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: var(--modal-overlay);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: var(--z-modal-backdrop);
+  padding: var(--spacing-md);
+}
+
+.qto-modal__overlay--animate {
+  opacity: 0;
+  animation: modalOverlayFadeIn var(--transition-normal) ease-out forwards;
+}
+
+.qto-modal__overlay--mobile {
+  padding: 0;
+  align-items: flex-end;
+}
+
+.qto-modal__overlay--tablet {
+  padding: var(--spacing-lg);
+}
+
+.qto-modal__overlay--desktop {
+  padding: var(--spacing-xl);
+}
+
+/* Modal Content */
+.qto-modal__content {
+  background: var(--modal-bg);
+  border: 1px solid var(--modal-border);
+  border-radius: var(--modal-radius);
+  box-shadow: var(--modal-shadow);
+  max-height: 90vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  font-family: var(--font-base);
+}
+
+.qto-modal__content.qto-modal--animate {
+  transform: scale(0.95) translateY(20px);
+  opacity: 0;
+  animation: modalContentSlideIn var(--transition-normal) ease-out 0.1s forwards;
+}
+
+/* Modal Variants */
+.qto-modal--glass {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+[data-theme="dark"] .qto-modal--glass {
+  background: rgba(23, 23, 23, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.qto-modal--outlined {
+  background: var(--modal-bg);
+  border: 2px solid var(--color-primary);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Modal Sizes */
+.qto-modal--xs {
+  max-width: var(--modal-xs-width);
+}
+
+.qto-modal--sm {
+  max-width: var(--modal-sm-width);
+}
+
+.qto-modal--md {
+  max-width: var(--modal-md-width);
+}
+
+.qto-modal--lg {
+  max-width: var(--modal-lg-width);
+}
+
+.qto-modal--xl {
+  max-width: var(--modal-xl-width);
+}
+
+.qto-modal--full {
+  max-width: var(--modal-full-width);
+  max-height: 100vh;
+  border-radius: 0;
+}
+
+/* Fullscreen on mobile */
+.qto-modal--fullscreen {
+  max-width: 100vw;
+  max-height: 100vh;
+  border-radius: 0;
+  height: 100vh;
+}
+
+/* Modal Header */
+.qto-modal__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-md);
+  padding: var(--modal-padding-md);
+  border-bottom: 1px solid var(--modal-border);
+  flex-shrink: 0;
+}
+
+.qto-modal--padding-sm .qto-modal__header {
+  padding: var(--modal-padding-sm);
+}
+
+.qto-modal--padding-lg .qto-modal__header {
+  padding: var(--modal-padding-lg);
+}
+
+.qto-modal__title {
+  margin: 0;
+  font-size: var(--text-lg);
+  font-weight: 600;
+  line-height: var(--line-height-tight);
+  color: var(--color-text);
+  flex: 1;
+  min-width: 0;
+}
+
+.qto-modal__close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: none;
+  background: transparent;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  border-radius: var(--radius-md);
+  transition: var(--transition-fast);
+  flex-shrink: 0;
+}
+
+.qto-modal__close:hover {
+  background: var(--color-bg-secondary);
+  color: var(--color-text);
+}
+
+.qto-modal__close:focus {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+.qto-modal__close svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* Modal Body */
+.qto-modal__body {
+  padding: var(--modal-padding-md);
+  flex: 1;
+  overflow-y: auto;
+  color: var(--color-text);
+  line-height: var(--line-height-normal);
+}
+
+.qto-modal--padding-sm .qto-modal__body {
+  padding: var(--modal-padding-sm);
+}
+
+.qto-modal--padding-lg .qto-modal__body {
+  padding: var(--modal-padding-lg);
+}
+
+.qto-modal__body--scrollable {
+  max-height: 60vh;
+  overflow-y: auto;
+}
+
+/* Modal Footer */
+.qto-modal__footer {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  padding: var(--modal-padding-md);
+  border-top: 1px solid var(--modal-border);
+  flex-shrink: 0;
+}
+
+.qto-modal--padding-sm .qto-modal__footer {
+  padding: var(--modal-padding-sm);
+}
+
+.qto-modal--padding-lg .qto-modal__footer {
+  padding: var(--modal-padding-lg);
+}
+
+.qto-modal__footer--justify-start {
+  justify-content: flex-start;
+}
+
+.qto-modal__footer--justify-center {
+  justify-content: center;
+}
+
+.qto-modal__footer--justify-end {
+  justify-content: flex-end;
+}
+
+.qto-modal__footer--justify-between {
+  justify-content: space-between;
+}
+
+.qto-modal__footer--stacked {
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--spacing-sm);
+}
+
+.qto-modal__footer--stacked > * {
+  width: 100%;
+}
+
+/* Dark theme adjustments */
+[data-theme="dark"] {
+  --modal-bg: var(--color-bg-secondary);
+  --modal-border: var(--color-border);
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .qto-modal__overlay {
+    padding: 0;
+  }
+  
+  .qto-modal__content {
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    max-height: 95vh;
+  }
+  
+  .qto-modal__header {
+    padding: var(--spacing-md);
+  }
+  
+  .qto-modal__body {
+    padding: var(--spacing-md);
+  }
+  
+  .qto-modal__footer {
+    padding: var(--spacing-md);
+    flex-direction: column;
+    gap: var(--spacing-sm);
+  }
+  
+  .qto-modal__footer > * {
+    width: 100%;
+  }
+  
+  .qto-modal__title {
+    font-size: var(--text-base);
+  }
+}
+
+@media (min-width: 641px) and (max-width: 1024px) {
+  .qto-modal__overlay {
+    padding: var(--spacing-lg);
+  }
+}
+
+@media (min-width: 1025px) {
+  .qto-modal__overlay {
+    padding: var(--spacing-2xl);
+  }
+  
+  .qto-modal__title {
+    font-size: var(--text-xl);
+  }
+}
+
+/* Animation keyframes */
+@keyframes modalOverlayFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes modalContentSlideIn {
+  from {
+    transform: scale(0.95) translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .qto-modal__overlay--animate {
+    animation: none;
+    opacity: 1;
+  }
+  
+  .qto-modal--animate {
+    animation: none;
+    transform: none;
+    opacity: 1;
+  }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+  .qto-modal__content {
+    border-width: 2px;
+  }
+  
+  .qto-modal__close {
+    border: 1px solid;
+  }
+}
+
+
+

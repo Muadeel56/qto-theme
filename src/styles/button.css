@@ -1,0 +1,656 @@
+/* Enhanced Responsive Button Styles */
+.qto-btn {
+  --btn-transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  --btn-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --btn-shadow-hover: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --btn-radius: var(--radius-md);
+  --btn-tap-target: 36px;
+  
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  position: relative;
+  padding: 0.5rem 1rem;
+  font-family: var(--font-base);
+  font-weight: 500;
+  font-size: 0.875rem;
+  line-height: 1.25;
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
+  user-select: none;
+  border: 1px solid transparent;
+  border-radius: var(--btn-radius);
+  transition: var(--btn-transition);
+  min-height: var(--btn-tap-target);
+  background: none;
+  letter-spacing: 0.025em;
+  touch-action: manipulation; /* Prevents double-tap zoom on mobile */
+}
+
+.qto-btn:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(var(--color-primary-rgb), 0.3);
+}
+
+.qto-btn:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+.qto-btn:hover:not(:disabled) {
+  box-shadow: var(--btn-shadow-hover);
+  transform: translateY(-1px);
+}
+
+.qto-btn:active:not(:disabled) {
+  box-shadow: var(--btn-shadow);
+  transform: translateY(0);
+}
+
+/* Responsive Behavior */
+.qto-btn--responsive {
+  min-width: 100px;
+}
+
+/* Breakpoint specific adjustments */
+.qto-btn--xs,
+.qto-btn--sm {
+  --btn-tap-target: var(--tap-target-comfortable);
+}
+
+/* Mobile optimizations */
+@media (max-width: 640px) {
+  .qto-btn--responsive {
+    min-height: 44px;
+    font-size: 1rem;
+    padding: 0.625rem 1rem;
+    font-weight: 500;
+  }
+  
+  .qto-btn--responsive.qto-btn--xs {
+    min-height: 36px;
+    padding: 0.375rem 0.75rem;
+    font-size: 0.875rem;
+  }
+  
+  .qto-btn--responsive.qto-btn--sm {
+    min-height: 40px;
+    padding: 0.5rem 0.875rem;
+    font-size: 0.9375rem;
+  }
+  
+  .qto-btn--full-width {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* Tablet adjustments */
+@media (min-width: 641px) and (max-width: 1024px) {
+  .qto-btn--responsive {
+    padding: 0.5rem 1.25rem;
+  }
+}
+
+/* Button Content */
+.qto-btn__content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+}
+
+/* Button Icons */
+.qto-btn__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 1.25em;
+  height: 1.25em;
+}
+
+.qto-btn__icon--start {
+  margin-right: var(--spacing-xs);
+  margin-left: calc(var(--spacing-xs) * -0.5);
+}
+
+.qto-btn__icon--end {
+  margin-left: var(--spacing-xs);
+  margin-right: calc(var(--spacing-xs) * -0.5);
+}
+
+/* Responsive icon sizing */
+@media (max-width: 640px) {
+  .qto-btn__icon {
+    width: 1.5em;
+    height: 1.5em;
+  }
+}
+
+/* Button Sizes - More Compact and Decent */
+.qto-btn--xs {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.75rem;
+  min-height: 28px;
+  gap: 0.25rem;
+}
+
+.qto-btn--sm {
+  padding: 0.375rem 0.75rem;
+  font-size: 0.875rem;
+  min-height: 32px;
+  gap: 0.375rem;
+}
+
+.qto-btn--md {
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  min-height: 36px;
+  gap: 0.5rem;
+}
+
+.qto-btn--lg {
+  padding: 0.625rem 1.25rem;
+  font-size: 1rem;
+  min-height: 40px;
+  gap: 0.5rem;
+}
+
+.qto-btn--xl {
+  padding: 0.75rem 1.5rem;
+  font-size: 1.125rem;
+  min-height: 44px;
+  gap: 0.75rem;
+}
+
+/* ===== BUTTON VARIANTS ===== */
+
+/* Primary Button */
+.qto-btn--primary {
+  background: var(--color-primary);
+  color: var(--color-white);
+  border-color: var(--color-primary);
+  font-weight: 600;
+}
+
+.qto-btn--primary:hover:not(.qto-btn--disabled) {
+  background: var(--color-primary-hover);
+  border-color: var(--color-primary-hover);
+}
+
+.qto-btn--primary:active:not(.qto-btn--disabled) {
+  background: var(--color-primary-active);
+  border-color: var(--color-primary-active);
+}
+
+/* Secondary Button */
+.qto-btn--secondary {
+  background: var(--color-secondary);
+  color: var(--color-white);
+  border-color: var(--color-secondary);
+}
+
+.qto-btn--secondary:hover:not(.qto-btn--disabled) {
+  background: var(--color-secondary-hover);
+  border-color: var(--color-secondary-hover);
+}
+
+.qto-btn--secondary:active:not(.qto-btn--disabled) {
+  background: var(--color-secondary-active);
+  border-color: var(--color-secondary-active);
+}
+
+/* Success Button */
+.qto-btn--success {
+  background: var(--color-success);
+  color: var(--color-white);
+  border-color: var(--color-success);
+}
+
+.qto-btn--success:hover:not(.qto-btn--disabled) {
+  background: var(--color-success-hover);
+  border-color: var(--color-success-hover);
+}
+
+.qto-btn--success:active:not(.qto-btn--disabled) {
+  background: var(--color-success-active);
+  border-color: var(--color-success-active);
+}
+
+/* Danger Button */
+.qto-btn--danger {
+  background: var(--color-danger);
+  color: var(--color-white);
+  border-color: var(--color-danger);
+}
+
+.qto-btn--danger:hover:not(.qto-btn--disabled) {
+  background: var(--color-danger-hover);
+  border-color: var(--color-danger-hover);
+}
+
+.qto-btn--danger:active:not(.qto-btn--disabled) {
+  background: var(--color-danger-active);
+  border-color: var(--color-danger-active);
+}
+
+/* Warning Button */
+.qto-btn--warning {
+  background: var(--color-warning);
+  color: var(--color-white);
+  border-color: var(--color-warning);
+}
+
+.qto-btn--warning:hover:not(.qto-btn--disabled) {
+  background: var(--color-warning-hover);
+  border-color: var(--color-warning-hover);
+}
+
+.qto-btn--warning:active:not(.qto-btn--disabled) {
+  background: var(--color-warning-active);
+  border-color: var(--color-warning-active);
+}
+
+/* Info Button */
+.qto-btn--info {
+  background: var(--color-info);
+  color: var(--color-white);
+  border-color: var(--color-info);
+}
+
+.qto-btn--info:hover:not(.qto-btn--disabled) {
+  background: var(--color-info-hover);
+  border-color: var(--color-info-hover);
+}
+
+.qto-btn--info:active:not(.qto-btn--disabled) {
+  background: var(--color-info-active);
+  border-color: var(--color-info-active);
+}
+
+/* ===== OUTLINE VARIANTS ===== */
+
+/* Outline Primary */
+.qto-btn--outline-primary {
+  background: transparent;
+  color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.qto-btn--outline-primary:hover:not(.qto-btn--disabled) {
+  background: var(--color-primary);
+  color: var(--color-white);
+  border-color: var(--color-primary);
+}
+
+.qto-btn--outline-primary:active:not(.qto-btn--disabled) {
+  background: var(--color-primary-hover);
+  color: var(--color-white);
+  border-color: var(--color-primary-hover);
+}
+
+/* Outline Secondary */
+.qto-btn--outline-secondary {
+  background: transparent;
+  color: var(--color-secondary);
+  border-color: var(--color-secondary);
+}
+
+.qto-btn--outline-secondary:hover:not(.qto-btn--disabled) {
+  background: var(--color-secondary);
+  color: var(--color-white);
+  border-color: var(--color-secondary);
+}
+
+.qto-btn--outline-secondary:active:not(.qto-btn--disabled) {
+  background: var(--color-secondary-hover);
+  color: var(--color-white);
+  border-color: var(--color-secondary-hover);
+}
+
+/* Outline Success */
+.qto-btn--outline-success {
+  background: transparent;
+  color: var(--color-success);
+  border-color: var(--color-success);
+}
+
+.qto-btn--outline-success:hover:not(.qto-btn--disabled) {
+  background: var(--color-success);
+  color: var(--color-white);
+  border-color: var(--color-success);
+}
+
+.qto-btn--outline-success:active:not(.qto-btn--disabled) {
+  background: var(--color-success-hover);
+  color: var(--color-white);
+  border-color: var(--color-success-hover);
+}
+
+/* Outline Danger */
+.qto-btn--outline-danger {
+  background: transparent;
+  color: var(--color-danger);
+  border-color: var(--color-danger);
+}
+
+.qto-btn--outline-danger:hover:not(.qto-btn--disabled) {
+  background: var(--color-danger);
+  color: var(--color-white);
+  border-color: var(--color-danger);
+}
+
+.qto-btn--outline-danger:active:not(.qto-btn--disabled) {
+  background: var(--color-danger-hover);
+  color: var(--color-white);
+  border-color: var(--color-danger-hover);
+}
+
+/* Outline Warning */
+.qto-btn--outline-warning {
+  background: transparent;
+  color: var(--color-warning);
+  border-color: var(--color-warning);
+}
+
+.qto-btn--outline-warning:hover:not(.qto-btn--disabled) {
+  background: var(--color-warning);
+  color: var(--color-white);
+  border-color: var(--color-warning);
+}
+
+.qto-btn--outline-warning:active:not(.qto-btn--disabled) {
+  background: var(--color-warning-hover);
+  color: var(--color-white);
+  border-color: var(--color-warning-hover);
+}
+
+/* Outline Info */
+.qto-btn--outline-info {
+  background: transparent;
+  color: var(--color-info);
+  border-color: var(--color-info);
+}
+
+.qto-btn--outline-info:hover:not(.qto-btn--disabled) {
+  background: var(--color-info);
+  color: var(--color-white);
+  border-color: var(--color-info);
+}
+
+.qto-btn--outline-info:active:not(.qto-btn--disabled) {
+  background: var(--color-info-hover);
+  color: var(--color-white);
+  border-color: var(--color-info-hover);
+}
+
+/* ===== SPECIAL VARIANTS ===== */
+
+/* Ghost Button */
+.qto-btn--ghost {
+  background: transparent;
+  color: var(--color-text);
+  border-color: transparent;
+}
+
+.qto-btn--ghost:hover:not(.qto-btn--disabled) {
+  background: var(--color-gray-100);
+  color: var(--color-text);
+}
+
+.qto-btn--ghost:active:not(.qto-btn--disabled) {
+  background: var(--color-gray-200);
+}
+
+/* Link Button */
+.qto-btn--link {
+  background: transparent;
+  color: var(--color-primary);
+  border-color: transparent;
+  text-decoration: underline;
+  font-weight: 400;
+}
+
+.qto-btn--link:hover:not(.qto-btn--disabled) {
+  background: transparent;
+  color: var(--color-primary-hover);
+  text-decoration: underline;
+}
+
+.qto-btn--link:active:not(.qto-btn--disabled) {
+  color: var(--color-primary-active);
+}
+
+/* Primary Gradient */
+.qto-btn--primary.qto-btn--gradient {
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-hover) 100%);
+  border: none;
+}
+
+.qto-btn--primary.qto-btn--gradient:hover:not(.qto-btn--disabled) {
+  background: linear-gradient(135deg, var(--color-primary-hover) 0%, var(--color-primary-active) 100%);
+}
+
+/* Full Width */
+.qto-btn--full-width {
+  width: 100%;
+}
+
+/* Rounded */
+.qto-btn--rounded {
+  border-radius: var(--radius-full);
+}
+
+/* Disabled State */
+.qto-btn--disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* Loading State */
+.qto-btn--loading {
+  pointer-events: none;
+}
+
+.qto-btn--loading .qto-btn__content {
+  opacity: 0.7;
+}
+
+/* Spinner */
+.qto-btn__spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.qto-btn__spinner-icon {
+  width: 16px;
+  height: 16px;
+  animation: qto-btn-spin 1s linear infinite;
+}
+
+.qto-btn__spinner-circle {
+  opacity: 0.25;
+}
+
+.qto-btn__spinner-path {
+  opacity: 0.75;
+}
+
+@keyframes qto-btn-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Dark Theme Adjustments */
+[data-theme="dark"] .qto-btn--ghost {
+  color: var(--color-text);
+}
+
+[data-theme="dark"] .qto-btn--ghost:hover:not(.qto-btn--disabled) {
+  background: var(--color-gray-800);
+}
+
+[data-theme="dark"] .qto-btn--ghost:active:not(.qto-btn--disabled) {
+  background: var(--color-gray-700);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .qto-btn {
+    min-height: 44px; /* Increase touch target on mobile */
+  }
+  
+  .qto-btn--xs {
+    min-height: 32px;
+  }
+  
+  .qto-btn--sm {
+    min-height: 36px;
+  }
+  
+  .qto-btn--lg {
+    min-height: 52px;
+  }
+  
+  .qto-btn--xl {
+    min-height: 60px;
+  }
+}
+
+/* Legacy button styles for backward compatibility */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-sm);
+  position: relative;
+  padding: var(--spacing-sm) var(--spacing-md);
+  font-family: var(--font-base);
+  font-weight: 500;
+  font-size: var(--text-sm);
+  line-height: 1.25;
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
+  user-select: none;
+  border: 1px solid transparent;
+  border-radius: var(--radius-md);
+  transition: all var(--transition-fast);
+  min-height: 40px;
+  background: none;
+}
+
+.btn:focus {
+  outline: 2px solid var(--color-border-focus);
+  outline-offset: 2px;
+}
+
+.btn-primary {
+  background: var(--color-primary);
+  color: var(--color-white);
+  border-color: var(--color-primary);
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-primary:hover:not(.btn-disabled) {
+  background: var(--color-primary-hover);
+  border-color: var(--color-primary-hover);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  background: var(--color-secondary);
+  color: var(--color-white);
+  border-color: var(--color-secondary);
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-secondary:hover:not(.btn-disabled) {
+  background: var(--color-secondary-hover);
+  border-color: var(--color-secondary-hover);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-1px);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.btn-outline:hover:not(.btn-disabled) {
+  background: var(--color-primary-light);
+  color: var(--color-primary-hover);
+  border-color: var(--color-primary-hover);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--color-text);
+  border-color: transparent;
+}
+
+.btn-ghost:hover:not(.btn-disabled) {
+  background: var(--color-gray-100);
+}
+
+.btn-danger {
+  background: var(--color-error);
+  color: var(--color-white);
+  border-color: var(--color-error);
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-danger:hover:not(.btn-disabled) {
+  background: #dc2626;
+  border-color: #dc2626;
+  box-shadow: var(--shadow-md);
+  transform: translateY(-1px);
+}
+
+.btn-sm {
+  padding: var(--spacing-xs) var(--spacing-sm);
+  font-size: var(--text-sm);
+  min-height: 32px;
+}
+
+.btn-md {
+  padding: var(--spacing-sm) var(--spacing-md);
+  font-size: var(--text-sm);
+  min-height: 40px;
+}
+
+.btn-lg {
+  padding: var(--spacing-md) var(--spacing-lg);
+  font-size: var(--text-base);
+  min-height: 48px;
+}
+
+.btn-disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.btn-full-width {
+  width: 100%;
+}

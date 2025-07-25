@@ -1,0 +1,890 @@
+/* Calendar Component Styles - Enhanced Multi-Variant */
+:root {
+  --calendar-bg: var(--color-bg-primary);
+  --calendar-border: var(--color-border);
+  --calendar-shadow: var(--shadow-md);
+  --calendar-text: var(--color-text);
+  --calendar-text-muted: var(--color-text-muted);
+  --calendar-text-secondary: var(--color-text-secondary);
+  --calendar-primary: var(--color-primary);
+  --calendar-primary-light: var(--color-primary-light);
+  --calendar-bg-secondary: var(--color-bg-secondary);
+  --calendar-hover-bg: var(--color-bg-secondary);
+}
+
+@keyframes calendarFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Base Calendar Styles */
+.qto-calendar {
+  background: var(--calendar-bg);
+  border: 1px solid var(--calendar-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--calendar-shadow);
+  font-family: var(--font-base);
+  max-width: 360px;
+  min-width: 300px;
+  user-select: none;
+  width: 100%;
+  overflow: hidden;
+  animation: calendarFadeIn 0.2s ease-out;
+  position: relative;
+}
+
+/* Variant: Compact */
+.qto-calendar--compact {
+  max-width: 280px;
+  min-width: 240px;
+}
+
+/* Variant: Large */
+.qto-calendar--large {
+  max-width: none;
+  min-width: 400px;
+  width: 100%;
+}
+
+/* Variant: Mobile */
+.qto-calendar--mobile {
+  max-width: 100%;
+  min-width: auto;
+  border-radius: var(--radius-md);
+}
+
+/* Calendar when used inside DatePicker dropdown */
+.qto-datepicker__calendar .qto-calendar {
+  border: none;
+  box-shadow: none;
+  border-radius: 0;
+  max-width: none;
+  width: 100%;
+  animation: none;
+}
+
+.qto-calendar__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-md);
+  border-bottom: 1px solid var(--calendar-border);
+  background: var(--calendar-bg);
+  position: relative;
+}
+
+/* Remove border in DatePicker dropdown */
+.qto-datepicker__calendar .qto-calendar__header {
+  border-bottom: 1px solid var(--color-border-light);
+  background: transparent;
+}
+
+.qto-calendar__nav-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: none;
+  border-radius: var(--radius-md);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.qto-calendar__nav-button:hover,
+.qto-calendar__nav-button:focus {
+  background: var(--calendar-hover-bg);
+  color: var(--calendar-text);
+  outline: none;
+  transform: scale(1.05);
+}
+
+.qto-calendar__nav-button:focus {
+  box-shadow: 0 0 0 2px var(--calendar-primary-light);
+}
+
+.qto-calendar__nav-button:active {
+  transform: scale(0.95);
+}
+
+.qto-calendar__nav-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.qto-calendar__header-selects {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  flex: 1;
+  justify-content: center;
+  max-width: 200px;
+}
+
+.qto-calendar__month-select,
+.qto-calendar__year-select {
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-primary);
+  color: var(--color-text);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  touch-action: manipulation;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+  background-position: right 0.5rem center;
+  background-repeat: no-repeat;
+  background-size: 1.5em 1.5em;
+  padding-right: 2.5rem;
+  flex: 1;
+  min-width: 0;
+}
+
+.qto-calendar__month-select:hover,
+.qto-calendar__year-select:hover {
+  border-color: var(--color-primary);
+}
+
+.qto-calendar__month-select:focus,
+.qto-calendar__year-select:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(242, 182, 15, 0.1);
+}
+
+.qto-calendar__grid {
+  padding: var(--spacing-sm);
+  background: var(--calendar-bg);
+}
+
+/* Large variant grid sizing */
+.qto-calendar--large .qto-calendar__grid {
+  padding: var(--spacing-md);
+  max-width: none;
+  width: 100%;
+}
+
+.qto-calendar--large .qto-calendar__week {
+  gap: 4px;
+  margin-bottom: 4px;
+}
+
+.qto-calendar--large .qto-calendar__weekdays {
+  gap: 4px;
+  margin-bottom: var(--spacing-md);
+  padding: var(--spacing-sm);
+}
+
+.qto-calendar__weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+  margin-bottom: var(--spacing-sm);
+  background: var(--calendar-bg-secondary);
+  border-radius: var(--radius-sm);
+  padding: var(--spacing-xs);
+}
+
+.qto-calendar__weekdays.qto-calendar__weekdays--with-week-numbers {
+  grid-template-columns: minmax(32px, auto) repeat(7, 1fr);
+}
+
+.qto-calendar__weekday {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-xs);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  color: var(--calendar-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+  background: transparent;
+}
+
+.qto-calendar__week-number-header {
+  font-size: var(--text-xs);
+  font-weight: 600;
+  color: var(--color-text-secondary);
+}
+
+.qto-calendar__weeks {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.qto-calendar__week {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+}
+
+.qto-calendar__week--with-week-numbers {
+  grid-template-columns: minmax(32px, auto) repeat(7, 1fr);
+}
+
+.qto-calendar__week-number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-xs);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  color: var(--color-text-muted);
+  background: var(--color-bg-secondary);
+  border-radius: var(--radius-sm);
+}
+
+.qto-calendar__day {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: none;
+  background: none;
+  border-radius: var(--radius-sm);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  position: relative;
+  padding: 2px;
+}
+
+/* Large variant day cells */
+.qto-calendar--large .qto-calendar__day {
+  width: 100%;
+  min-height: 120px;
+  height: auto;
+  font-size: var(--text-sm);
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 8px;
+  border: 1px solid var(--border-color);
+}
+
+.qto-calendar--large .qto-calendar__day-content--large {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  gap: 2px;
+  align-items: flex-start;
+}
+
+.qto-calendar--large .qto-calendar__day-number {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 2px;
+}
+
+.qto-calendar--large .qto-calendar__events-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  width: 100%;
+  overflow: hidden;
+}
+
+.qto-calendar__event-block {
+  display: flex;
+  align-items: center;
+  padding: 3px 6px;
+  border-radius: 4px;
+  min-height: 20px;
+  font-size: 11px;
+  line-height: 1.2;
+  overflow: hidden;
+  width: 100%;
+  font-weight: 500;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.qto-calendar__event-title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex: 1;
+  font-weight: 500;
+}
+
+/* Large screens get even bigger event blocks */
+@media (min-width: 1200px) {
+  .qto-calendar--large .qto-calendar__day {
+    min-height: 140px;
+    padding: 10px;
+  }
+  
+  .qto-calendar__event-block {
+    padding: 4px 8px;
+    min-height: 24px;
+    font-size: 12px;
+    margin-bottom: 2px;
+  }
+  
+  .qto-calendar--large .qto-calendar__day-number {
+    font-size: 16px;
+    margin-bottom: 6px;
+  }
+}
+
+/* Event block colors */
+.qto-calendar__event-block--present {
+  background-color: #22c55e;
+  color: white;
+}
+
+.qto-calendar__event-block--absent {
+  background-color: #ef4444;
+  color: white;
+}
+
+.qto-calendar__event-block--partial {
+  background-color: #f59e0b;
+  color: white;
+}
+
+.qto-calendar__event-block--holiday {
+  background-color: #8b5cf6;
+  color: white;
+}
+
+.qto-calendar__event-block--leave {
+  background-color: #06b6d4;
+  color: white;
+}
+
+.qto-calendar__event-block--meeting {
+  background-color: #3b82f6;
+  color: white;
+}
+
+.qto-calendar__event-block--personal {
+  background-color: #ec4899;
+  color: white;
+}
+
+.qto-calendar__event-block--work {
+  background-color: #10b981;
+  color: white;
+}
+
+.qto-calendar__event-block--deadline {
+  background-color: #dc2626;
+  color: white;
+}
+
+/* Large variant hover and selection states */
+.qto-calendar--large .qto-calendar__day:hover:not(:disabled) {
+  background: var(--calendar-hover-bg);
+  transform: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-color: var(--calendar-primary-light);
+}
+
+.qto-calendar--large .qto-calendar__day--selected {
+  background: var(--calendar-primary-light);
+  border-color: var(--calendar-primary);
+  box-shadow: 0 0 0 2px var(--calendar-primary-light);
+  transform: none;
+}
+
+.qto-calendar--large .qto-calendar__day--today {
+  background: var(--calendar-primary-light);
+  border-color: var(--calendar-primary);
+}
+
+.qto-calendar--large .qto-calendar__day--other-month {
+  opacity: 0.4;
+}
+
+.qto-calendar--large .qto-calendar__day--other-month .qto-calendar__day-number {
+  color: var(--color-text-muted);
+}
+
+/* Compact variant day cells */
+.qto-calendar--compact .qto-calendar__day {
+  width: 28px;
+  height: 28px;
+  font-size: var(--text-xs);
+}
+
+/* Mobile variant day cells */
+.qto-calendar--mobile .qto-calendar__day {
+  width: auto;
+  height: auto;
+  aspect-ratio: 1;
+  min-width: 32px;
+  min-height: 32px;
+}
+
+.qto-calendar__day-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  gap: 1px;
+}
+
+.qto-calendar__day-content--large {
+  gap: 2px;
+  padding: 2px;
+}
+
+.qto-calendar__day-number {
+  font-size: inherit;
+  line-height: 1;
+  font-weight: inherit;
+}
+
+.qto-calendar__day-indicators {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  min-height: 8px;
+}
+
+.qto-calendar--large .qto-calendar__day-indicators {
+  min-height: 12px;
+  gap: 3px;
+}
+
+.qto-calendar__status-indicator {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.qto-calendar--large .qto-calendar__status-indicator {
+  width: 6px;
+  height: 6px;
+}
+
+.qto-calendar--compact .qto-calendar__status-indicator {
+  width: 3px;
+  height: 3px;
+}
+
+.qto-calendar__event-text {
+  font-size: 8px;
+  line-height: 1;
+  color: var(--color-text-muted);
+  text-align: center;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.qto-calendar__hours-text {
+  font-size: 9px;
+  line-height: 1;
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+.qto-calendar__hours-indicator {
+  font-size: 8px;
+  line-height: 1;
+  color: var(--color-text-muted);
+  opacity: 0.8;
+}
+
+.qto-calendar__status--present {
+  background: var(--color-success);
+}
+
+.qto-calendar__status--absent {
+  background: var(--color-error);
+}
+
+.qto-calendar__status--holiday {
+  background: var(--color-warning);
+}
+
+.qto-calendar__status--leave {
+  background: var(--color-info);
+}
+
+.qto-calendar__status--partial {
+  background: var(--color-warning-light);
+}
+
+.qto-calendar__status--event {
+  background: var(--color-primary);
+}
+
+/* Day Interaction States */
+.qto-calendar__day:hover:not(:disabled),
+.qto-calendar__day:focus:not(:disabled) {
+  background: var(--calendar-hover-bg);
+  color: var(--calendar-text);
+  outline: none;
+  transform: translateY(-1px);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.qto-calendar__day:focus:not(:disabled) {
+  box-shadow: 0 0 0 2px var(--calendar-primary-light), 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.qto-calendar__day:focus:not(:disabled) {
+  box-shadow: 0 0 0 2px var(--calendar-primary-light), 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.qto-calendar__day--current {
+  color: var(--color-text);
+}
+
+.qto-calendar__day--today {
+  background: var(--calendar-primary-light);
+  color: var(--calendar-primary);
+  font-weight: 600;
+  position: relative;
+}
+
+.qto-calendar__day--today:hover {
+  background: var(--calendar-primary-light);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.qto-calendar__day--selected {
+  background: var(--calendar-primary);
+  color: var(--color-white);
+  font-weight: 600;
+  transform: scale(1.05);
+  box-shadow: 0 2px 8px rgba(242, 182, 15, 0.3);
+}
+
+.qto-calendar__day--selected:hover {
+  background: var(--color-primary-hover);
+  transform: scale(1.05);
+}
+
+.qto-calendar__day--disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.qto-calendar__day--disabled:hover {
+  background: none;
+  color: var(--color-text-muted);
+}
+
+.qto-calendar__day--highlighted {
+  background: var(--color-info-light);
+  color: var(--color-info);
+}
+
+.qto-calendar__day--highlighted:hover {
+  background: var(--color-info-light);
+}
+
+.qto-calendar__day--present {
+  background: rgba(34, 197, 94, 0.1);
+  border: 1px solid rgba(34, 197, 94, 0.3);
+}
+
+.qto-calendar__day--absent {
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.qto-calendar__day--holiday {
+  background: rgba(245, 158, 11, 0.1);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+.qto-calendar__day--leave {
+  background: rgba(59, 130, 246, 0.1);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+}
+
+.qto-calendar__day--partial {
+  background: rgba(245, 158, 11, 0.05);
+  border: 1px solid rgba(245, 158, 11, 0.2);
+}
+
+.qto-calendar__day--event {
+  background: rgba(242, 182, 15, 0.1);
+  border: 1px solid rgba(242, 182, 15, 0.3);
+}
+
+.qto-calendar__day--other {
+  opacity: 0.4;
+}
+
+/* Dark theme support */
+[data-theme="dark"] .qto-calendar {
+  background: var(--color-bg-secondary);
+  border-color: var(--color-gray-700);
+}
+
+[data-theme="dark"] .qto-calendar__header {
+  border-bottom-color: var(--color-gray-700);
+}
+
+[data-theme="dark"] .qto-calendar__nav-button:hover {
+  background: var(--color-gray-800);
+}
+
+[data-theme="dark"] .qto-calendar__month-select,
+[data-theme="dark"] .qto-calendar__year-select {
+  background: var(--color-bg-secondary);
+  border-color: var(--color-gray-700);
+}
+
+[data-theme="dark"] .qto-calendar__week-number {
+  background: var(--color-gray-800);
+}
+
+[data-theme="dark"] .qto-calendar__day:hover:not(:disabled) {
+  background: var(--color-gray-800);
+}
+
+[data-theme="dark"] .qto-calendar__day--today {
+  background: rgba(242, 182, 15, 0.2);
+}
+
+[data-theme="dark"] .qto-calendar__day--highlighted {
+  background: rgba(59, 130, 246, 0.2);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .qto-calendar {
+    max-width: 100%;
+    min-width: auto;
+    border-radius: var(--radius-lg);
+  }
+  
+  .qto-calendar--compact {
+    max-width: 100%;
+    min-width: auto;
+  }
+  
+  .qto-calendar__header {
+    padding: var(--spacing-sm) var(--spacing-md);
+    flex-wrap: nowrap;
+  }
+  
+  .qto-calendar__nav-button {
+    width: 36px;
+    height: 36px;
+    flex-shrink: 0;
+  }
+  
+  .qto-calendar__header-selects {
+    gap: var(--spacing-xs);
+    min-width: 0;
+  }
+  
+  .qto-calendar__month-select,
+  .qto-calendar__year-select {
+    font-size: var(--text-xs);
+    padding: var(--spacing-xs);
+    min-width: 60px;
+  }
+  
+  .qto-calendar__grid {
+    padding: var(--spacing-sm);
+  }
+  
+  .qto-calendar__day {
+    width: auto;
+    height: auto;
+    aspect-ratio: 1;
+    min-width: 32px;
+    min-height: 32px;
+    font-size: var(--text-xs);
+  }
+  
+  .qto-calendar__weekday {
+    padding: var(--spacing-xs);
+    font-size: 10px;
+  }
+  
+  .qto-calendar__hours-indicator {
+    font-size: 7px;
+  }
+  
+  .qto-calendar__status-indicator {
+    width: 3px;
+    height: 3px;
+  }
+}
+
+/* Ultra small screens */
+@media (max-width: 480px) {
+  .qto-calendar__day {
+    width: auto;
+    height: auto;
+    aspect-ratio: 1;
+    min-width: 28px;
+    min-height: 28px;
+    font-size: 11px;
+  }
+  
+  .qto-calendar__weekday {
+    font-size: 9px;
+    padding: 2px;
+  }
+  
+  .qto-calendar__nav-button {
+    width: 32px;
+    height: 32px;
+  }
+  
+  .qto-calendar__month-select,
+  .qto-calendar__year-select {
+    min-width: 50px;
+    font-size: 11px;
+  }
+  
+  .qto-calendar__hours-indicator {
+    display: none; /* Hide hours text on very small screens */
+  }
+  
+  .qto-calendar__status-indicator {
+    width: 2px;
+    height: 2px;
+  }
+  
+  .qto-calendar__grid {
+    padding: var(--spacing-xs);
+  }
+  
+  .qto-calendar__header {
+    padding: var(--spacing-xs) var(--spacing-sm);
+  }
+}
+
+/* Extra small screens (smartwatches, very narrow phones) */
+@media (max-width: 320px) {
+  .qto-calendar__day {
+    width: auto;
+    height: auto;
+    aspect-ratio: 1;
+    min-width: 24px;
+    min-height: 24px;
+    font-size: 10px;
+  }
+  
+  .qto-calendar__day-indicators {
+    gap: 1px;
+    min-height: 6px;
+  }
+  
+  .qto-calendar__weekday {
+    font-size: 8px;
+    padding: 1px;
+  }
+}
+
+/* Tablet optimizations */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .qto-calendar {
+    max-width: 350px;
+  }
+  
+  .qto-calendar--compact {
+    max-width: 300px;
+  }
+  
+  .qto-calendar--large {
+    max-width: none;
+    width: 100%;
+  }
+  
+  .qto-calendar__day {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+/* Large screens */
+@media (min-width: 1025px) {
+  .qto-calendar {
+    max-width: 380px;
+  }
+  
+  .qto-calendar--compact {
+    max-width: 320px;
+  }
+  
+  .qto-calendar--large {
+    max-width: none;
+    width: 100%;
+  }
+  
+  .qto-calendar__day {
+    width: 42px;
+    height: 42px;
+  }
+}
+
+/* Better touch targets for touch devices */
+@media (hover: none) and (pointer: coarse) {
+  .qto-calendar__day {
+    min-width: 40px;
+    min-height: 40px;
+  }
+  
+  .qto-calendar__nav-button {
+    min-width: 44px;
+    min-height: 44px;
+  }
+}
+
+/* High DPI displays */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 2dppx) {
+  .qto-calendar__status-indicator {
+    width: 5px;
+    height: 5px;
+  }
+}
+
+/* Landscape orientation on mobile */
+@media (max-height: 500px) and (orientation: landscape) {
+  .qto-calendar__day {
+    width: 32px;
+    height: 32px;
+    font-size: var(--text-xs);
+  }
+  
+  .qto-calendar__grid {
+    padding: var(--spacing-xs);
+  }
+  
+  .qto-calendar__header {
+    padding: var(--spacing-xs) var(--spacing-sm);
+  }
+}

@@ -1,0 +1,152 @@
+/* Table with Actions Component Styles */
+
+.qto-table-actions {
+  width: 100%;
+}
+
+/* Row Actions */
+.qto-table-actions__row-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  justify-content: flex-end;
+}
+
+.qto-table-actions__action-btn {
+  min-width: auto;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  font-size: var(--text-xs);
+  white-space: nowrap;
+}
+
+/* Bulk Actions */
+.qto-table-actions__bulk-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-md);
+  flex-wrap: wrap;
+  background: rgba(var(--color-primary-rgb), 0.1);
+  border: 1px solid rgba(var(--color-primary-rgb), 0.2);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-md);
+  margin-bottom: var(--spacing-md);
+}
+
+.qto-table-actions__selected-count {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
+.qto-table-actions__bulk-buttons {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  flex-wrap: wrap;
+}
+
+.qto-table-actions__bulk-btn {
+  min-width: auto;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  font-size: var(--text-xs);
+  white-space: nowrap;
+}
+
+/* Confirmation Modal */
+.qto-table-actions__confirm {
+  text-align: center;
+}
+
+.qto-table-actions__confirm-message {
+  margin-bottom: var(--spacing-lg);
+  color: var(--color-text);
+  line-height: 1.5;
+}
+
+.qto-table-actions__confirm-buttons {
+  display: flex;
+  justify-content: center;
+  gap: var(--spacing-md);
+}
+
+/* Mobile Responsive */
+@media (max-width: 640px) {
+  .qto-table-actions__row-actions {
+    flex-direction: column;
+    gap: var(--spacing-xs);
+    align-items: stretch;
+  }
+
+  .qto-table-actions__action-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .qto-table-actions__bulk-actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--spacing-sm);
+  }
+
+  .qto-table-actions__bulk-buttons {
+    justify-content: center;
+  }
+
+  .qto-table-actions__confirm-buttons {
+    flex-direction: column;
+    gap: var(--spacing-sm);
+  }
+
+  .qto-table-actions__confirm-buttons .qto-button {
+    width: 100%;
+  }
+}
+
+/* Tablet */
+@media (min-width: 641px) and (max-width: 1024px) {
+  .qto-table-actions__row-actions {
+    flex-wrap: wrap;
+  }
+  
+  .qto-table-actions__action-btn {
+    flex: 1;
+    min-width: 80px;
+  }
+}
+
+/* Desktop and larger */
+@media (min-width: 1025px) {
+  .qto-table-actions__row-actions {
+    justify-content: flex-end;
+  }
+  
+  .qto-table-actions__bulk-actions {
+    padding: var(--spacing-lg);
+  }
+}
+
+/* Dark Theme */
+[data-theme="dark"] .qto-table-actions__bulk-actions {
+  background: rgba(var(--color-primary-rgb), 0.1);
+  border-color: rgba(var(--color-primary-rgb), 0.3);
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+  .qto-table-actions__bulk-actions {
+    border-width: 2px;
+  }
+  
+  .qto-table-actions__action-btn,
+  .qto-table-actions__bulk-btn {
+    border-width: 2px;
+  }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .qto-table-actions__bulk-actions {
+    transition: none;
+  }
+}
