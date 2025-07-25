@@ -1,0 +1,755 @@
+/* Enhanced QTO Select Component Styles */
+
+.qto-select {
+  --select-bg: var(--color-bg-primary);
+  --select-border: var(--color-border);
+  --select-text: var(--color-text);
+  --select-text-muted: var(--color-text-secondary);
+  --select-hover: var(--color-bg-tertiary);
+  --select-focus: var(--color-primary);
+  --select-radius: var(--radius-lg);
+  --select-shadow: var(--shadow-sm);
+  --select-shadow-focus: 0 0 0 3px rgba(var(--color-primary-rgb, 242, 182, 15), 0.1);
+  
+  position: relative;
+  display: inline-block;
+  width: auto;
+  margin-bottom: var(--spacing-sm);
+  font-family: var(--font-base);
+}
+
+.qto-select--full-width {
+  width: 100%;
+}
+
+.qto-select__label {
+  display: block;
+  margin-bottom: var(--spacing-xs);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--select-text);
+  line-height: var(--line-height-normal);
+  letter-spacing: 0.025em;
+}
+
+.qto-select__required {
+  color: var(--color-error);
+  margin-left: var(--spacing-xs);
+  font-weight: 500;
+}
+
+.qto-select__wrapper {
+  position: relative;
+}
+
+.qto-select__field {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  min-height: 44px;
+  padding: var(--spacing-sm) var(--spacing-md);
+  border: 2px solid var(--select-border);
+  border-radius: var(--select-radius);
+  background: var(--select-bg);
+  color: var(--select-text);
+  font-size: var(--text-base);
+  font-family: var(--font-base);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  outline: none;
+  box-shadow: var(--select-shadow);
+  backdrop-filter: blur(8px);
+}
+
+.qto-select__field:hover:not(.qto-select__field--disabled) {
+  border-color: var(--select-focus);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-1px);
+}
+
+.qto-select__field:focus,
+.qto-select__field--focused {
+  border-color: var(--select-focus);
+  box-shadow: var(--select-shadow-focus), var(--shadow-md);
+  transform: translateY(-1px);
+}
+
+.qto-select__field--open {
+  border-color: var(--select-focus);
+  box-shadow: var(--select-shadow-focus), var(--shadow-md);
+  border-bottom-left-radius: var(--radius-md);
+  border-bottom-right-radius: var(--radius-md);
+  transform: translateY(-1px);
+}
+
+.qto-select__field--error {
+  border-color: var(--color-error);
+  background: var(--color-error-light);
+}
+
+.qto-select__field--error:focus {
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1), var(--shadow-md);
+}
+
+.qto-select__field--disabled {
+  background: var(--color-bg-secondary);
+  color: var(--select-text-muted);
+  cursor: not-allowed;
+  opacity: 0.6;
+  transform: none !important;
+  box-shadow: var(--select-shadow);
+}
+
+.qto-select__field--rounded {
+  border-radius: var(--radius-full);
+}
+
+.qto-select__field--sm {
+  min-height: 36px;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  font-size: var(--text-sm);
+}
+
+.qto-select__field--lg {
+  min-height: 52px;
+  padding: var(--spacing-md) var(--spacing-lg);
+  font-size: var(--text-lg);
+}
+
+.qto-select__field--full-width {
+  width: 100%;
+}
+
+.qto-select__value {
+  flex: 1;
+  text-align: left;
+  color: var(--select-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: 500;
+}
+
+.qto-select__value:empty::after {
+  content: attr(data-placeholder);
+  color: var(--select-text-muted);
+  font-weight: 400;
+}
+
+.qto-select__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  margin-left: var(--spacing-sm);
+}
+
+.qto-select__clear {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border: none;
+  border-radius: var(--radius-md);
+  background: var(--color-gray-200);
+  color: var(--select-text-muted);
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.qto-select__clear:hover {
+  background: var(--color-error);
+  color: white;
+  transform: scale(1.1);
+}
+
+.qto-select__arrow {
+  display: flex;
+  align-items: center;
+  color: var(--select-text-muted);
+  transition: all var(--transition-normal);
+}
+
+.qto-select--open .qto-select__arrow {
+  transform: rotate(180deg);
+  color: var(--select-focus);
+}
+
+.qto-select__arrow-icon {
+  width: 18px;
+  height: 18px;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+}
+
+.qto-select__dropdown {
+  position: absolute;
+  top: calc(100% - 2px);
+  left: 0;
+  right: 0;
+  z-index: var(--z-dropdown);
+  border: 2px solid var(--select-focus);
+  border-top: none;
+  border-bottom-left-radius: var(--select-radius);
+  border-bottom-right-radius: var(--select-radius);
+  background: var(--select-bg);
+  box-shadow: var(--shadow-xl);
+  max-height: 280px;
+  overflow-y: auto;
+  backdrop-filter: blur(12px);
+  animation: qto-select-dropdown-enter var(--transition-fast) ease-out;
+}
+
+@keyframes qto-select-dropdown-enter {
+  from {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.qto-select__search {
+  padding: var(--spacing-md);
+  border-bottom: 1px solid var(--select-border);
+  background: var(--color-bg-secondary);
+}
+
+.qto-select__search-input {
+  width: 100%;
+  padding: var(--spacing-sm) var(--spacing-md);
+  border: 1px solid var(--select-border);
+  border-radius: var(--radius-md);
+  background: var(--select-bg);
+  color: var(--select-text);
+  font-size: var(--text-sm);
+  font-family: var(--font-base);
+  font-weight: 500;
+  outline: none;
+  transition: all var(--transition-fast);
+}
+
+.qto-select__search-input:focus {
+  border-color: var(--select-focus);
+  box-shadow: 0 0 0 2px rgba(var(--color-primary-rgb, 242, 182, 15), 0.1);
+}
+
+.qto-select__search-input::placeholder {
+  color: var(--select-text-muted);
+  font-weight: 400;
+}
+
+.qto-select__options {
+  list-style: none;
+  margin: 0;
+  padding: var(--spacing-xs) 0;
+}
+
+.qto-select__option {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-sm) var(--spacing-md);
+  cursor: pointer;
+  color: var(--select-text);
+  font-weight: 500;
+  transition: all var(--transition-fast);
+  position: relative;
+}
+
+.qto-select__option::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: transparent;
+  transition: background var(--transition-fast);
+}
+
+.qto-select__option:hover {
+  background: var(--select-hover);
+  color: var(--select-focus);
+  padding-left: calc(var(--spacing-md) + var(--spacing-xs));
+}
+
+.qto-select__option:hover::before {
+  background: var(--select-focus);
+}
+
+.qto-select__option--selected {
+  background: var(--color-primary-light);
+  color: var(--color-primary-dark);
+  font-weight: 600;
+  padding-left: calc(var(--spacing-md) + var(--spacing-xs));
+}
+
+.qto-select__option--selected::before {
+  background: var(--color-primary);
+}
+
+.qto-select__option--empty {
+  color: var(--select-text-muted);
+  cursor: default;
+  text-align: center;
+  font-style: italic;
+  justify-content: center;
+}
+
+.qto-select__option--empty:hover {
+  background: transparent;
+  padding-left: var(--spacing-md);
+}
+
+.qto-select__option--empty::before {
+  display: none;
+}
+
+.qto-select__checkbox {
+  width: 18px;
+  height: 18px;
+  border: 2px solid var(--select-border);
+  border-radius: var(--radius-sm);
+  background: var(--select-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  color: var(--color-primary);
+  transition: all var(--transition-fast);
+  flex-shrink: 0;
+}
+
+.qto-select__checkbox--checked {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: white;
+  transform: scale(1.1);
+}
+
+.qto-select__option-text {
+  flex: 1;
+  line-height: var(--line-height-normal);
+}
+
+.qto-select__error {
+  display: block;
+  margin-top: var(--spacing-xs);
+  font-size: var(--text-sm);
+  color: var(--color-error);
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+}
+
+.qto-select__error::before {
+  content: '⚠';
+  font-size: var(--text-base);
+}
+
+.qto-select__helper {
+  display: block;
+  margin-top: var(--spacing-xs);
+  font-size: var(--text-sm);
+  color: var(--select-text-muted);
+  font-weight: 400;
+  line-height: var(--line-height-normal);
+}
+
+/* Custom scrollbar for dropdown */
+.qto-select__dropdown::-webkit-scrollbar {
+  width: 6px;
+}
+
+.qto-select__dropdown::-webkit-scrollbar-track {
+  background: var(--color-bg-secondary);
+  border-radius: var(--radius-sm);
+}
+
+.qto-select__dropdown::-webkit-scrollbar-thumb {
+  background: var(--select-border);
+  border-radius: var(--radius-sm);
+}
+
+.qto-select__dropdown::-webkit-scrollbar-thumb:hover {
+  background: var(--select-focus);
+}
+
+/* Dark theme adjustments */
+[data-theme="dark"] .qto-select {
+  --select-bg: var(--color-bg-primary);
+  --select-border: var(--color-border);
+  --select-text: var(--color-text);
+  --select-text-muted: var(--color-text-secondary);
+  --select-hover: var(--color-bg-tertiary);
+}
+
+[data-theme="dark"] .qto-select__clear {
+  background: var(--color-gray-700);
+}
+
+[data-theme="dark"] .qto-select__clear:hover {
+  background: var(--color-error);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .qto-select__field {
+    min-height: 48px;
+    font-size: 16px; /* Prevent zoom on iOS */
+  }
+  
+  .qto-select__dropdown {
+    max-height: 240px;
+  }
+  
+  .qto-select__option {
+    padding: var(--spacing-md);
+  }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+  .qto-select__field {
+    border-width: 3px;
+  }
+  
+  .qto-select__option--selected {
+    background: var(--color-primary);
+    color: white;
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .qto-select__field,
+  .qto-select__clear,
+  .qto-select__arrow,
+  .qto-select__option,
+  .qto-select__checkbox {
+    transition: none;
+  }
+  
+  .qto-select__dropdown {
+    animation: none;
+  }
+  
+  .qto-select__field:hover:not(.qto-select__field--disabled) {
+    transform: none;
+  }
+}
+
+.qto-select__field--filled:focus {
+  background: var(--color-bg-primary);
+  border-bottom-color: var(--color-primary);
+  box-shadow: none;
+}
+
+/* Rounded Select */
+.qto-select__field--rounded {
+  border-radius: var(--radius-full);
+}
+
+.qto-select__field--rounded.qto-select__field--open {
+  border-radius: var(--radius-full) var(--radius-full) 0 0;
+}
+
+/* Full Width */
+.qto-select__field--full-width {
+  width: 100%;
+}
+
+/* Error State */
+.qto-select__field--error {
+  border-color: var(--color-error);
+  background: var(--color-error-light);
+}
+
+.qto-select__field--error:focus {
+  border-color: var(--color-error);
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+}
+
+/* Disabled State */
+.qto-select__field--disabled {
+  background: var(--color-bg-secondary);
+  color: var(--color-text-muted);
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* Select Value */
+.qto-select__value {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--color-text);
+}
+
+.qto-select__field--disabled .qto-select__value {
+  color: var(--color-text-muted);
+}
+
+/* Select Actions */
+.qto-select__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  margin-left: var(--spacing-sm);
+}
+
+/* Clear Button */
+.qto-select__clear {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border: none;
+  background: transparent;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+  transition: all var(--transition-fast);
+  font-size: 16px;
+  line-height: 1;
+}
+
+.qto-select__clear:hover {
+  background: var(--color-gray-200);
+  color: var(--color-text);
+}
+
+/* Select Arrow */
+.qto-select__arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-muted);
+  transition: transform var(--transition-fast);
+}
+
+.qto-select__field--open .qto-select__arrow {
+  transform: rotate(180deg);
+}
+
+.qto-select__arrow-icon {
+  width: 16px;
+  height: 16px;
+}
+
+/* Dropdown */
+.qto-select__dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: var(--color-bg-primary);
+  border: 1px solid var(--color-primary);
+  border-top: none;
+  border-radius: 0 0 var(--radius-md) var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  z-index: var(--z-dropdown);
+  max-height: 240px;
+  overflow: hidden;
+}
+
+.qto-select--open .qto-select__dropdown {
+  animation: qto-select-slide-down var(--transition-fast) ease-out;
+}
+
+/* Search Input */
+.qto-select__search {
+  padding: var(--spacing-sm);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.qto-select__search-input {
+  width: 100%;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  font-size: var(--text-sm);
+  outline: none;
+  background: var(--color-bg-primary);
+  color: var(--color-text);
+}
+
+.qto-select__search-input:focus {
+  border-color: var(--color-primary);
+}
+
+/* Options */
+.qto-select__options {
+  max-height: 200px;
+  overflow-y: auto;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.qto-select__option {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-sm) var(--spacing-md);
+  font-size: var(--text-sm);
+  color: var(--color-text);
+  cursor: pointer;
+  transition: background-color var(--transition-fast);
+  border-bottom: 1px solid transparent;
+}
+
+.qto-select__option:hover {
+  background: var(--color-primary-light);
+}
+
+.qto-select__option--selected {
+  background: var(--color-primary-light);
+  color: var(--color-primary-dark);
+  font-weight: 500;
+}
+
+.qto-select__option--empty {
+  color: var(--color-text-muted);
+  cursor: default;
+}
+
+.qto-select__option--empty:hover {
+  background: transparent;
+}
+
+/* Checkbox for Multiple Select */
+.qto-select__checkbox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-primary);
+  font-size: 10px;
+  line-height: 1;
+  color: var(--color-white);
+  transition: all var(--transition-fast);
+}
+
+.qto-select__checkbox--checked {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+/* Option Text */
+.qto-select__option-text {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Error Message */
+.qto-select__error {
+  font-size: var(--text-xs);
+  color: var(--color-error);
+  margin-top: var(--spacing-xs);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+}
+
+/* Helper Text */
+.qto-select__helper {
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  margin-top: var(--spacing-xs);
+}
+
+/* Animations */
+@keyframes qto-select-slide-down {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Custom Scrollbar for Options */
+.qto-select__options::-webkit-scrollbar {
+  width: 6px;
+}
+
+.qto-select__options::-webkit-scrollbar-track {
+  background: var(--color-bg-secondary);
+}
+
+.qto-select__options::-webkit-scrollbar-thumb {
+  background: var(--color-text-muted);
+  border-radius: var(--radius-sm);
+}
+
+.qto-select__options::-webkit-scrollbar-thumb:hover {
+  background: var(--color-text-secondary);
+}
+
+/* Dark Theme Adjustments */
+[data-theme="dark"] .qto-select__field {
+  background: var(--color-bg-primary);
+  border-color: var(--color-border);
+}
+
+[data-theme="dark"] .qto-select__field--filled {
+  background: var(--color-bg-secondary);
+}
+
+[data-theme="dark"] .qto-select__field--filled:focus {
+  background: var(--color-bg-primary);
+}
+
+[data-theme="dark"] .qto-select__field--disabled {
+  background: var(--color-bg-tertiary);
+}
+
+[data-theme="dark"] .qto-select__dropdown {
+  background: var(--color-bg-primary);
+  border-color: var(--color-primary);
+}
+
+[data-theme="dark"] .qto-select__clear:hover {
+  background: var(--color-gray-700);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .qto-select__field {
+    min-height: 44px; /* Increase touch target on mobile */
+  }
+  
+  .qto-select__field--sm {
+    min-height: 36px;
+  }
+  
+  .qto-select__field--lg {
+    min-height: 52px;
+  }
+  
+  .qto-select__dropdown {
+    max-height: 200px;
+  }
+  
+  .qto-select__options {
+    max-height: 160px;
+  }
+}

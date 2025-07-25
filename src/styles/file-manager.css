@@ -1,0 +1,276 @@
+/* File Manager Component Styles */
+.qto-file-manager {
+  font-family: var(--font-base);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-bg-primary);
+}
+
+/* Header */
+.qto-file-manager__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-lg);
+  border-bottom: 1px solid var(--color-border);
+  background: var(--color-bg-secondary);
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+}
+
+.qto-file-manager__title h2 {
+  margin: 0 0 var(--spacing-xs) 0;
+  font-size: var(--text-xl);
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.qto-file-manager__title p {
+  margin: 0;
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+.qto-file-manager__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+/* Toolbar */
+.qto-file-manager__toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-md) var(--spacing-lg);
+  border-bottom: 1px solid var(--color-border);
+  background: var(--color-bg-secondary);
+}
+
+.qto-file-manager__search-filters {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  flex: 1;
+}
+
+.qto-file-manager__search {
+  min-width: 250px;
+  max-width: 400px;
+}
+
+.qto-file-manager__filter {
+  min-width: 150px;
+}
+
+.qto-file-manager__view-controls {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+.qto-file-manager__bulk-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-sm) var(--spacing-md);
+  background: var(--color-primary-light);
+  border: 1px solid var(--color-primary);
+  border-radius: var(--radius-md);
+}
+
+.qto-file-manager__selection-count {
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--color-primary);
+}
+
+.qto-file-manager__layout-controls {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.qto-file-manager__layout-controls .qto-btn {
+  border-radius: 0;
+  border: none;
+}
+
+/* Content */
+.qto-file-manager__content {
+  padding: var(--spacing-lg);
+  min-height: 400px;
+}
+
+.qto-file-manager__loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+  gap: var(--spacing-md);
+  color: var(--color-text-muted);
+}
+
+.qto-file-manager__loading p {
+  margin: 0;
+  font-size: var(--text-lg);
+}
+
+.qto-file-manager__error {
+  padding: var(--spacing-md);
+  background: var(--color-error-light);
+  border: 1px solid var(--color-error);
+  border-radius: var(--radius-md);
+  color: var(--color-error);
+  margin-bottom: var(--spacing-lg);
+}
+
+.qto-file-manager__error p {
+  margin: 0;
+  font-size: var(--text-sm);
+}
+
+/* Upload Modal */
+.qto-file-manager__upload-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: var(--spacing-lg);
+}
+
+.qto-file-manager__upload-modal {
+  background: var(--color-bg-primary);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  width: 100%;
+  max-width: 600px;
+  max-height: 90vh;
+  overflow: auto;
+}
+
+.qto-file-manager__upload-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-lg);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.qto-file-manager__upload-header h3 {
+  margin: 0;
+  font-size: var(--text-lg);
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.qto-file-manager__upload-modal .qto-file-upload-container {
+  padding: var(--spacing-lg);
+}
+
+/* Animation for spinner */
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .qto-file-manager__header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--spacing-md);
+  }
+  
+  .qto-file-manager__actions {
+    width: 100%;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
+  
+  .qto-file-manager__toolbar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--spacing-md);
+  }
+  
+  .qto-file-manager__search-filters {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .qto-file-manager__search {
+    min-width: auto;
+    max-width: none;
+  }
+  
+  .qto-file-manager__filter {
+    min-width: auto;
+  }
+  
+  .qto-file-manager__view-controls {
+    justify-content: space-between;
+  }
+  
+  .qto-file-manager__bulk-actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--spacing-sm);
+  }
+  
+  .qto-file-manager__content {
+    padding: var(--spacing-md);
+  }
+  
+  .qto-file-manager__upload-overlay {
+    padding: var(--spacing-md);
+  }
+  
+  .qto-file-manager__upload-modal {
+    max-width: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .qto-file-manager__header {
+    padding: var(--spacing-md);
+  }
+  
+  .qto-file-manager__toolbar {
+    padding: var(--spacing-sm) var(--spacing-md);
+  }
+  
+  .qto-file-manager__actions {
+    gap: var(--spacing-xs);
+  }
+  
+  .qto-file-manager__actions .qto-btn {
+    font-size: var(--text-xs);
+    padding: var(--spacing-xs) var(--spacing-sm);
+  }
+  
+  .qto-file-manager__layout-controls {
+    flex-direction: column;
+  }
+  
+  .qto-file-manager__content {
+    padding: var(--spacing-sm);
+  }
+}

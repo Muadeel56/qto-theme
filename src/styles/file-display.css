@@ -1,0 +1,389 @@
+/* File Display Component Styles */
+.qto-file-display {
+  font-family: var(--font-base);
+}
+
+.qto-file-display--empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+  border: 2px dashed var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-bg-secondary);
+}
+
+.qto-file-display__empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-md);
+  color: var(--color-text-muted);
+  text-align: center;
+}
+
+.qto-file-display__empty p {
+  margin: 0;
+  font-size: var(--text-lg);
+}
+
+/* Header */
+.qto-file-display__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-md) 0;
+  border-bottom: 1px solid var(--color-border);
+  margin-bottom: var(--spacing-lg);
+}
+
+.qto-file-display__select-all {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  cursor: pointer;
+  font-size: var(--text-sm);
+  color: var(--color-text);
+}
+
+.qto-file-display__select-all input[type="checkbox"] {
+  margin: 0;
+}
+
+/* Grid Layout */
+.qto-file-display--grid .qto-file-display__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: var(--spacing-lg);
+}
+
+.qto-file-display--grid .qto-file-display__item {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-secondary);
+  transition: all var(--transition-fast);
+  cursor: pointer;
+  position: relative;
+}
+
+.qto-file-display--grid .qto-file-display__item:hover {
+  background: var(--color-bg-tertiary);
+  box-shadow: var(--shadow-sm);
+  transform: translateY(-2px);
+}
+
+.qto-file-display--grid .qto-file-display__item--selected {
+  border-color: var(--color-primary);
+  background: var(--color-primary-light);
+}
+
+/* List Layout */
+.qto-file-display--list .qto-file-display__grid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.qto-file-display--list .qto-file-display__item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  padding: var(--spacing-sm) var(--spacing-md);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-secondary);
+  transition: all var(--transition-fast);
+  cursor: pointer;
+}
+
+.qto-file-display--list .qto-file-display__item:hover {
+  background: var(--color-bg-tertiary);
+}
+
+.qto-file-display--list .qto-file-display__item--selected {
+  border-color: var(--color-primary);
+  background: var(--color-primary-light);
+}
+
+/* Gallery Layout */
+.qto-file-display--gallery .qto-file-display__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: var(--spacing-md);
+}
+
+.qto-file-display--gallery .qto-file-display__item {
+  aspect-ratio: 1;
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: var(--color-bg-secondary);
+  transition: all var(--transition-fast);
+  cursor: pointer;
+  position: relative;
+}
+
+.qto-file-display--gallery .qto-file-display__item:hover {
+  transform: scale(1.05);
+  box-shadow: var(--shadow-md);
+}
+
+/* File Item Components */
+.qto-file-display__checkbox {
+  position: absolute;
+  top: var(--spacing-sm);
+  left: var(--spacing-sm);
+  z-index: 2;
+}
+
+.qto-file-display__checkbox input[type="checkbox"] {
+  margin: 0;
+}
+
+.qto-file-display__thumbnail {
+  position: relative;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-bg-primary);
+  overflow: hidden;
+}
+
+.qto-file-display--grid .qto-file-display__thumbnail {
+  height: 120px;
+}
+
+.qto-file-display--list .qto-file-display__thumbnail {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  border-radius: var(--radius-sm);
+}
+
+.qto-file-display--gallery .qto-file-display__thumbnail {
+  height: 100%;
+}
+
+.qto-file-display__thumbnail-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.qto-file-display__thumbnail-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-muted);
+}
+
+.qto-file-display__overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity var(--transition-fast);
+}
+
+.qto-file-display__item:hover .qto-file-display__overlay {
+  opacity: 1;
+}
+
+.qto-file-display--list .qto-file-display__overlay {
+  position: static;
+  background: transparent;
+  opacity: 1;
+}
+
+/* File Info */
+.qto-file-display__info {
+  padding: var(--spacing-md);
+}
+
+.qto-file-display--list .qto-file-display__info {
+  padding: 0;
+  flex: 1;
+  min-width: 0;
+}
+
+.qto-file-display--gallery .qto-file-display__info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: var(--spacing-sm);
+}
+
+.qto-file-display__name {
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--color-text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-bottom: var(--spacing-xs);
+}
+
+.qto-file-display--gallery .qto-file-display__name {
+  color: white;
+  margin-bottom: 0;
+}
+
+.qto-file-display__meta {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+}
+
+.qto-file-display--gallery .qto-file-display__meta {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.qto-file-display__size,
+.qto-file-display__date {
+  flex-shrink: 0;
+}
+
+/* Actions */
+.qto-file-display__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+}
+
+.qto-file-display--list .qto-file-display__actions {
+  margin-left: auto;
+}
+
+.qto-file-display__action-trigger {
+  color: white;
+}
+
+/* Variants */
+.qto-file-display--minimal .qto-file-display__info {
+  padding: var(--spacing-sm);
+}
+
+.qto-file-display--minimal .qto-file-display__meta {
+  display: none;
+}
+
+.qto-file-display--detailed .qto-file-display__info {
+  padding: var(--spacing-lg);
+}
+
+.qto-file-display--detailed .qto-file-display__meta {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--spacing-xs);
+}
+
+/* Preview Modal */
+.qto-file-display__preview-modal .qto-modal__content {
+  max-width: 90vw;
+  max-height: 90vh;
+}
+
+.qto-file-display__preview-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-height: 70vh;
+  overflow: hidden;
+}
+
+.qto-file-display__preview-image,
+.qto-file-display__preview-video {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.qto-file-display__preview-audio {
+  width: 100%;
+  max-width: 400px;
+}
+
+.qto-file-display__preview-document {
+  width: 100%;
+  height: 70vh;
+  border: none;
+}
+
+.qto-file-display__preview-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-lg);
+  padding: var(--spacing-xl);
+  color: var(--color-text-muted);
+  text-align: center;
+}
+
+.qto-file-display__preview-placeholder p {
+  margin: 0;
+  font-size: var(--text-lg);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .qto-file-display--grid .qto-file-display__grid {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: var(--spacing-md);
+  }
+  
+  .qto-file-display--gallery .qto-file-display__grid {
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: var(--spacing-sm);
+  }
+  
+  .qto-file-display--list .qto-file-display__item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--spacing-sm);
+  }
+  
+  .qto-file-display--list .qto-file-display__actions {
+    margin-left: 0;
+    width: 100%;
+    justify-content: flex-end;
+  }
+  
+  .qto-file-display__header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--spacing-sm);
+  }
+  
+  .qto-file-display__preview-content {
+    max-height: 60vh;
+  }
+  
+  .qto-file-display__preview-document {
+    height: 60vh;
+  }
+}
+
+@media (max-width: 480px) {
+  .qto-file-display--grid .qto-file-display__grid {
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  }
+  
+  .qto-file-display--gallery .qto-file-display__grid {
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  }
+}
